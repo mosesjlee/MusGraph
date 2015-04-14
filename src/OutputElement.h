@@ -43,10 +43,10 @@ public:
     void setLeftInput(WaveTable * wPtr);
     void setRightInput(WaveTable * wPtr);
     
+    bool inBound(int x, int y);
+    
     void draw();
 private:
-    int x, y;
-    int width, height;
     ofRectangle outputTab;
     ofSoundStream stream;
     WaveTable * lWavePtr;

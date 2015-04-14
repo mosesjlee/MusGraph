@@ -6,24 +6,40 @@
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>6306965B-6AB3-473E-9570-17D462DCC606</string>
+	<key>IDESourceControlProjectName</key>
+	<string>MusGraph</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
+		<key>7CEB586CAD021A4CE6B3D90EB5A5897C65F4022B</key>
+		<string>https://bitbucket.org/burningTr33/musgraph.git</string>
 		<key>90E2F969A762FB62C413A0C44D1F334E6EC3F531</key>
 		<string>https://github.com/danomatika/ofxMidi.git</string>
 	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>MusGraph.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
+		<key>7CEB586CAD021A4CE6B3D90EB5A5897C65F4022B</key>
+		<string>../..</string>
 		<key>90E2F969A762FB62C413A0C44D1F334E6EC3F531</key>
-		<string>ofxMidi/</string>
+		<string>../../../../../addons/ofxMidi</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://github.com/danomatika/ofxMidi.git</string>
+	<string>https://bitbucket.org/burningTr33/musgraph.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>90E2F969A762FB62C413A0C44D1F334E6EC3F531</string>
+	<string>7CEB586CAD021A4CE6B3D90EB5A5897C65F4022B</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>7CEB586CAD021A4CE6B3D90EB5A5897C65F4022B</string>
+			<key>IDESourceControlWCCName</key>
+			<string>MusGraph</string>
+		</dict>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>

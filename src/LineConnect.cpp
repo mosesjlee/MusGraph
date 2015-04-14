@@ -30,6 +30,7 @@ LineConnect::LineConnect(int x_start, int y_start, int x_end, int y_end){
 }
 
 LineConnect::~LineConnect(){
+    line->clear();
     delete line;
 }
 

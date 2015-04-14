@@ -11,7 +11,7 @@
 #include <math.h>
 class WaveTable : public ElementObject
 {
-	public:
+public:
     WaveTable();
     WaveTable(int, int);
     ~WaveTable();
@@ -19,8 +19,7 @@ class WaveTable : public ElementObject
     double tick();
     void draw();
 
-	private:
-    int x, y;
+private:
     double * table;
     double initialPhase;
     double delta_i;

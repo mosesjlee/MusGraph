@@ -20,6 +20,7 @@ void ofApp::setup(){
 void ofApp::update(){
     numWaveTables = listOfWaveTables.size();
     numOutput = listOfOutputs.size();
+    numSliderObjects = listOfSliderObjects.size();
     numLineConnect = listOfLineConnects.size();
 }
 
@@ -74,7 +75,7 @@ void ofApp::mouseMoved(int x, int y ){
 
 //--------------------------------------------------------------
 void ofApp::mouseDragged(int x, int y, int button){
-    currLine->lineTo(x, y);
+    if(currLine != NULL) currLine->lineTo(x, y);
 }
 
 //--------------------------------------------------------------
@@ -115,16 +116,25 @@ void ofApp::mousePressed(int x, int y, int button){
                         ofAddListener(elementsGUI->newGUIEvent,this,&ofApp::guiEvent);
                         
                         //This is just hard coded. should not like this
-                        sliderPtr = new SliderObject(elementsGUI, name, 20, 1500, 440);
+                        sliderPtr = new SliderObject(elementsGUI, name, 100, 1200, 440);
                         sliderPtr->setCoord(x, y);
-                        sliderPtr->setObjectToControl(waveTablePtr);
+                        listOfSliderObjects.push_back(sliderPtr);
+                        
+                        //This is just hard coded
+                        sliderPtr->setObjectToControl(listOfWaveTables.at(numWaveTables-1));
+                        
+
                     }
                     else if(y > y_coord + 60 && y < y_coord + 90){
                         cout << "third menu" << endl;
+                        
+                        
                         outputPtr = new OutputElement(x, y);
-                        outputPtr->setLeftInput(waveTablePtr);
                         outputPtr->setUpAudio(this);
                         listOfOutputs.push_back(outputPtr);
+                        
+                        //This is hard coded This should not be like this
+                        outputPtr->setLeftInput(listOfWaveTables.at(numWaveTables-1));
                     }
                 }
                 selectMenu.setShowMenu(false);
@@ -132,7 +142,7 @@ void ofApp::mousePressed(int x, int y, int button){
             
             
             //Draw the line connect items
-            else {
+            else if(onOff == 0){
                 initial_x = x;
                 initial_y = y;
                 currLine = new ofPolyline();
@@ -187,8 +197,6 @@ void ofApp::audioOut(float *output, int bufferSize, int nChannels){
 void ofApp::guiEvent(ofxUIEventArgs &e){
     string name = e.getName();
     
-    cout << e.getName() << endl;
-    
     //For the getting of the value
     if(name == "On/Off"){
         onOff = e.getToggle()->getValue();
@@ -197,9 +205,17 @@ void ofApp::guiEvent(ofxUIEventArgs &e){
     
     else if(name == "Slider"){
         double freq = e.getSlider()->getValue();
+        int currSliderID = e.getSlider()->getID();
         
-        //I am just hard coding this
-        sliderPtr->getObjectToControl()->setFreq(freq);
+        //Look for the slider ID
+        for (int i = 0; i < numSliderObjects; i++) {
+            cout << "CurrSliderID: " << currSliderID << " SliderID: " <<
+            listOfSliderObjects.at(i)->getSliderID() << endl;
+            
+            if(listOfSliderObjects.at(i)->getSliderID() == currSliderID){
+                listOfSliderObjects.at(i)->getObjectToControl()->setFreq(freq);
+            }
+        }
     }
     //These are for future inputs
     //    else if(){

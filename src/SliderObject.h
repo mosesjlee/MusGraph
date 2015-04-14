@@ -23,20 +23,21 @@ public:
     void setMinAndMax(float min, float max);
     void setObjectToControl(void * objPtr);
     WaveTable * getObjectToControl();
+    void setSliderID(int id);
+    int getSliderID();
     void draw();
     
     ofxUISlider * getSliderRef();
     ~SliderObject();
 private:
     string sliderName;
+    int sliderID;
     WaveTable * oscPtr;
     ofxUISlider * slider;
     ofxUICanvas * sliderCanvas;
-    int x, y;
+    
     float maxVal;
     float minVal;
-    float height;
-    float width;
 };
 
 #endif /* defined(__mySketch__SliderObject__) */

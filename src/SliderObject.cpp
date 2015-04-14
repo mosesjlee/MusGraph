@@ -13,12 +13,20 @@ SliderObject::SliderObject(ofxUICanvas * parentCanvas, string name, float min, f
     maxVal = max;
     minVal = min;
     sliderName = name;
+    setSliderID(slider->getID());
     type = "Slider";
 }
 
 SliderObject::~SliderObject(){
     delete slider;
     delete sliderCanvas;
+}
+
+void SliderObject::setSliderID(int id){
+    sliderID = id;
+}
+int SliderObject::getSliderID(){
+    return sliderID;
 }
 
 void SliderObject::setCoord(int x_coord, int y_coord){

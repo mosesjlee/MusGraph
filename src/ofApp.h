@@ -69,9 +69,6 @@ private:
     
     //For the output
     int onOff = 0;
-//    ofSoundStream soundStream;
-//    vector <float> lAudio;
-//    vector <float> rAudio;
     
     //For drawing lines
     int initial_x;
