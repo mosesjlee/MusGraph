@@ -214,6 +214,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e){
             
             if(listOfSliderObjects.at(i)->getSliderID() == currSliderID){
                 listOfSliderObjects.at(i)->getObjectToControl()->setFreq(freq);
+                break;
             }
         }
     }
