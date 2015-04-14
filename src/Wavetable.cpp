@@ -65,8 +65,15 @@ double WaveTable::lerp(double x_1, double y_1, double x_2, double y_2, double x)
 }
 
 void WaveTable::draw(){
-    ofSetColor(0, 0, 0);
-    ofNoFill();
+    if(!amIClicked){
+        ofSetColor(0, 0, 0);
+        ofNoFill();
+    }
+    else {
+        ofSetColor(125, 100, 100);
+        ofFill();
+    }
+    
     ofSetLineWidth(2);
     ofRect(sineTab);
     

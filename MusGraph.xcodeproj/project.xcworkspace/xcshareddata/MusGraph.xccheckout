@@ -22,7 +22,7 @@
 		<key>7CEB586CAD021A4CE6B3D90EB5A5897C65F4022B</key>
 		<string>../..</string>
 		<key>90E2F969A762FB62C413A0C44D1F334E6EC3F531</key>
-		<string>../../../../../addons/ofxMidi</string>
+		<string>../../../addons/ofxMidi</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://bitbucket.org/burningTr33/musgraph.git</string>

@@ -25,6 +25,9 @@ public:
     int getNumOutputs(){return outputs;}
     void setNumOutputs(int o){outputs = o;}
     
+    bool getAmIClicked(){return amIClicked;}
+    void setAmIClicked(bool clicked){amIClicked = clicked;}
+    
     bool inBound(int x_coord, int y_coord){
         if(x_coord < x_bound && x_coord > x && y_coord < y_bound && y_coord > y){
             return true;

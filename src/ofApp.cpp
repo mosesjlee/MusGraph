@@ -84,19 +84,18 @@ void ofApp::mousePressed(int x, int y, int button){
     //If its near the top menu area just ignore the input
     if(y < 35) return;
     
-    cout << "Left Click: " << endl;
     
     int x_coord = selectMenu.getXCoord(), y_coord = selectMenu.getYCoord();
     int menuWidth = selectMenu.getWidth(), menuHeight = selectMenu.getHeight();
     
-    cout << "x_coord: " << x_coord << " y_coord: " << y_coord << endl;
-    cout << "menuWidth: " << menuWidth << " menuHeight: " << menuHeight << endl;
-    cout << "x: " << x << " y: " << y << endl;
+//    cout << "x_coord: " << x_coord << " y_coord: " << y_coord << endl;
+//    cout << "menuWidth: " << menuWidth << " menuHeight: " << menuHeight << endl;
+//    cout << "x: " << x << " y: " << y << endl;
     
     //If Right button is clicked display the menu
     switch(button){
         case LEFT_CLICK:
-            
+        
             if(selectMenu.getShowMenu()){
                 if(x > x_coord && x < x_coord + menuWidth &&
                    y > y_coord && y < y_coord + menuHeight){
@@ -128,7 +127,6 @@ void ofApp::mousePressed(int x, int y, int button){
                     else if(y > y_coord + 60 && y < y_coord + 90){
                         cout << "third menu" << endl;
                         
-                        
                         outputPtr = new OutputElement(x, y);
                         outputPtr->setUpAudio(this);
                         listOfOutputs.push_back(outputPtr);
@@ -138,16 +136,44 @@ void ofApp::mousePressed(int x, int y, int button){
                     }
                 }
                 selectMenu.setShowMenu(false);
+                break;
             }
+            
+            //To select objects
+            else {
+                cout<< "Checking to see if wavetable object is clicked" << endl;
+                for(int i = 0; i < numWaveTables; i++){
+                    if(listOfWaveTables.at(i)->inBound(x, y)){
+                    //Set the negation of the previous value
+                        listOfWaveTables.at(i)->setAmIClicked(!listOfWaveTables.at(i)->getAmIClicked());
+                        break;
+                    }
+                }
+            
+                cout<< "Checking to see if slider object is clicked" << endl;
+                for(int i = 0; i < numSliderObjects; i++){
+                
+                }
+            
+                cout<< "Checking to see if output object is clicked" << endl;
+                for(int i = 0; i < numOutput; i++){
+                
+                }
+            
+                for(int i = 0; i < numLineConnect; i++){
+                
+                }
+            }
+
             
             
             //Draw the line connect items
-            else if(onOff == 0){
+            /*else if(onOff == 0){
                 initial_x = x;
                 initial_y = y;
                 currLine = new ofPolyline();
                 currLine->addVertex(initial_x, initial_y);
-            }
+            }*/
             
             break;
         case RIGHT_CLICK:
@@ -159,12 +185,14 @@ void ofApp::mousePressed(int x, int y, int button){
 
 //--------------------------------------------------------------
 void ofApp::mouseReleased(int x, int y, int button){
+    
     if (button == LEFT_CLICK && !selectMenu.getShowMenu() && currLine != NULL && onOff == 0) {
         currLine->lineTo(x,y);
         lineConnectPtr = new LineConnect(currLine, initial_x, initial_y, x, y);
         listOfLineConnects.push_back(lineConnectPtr);
         currLine = NULL;
     }
+    
 }
 
 //--------------------------------------------------------------
@@ -194,7 +222,7 @@ void ofApp::audioOut(float *output, int bufferSize, int nChannels){
 }
 
 //--------------------------------------------------------------
-void ofApp::guiEvent(ofxUIEventArgs &e){
+void ofApp::guiEvent(ofxUIEventArgs & e){
     string name = e.getName();
     
     //For the getting of the value
@@ -218,19 +246,23 @@ void ofApp::guiEvent(ofxUIEventArgs &e){
             }
         }
     }
+    
     //These are for future inputs
     //    else if(){
     //
     //    }
     
 }
-
+//--------------------------------------------------------------
+//TODO find a way to delete dynamically allocated objects without
+//seg fault
 //--------------------------------------------------------------
 void ofApp::exit(){
     delete menuGUI;
     delete elementsGUI;
     //Free the objects
     int listSize = 0;
+    
     
     /*if((listSize = listOfWaveTables->size()) > 0){
      for(int i = 0; i < listSize; i++){

@@ -45,6 +45,7 @@ public:
     SliderObject * sliderPtr;
     OutputElement * outputPtr;
     LineConnect * lineConnectPtr;
+    ElementObject * currObject;
     
     
     //For UI Elements
