@@ -38,6 +38,8 @@ void MenuView::setCoordinates(int x_coord, int y_coord)
 {
     x = x_coord;
     y = y_coord;
+    x_bound = x + width;
+    y_bound = y + height;
     menuBox.setX(x_coord);
     menuBox.setY(y_coord);
 }
@@ -77,10 +79,6 @@ int MenuView::getXCoord(){
 
 int MenuView::getYCoord(){
     return y;
-}
-
-void MenuView::menuChoice(int x, int y){
-    
 }
 
 void MenuView::drawMenu()

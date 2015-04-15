@@ -84,8 +84,11 @@ private:
     
     //Helper functions
     void setUpGUIElements();
-    void setUpAudioElements();
-    
+    void addWaveTableObject(int x, int y);
+    void addOutputObject(int x, int y);
+    void addSliderObject(int x, int y);
+    void addAdderObject(int x, int y);
+    void addMultiplierObject(int x, int y);
     
 };
 

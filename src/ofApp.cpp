@@ -86,54 +86,35 @@ void ofApp::mousePressed(int x, int y, int button){
     //If its near the top menu area just ignore the input
     if(y < 35) return;
     
-    
+    bool itemSelected = false;
     int x_coord = selectMenu.getXCoord(), y_coord = selectMenu.getYCoord();
-    int menuWidth = selectMenu.getWidth(), menuHeight = selectMenu.getHeight();
-    
-//    cout << "x_coord: " << x_coord << " y_coord: " << y_coord << endl;
-//    cout << "menuWidth: " << menuWidth << " menuHeight: " << menuHeight << endl;
-//    cout << "x: " << x << " y: " << y << endl;
+    int x_bound = selectMenu.getXBound(), y_bound = selectMenu.getYBound();
     
     //If Right button is clicked display the menu
     switch(button){
         case LEFT_CLICK:
         
             if(selectMenu.getShowMenu()){
-                if(x > x_coord && x < x_coord + menuWidth &&
-                   y > y_coord && y < y_coord + menuHeight){
+                if(x > x_coord && x < x_bound && y > y_coord && y < y_bound){
                     cout << "In menu: " << endl;
                     
                     if(y > y_coord && y < y_coord + 30){
-                        waveTablePtr = new WaveTable(x, y);
-                        waveTablePtr->setFreq(440);
-                        listOfWaveTables.push_back(waveTablePtr);
+                        addWaveTableObject(x, y);
                     }
                     else if(y > y_coord + 30 && y < y_coord + 60){
                         cout << "second menu" << endl;
-                        string name = "Slider";
-                        elementsGUI = new ofxUICanvas();
-                        elementsGUI->setDimensions(100, 25);
-                        elementsGUI->setPosition(x,y);
-                        ofAddListener(elementsGUI->newGUIEvent,this,&ofApp::guiEvent);
-                        
-                        sliderPtr = new SliderObject(elementsGUI, name, 100, 1200, 440);
-                        sliderPtr->setCoord(x, y);
-                        listOfSliderObjects.push_back(sliderPtr);
-                        
-                        //This is just hard coded
-                        sliderPtr->setObjectToControl(listOfWaveTables.at(numWaveTables-1));
-                        
+                        addSliderObject(x, y);
 
                     }
                     else if(y > y_coord + 60 && y < y_coord + 90){
                         cout << "third menu" << endl;
-                        
-                        outputPtr = new OutputElement(x, y);
-                        outputPtr->setUpAudio(this);
-                        listOfOutputs.push_back(outputPtr);
-                        
-                        //This is hard coded This should not be like this
-                        outputPtr->setLeftInput(listOfWaveTables.at(numWaveTables-1));
+                        addOutputObject(x, y);
+                    }
+                    else if(y > y_coord + 90 && y < y_coord + 120){
+                        addAdderObject(x, y);
+                    }
+                    else if(y > y_coord + 120 && y < y_coord + 150){
+                        addMultiplierObject(x, y);
                     }
                 }
                 selectMenu.setShowMenu(false);
@@ -147,22 +128,45 @@ void ofApp::mousePressed(int x, int y, int button){
                     if(listOfWaveTables.at(i)->inBound(x, y)){
                     //Set the negation of the previous value
                         listOfWaveTables.at(i)->setAmIClicked(!listOfWaveTables.at(i)->getAmIClicked());
+                        itemSelected = true;
                         break;
                     }
                 }
             
-                cout<< "Checking to see if slider object is clicked" << endl;
-                for(int i = 0; i < numSliderObjects; i++){
-                
+                if(!itemSelected){
+                    cout<< "Checking to see if slider object is clicked" << endl;
+                    for(int i = 0; i < numSliderObjects; i++){
+                        if(listOfSliderObjects.at(i)->inBound(x, y)){
+                            listOfSliderObjects.at(i)->
+                            setAmIClicked(!listOfSliderObjects.at(i)->getAmIClicked());
+                            itemSelected = true;
+                        }
+                    }
                 }
-            
-                cout<< "Checking to see if output object is clicked" << endl;
-                for(int i = 0; i < numOutput; i++){
                 
+                if(!itemSelected){
+                    cout<< "Checking to see if output object is clicked" << endl;
+                    for(int i = 0; i < numOutput; i++){
+                        itemSelected = true;
+                    }
                 }
-            
-                for(int i = 0; i < numLineConnect; i++){
                 
+                if(!itemSelected){
+                    for(int i = 0; i < numLineConnect; i++){
+                        itemSelected = true;
+                    }
+                }
+                
+                if(!itemSelected){
+                    for(int i = 0; i < numAdderObjects; i++){
+                        itemSelected = true;
+                    }
+                }
+                
+                if(!itemSelected){
+                    for(int i = 0; i < numMultiplierObjects; i++){
+                        itemSelected = true;
+                    }
                 }
             }
 
@@ -283,5 +287,44 @@ void ofApp::setUpGUIElements(){
     menuGUI->setDimensions(150, 32);
     onOffButton = menuGUI->addLabelToggle("On/Off", false);
     ofAddListener(menuGUI->newGUIEvent,this,&ofApp::guiEvent);
+    
+}
+
+void ofApp::addWaveTableObject(int x, int y){
+    waveTablePtr = new WaveTable(x, y);
+    waveTablePtr->setFreq(440);
+    listOfWaveTables.push_back(waveTablePtr);
+}
+
+void ofApp::addOutputObject(int x, int y){
+    outputPtr = new OutputElement(x, y);
+    outputPtr->setUpAudio(this);
+    listOfOutputs.push_back(outputPtr);
+    
+    //This is hard coded This should not be like this
+    outputPtr->setLeftInput(listOfWaveTables.at(numWaveTables-1));
+    
+}
+
+void ofApp::addSliderObject(int x, int y){
+    string name = "Slider";
+    elementsGUI = new ofxUICanvas();
+    elementsGUI->setDimensions(100, 25);
+    elementsGUI->setPosition(x,y);
+    ofAddListener(elementsGUI->newGUIEvent,this,&ofApp::guiEvent);
+    
+    sliderPtr = new SliderObject(elementsGUI, name, 100, 1200, 440);
+    sliderPtr->setCoord(x, y);
+    listOfSliderObjects.push_back(sliderPtr);
+    
+    //This is just hard coded
+    sliderPtr->setObjectToControl(listOfWaveTables.at(numWaveTables-1));
+}
+
+void ofApp::addAdderObject(int x, int y){
+    
+}
+
+void ofApp::addMultiplierObject(int x, int y){
     
 }
