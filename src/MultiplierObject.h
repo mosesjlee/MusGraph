@@ -15,10 +15,13 @@
 class MultiplierObject : public ElementObject{
 public:
     MultiplierObject();
+    MultiplierObject(ElementObject * o1, ElementObject * o2);
     ~MultiplierObject();
-    void multiply(float a, float b);
+    float multiply(float a, float b);
+    float tick();
     void connectElement(ElementObject * o);
 private:
+    ofRectangle multiplierRect;
     float * buf;
     int numElementsConnected = 0;
     ElementObject * o1 = NULL;

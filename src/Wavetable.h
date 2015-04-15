@@ -4,9 +4,6 @@
 #define MAX_SAMPLES 4096
 #define SR 44100
 
-//#include "ofApp.h"
-#include "ofRectangle.h"
-#include "ofGraphics.h"
 #include "ElementObject.h"
 #include <math.h>
 class WaveTable : public ElementObject

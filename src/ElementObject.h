@@ -13,6 +13,9 @@
 #include <string>
 #include <ctype.h>
 #include <stdlib.h>
+#include "ofRectangle.h"
+#include "ofGraphics.h"
+#include "ofPolyLine.h"
 
 class ElementObject{
 public:

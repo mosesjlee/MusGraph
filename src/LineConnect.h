@@ -11,8 +11,7 @@
 
 #include <stdio.h>
 #include "ElementObject.h"
-#include "ofPolyLine.h"
-#include "ofGraphics.h"
+
 class LineConnect : public ElementObject{
 public:
     LineConnect();

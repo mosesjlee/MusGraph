@@ -12,8 +12,7 @@
 #include <stdio.h>
 #include "ElementObject.h"
 #include "ofSoundStream.h"
-#include "ofGraphics.h"
-#include "ofRectangle.h"
+#include "LineConnect.h"
 #include "WaveTable.h"
 #include "SliderObject.h"
 

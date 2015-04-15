@@ -52,6 +52,7 @@ void ofApp::draw(){
         }
     }
     
+    //Draw line connects
     if(currLine != NULL) {
         ofSetLineWidth(4);
         currLine->draw();
@@ -79,6 +80,7 @@ void ofApp::mouseDragged(int x, int y, int button){
 }
 
 //--------------------------------------------------------------
+//TODO abstract some of this away to the menuObject
 void ofApp::mousePressed(int x, int y, int button){
     
     //If its near the top menu area just ignore the input
@@ -114,7 +116,6 @@ void ofApp::mousePressed(int x, int y, int button){
                         elementsGUI->setPosition(x,y);
                         ofAddListener(elementsGUI->newGUIEvent,this,&ofApp::guiEvent);
                         
-                        //This is just hard coded. should not like this
                         sliderPtr = new SliderObject(elementsGUI, name, 100, 1200, 440);
                         sliderPtr->setCoord(x, y);
                         listOfSliderObjects.push_back(sliderPtr);

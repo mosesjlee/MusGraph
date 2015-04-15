@@ -11,6 +11,8 @@
 
 #include <stdio.h>
 #include "ElementObject.h"
+#include "LineConnect.h"
+#include "WaveTable.h"
 
 class AdderObject : public ElementObject{
 public:
@@ -18,9 +20,11 @@ public:
     AdderObject(ElementObject * o1, ElementObject * o2);
     ~AdderObject();
     float add(float a, float b);
+    float tick();
     void connectElement(ElementObject * o);
     
 private:
+    ofRectangle adderRect;
     float * buf;
     int numElementsConnected = 0;
     ElementObject * o1 = NULL;

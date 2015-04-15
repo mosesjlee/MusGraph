@@ -16,6 +16,8 @@ MenuView::MenuView(int height, int width){
     menuListItems.push_back("Sine");
     menuListItems.push_back("Slider");
     menuListItems.push_back("Output");
+    menuListItems.push_back("Adder");
+    menuListItems.push_back("Multiplier");
 }
 
 MenuView::MenuView()
@@ -24,6 +26,8 @@ MenuView::MenuView()
     menuListItems.push_back("Sine");
     menuListItems.push_back("Slider");
     menuListItems.push_back("Output");
+    menuListItems.push_back("Adder");
+    menuListItems.push_back("Multiplier");
 }
 
 MenuView::~MenuView()
@@ -75,6 +79,10 @@ int MenuView::getYCoord(){
     return y;
 }
 
+void MenuView::menuChoice(int x, int y){
+    
+}
+
 void MenuView::drawMenu()
 {
     ofSetColor(r, g, b);
@@ -88,6 +96,10 @@ void MenuView::drawMenu()
     text << menuListItems.at(1) << endl;
     text << endl;
     text << menuListItems.at(2) << endl;
+    text << endl;
+    text << menuListItems.at(3) << endl;
+    text << endl;
+    text << menuListItems.at(4) << endl;
     ofDrawBitmapString(text.str(), x + 10, y + 20);
 }
 

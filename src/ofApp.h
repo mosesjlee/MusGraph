@@ -7,6 +7,8 @@
 #include "SliderObject.h"
 #include "OutputElement.h"
 #include "LineConnect.h"
+#include "AdderObject.h"
+#include "MultiplierObject.h"
 
 //Pred
 #define LEFT_CLICK 0
@@ -45,8 +47,9 @@ public:
     SliderObject * sliderPtr;
     OutputElement * outputPtr;
     LineConnect * lineConnectPtr;
+    AdderObject * adderPtr;
+    MultiplierObject * multiplierPtr;
     ElementObject * currObject;
-    
     
     //For UI Elements
     ofxUICanvas * menuGUI;
@@ -54,12 +57,14 @@ public:
     ofxUICanvas * elementsGUI;
     ofPolyline * currLine;
     
-    
+    //Counters for the different objects on screen
     int menuItem = 0;
     int numWaveTables = 0;
     int numOutput = 0;
     int numLineConnect = 0;
     int numSliderObjects = 0;
+    int numAdderObjects = 0;
+    int numMultiplierObjects = 0;
     
     
 private:
@@ -67,6 +72,8 @@ private:
     vector<SliderObject *> listOfSliderObjects;
     vector<OutputElement *> listOfOutputs;
     vector<LineConnect *> listOfLineConnects;
+    vector<AdderObject *> listOfAdders;
+    vector<MultiplierObject *> listOfMultipliers;
     
     //For the output
     int onOff = 0;

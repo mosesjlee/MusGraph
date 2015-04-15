@@ -27,6 +27,7 @@ public:
     int getYCoord();
     int getHeight() {return height;}
     int getWidth() {return width;}
+    void menuChoice(int x, int y);
     ofRectangle * getMenuBox();
     ~MenuView();
     
@@ -35,6 +36,7 @@ private:
     bool showMenu = false;
     int x;
     int y;
+    int x_bound, y_bound;
     int height;
     int width;
     int r,g,b;
