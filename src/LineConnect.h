@@ -26,6 +26,9 @@ public:
     void fillBuffer();
     void setLine(ofPolyline * linePtr);
     double lerp(double x_1, double y_1, double x_2, double y_2, double x);
+    
+    void setFirstElement(ElementObject o);
+    void setSecondElement(ElementObject o);
 private:
     ElementObject * o1;
     ElementObject * o2;
