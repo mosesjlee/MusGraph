@@ -13,8 +13,8 @@ OutputElement::OutputElement(){
 OutputElement::OutputElement(int _x, int _y){
     x = _x; y = _y;
     outputTab.setPosition(_x, _y);
-    outputTab.setHeight(30);
-    outputTab.setWidth(70);
+    outputTab.setHeight(OUT_HEIGHT);
+    outputTab.setWidth(OUT_WIDTH);
 }
 
 OutputElement::~OutputElement(){
@@ -72,8 +72,15 @@ void OutputElement::setRightInput(WaveTable * wPtr){
 }
 
 void OutputElement::draw(){
-    ofSetColor(0, 0, 0);
-    ofNoFill();
+    if(!amIClicked){
+        ofSetColor(0, 0, 0);
+        ofNoFill();
+    }
+    else {
+        ofSetColor(125, 100, 100);
+        ofFill();
+    }
+    
     ofSetLineWidth(2);
     ofRect(outputTab);
     

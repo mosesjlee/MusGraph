@@ -26,10 +26,10 @@ WaveTable::WaveTable(int x_coord, int y_coord)
     x = sineTab.x = x_coord;
     y = sineTab.y = y_coord;
     
-    sineTab.setWidth(50.0);
-    sineTab.setHeight(30.0);
-    x_bound = x + 50;
-    y_bound = y + 30;
+    sineTab.setWidth(WT_WIDTH);
+    sineTab.setHeight(WT_HEIGHT);
+    x_bound = x + WT_WIDTH;
+    y_bound = y + WT_HEIGHT;
     type = "sine";
     
 }

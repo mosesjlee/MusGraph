@@ -22,6 +22,8 @@ void ofApp::update(){
     numOutput = listOfOutputs.size();
     numSliderObjects = listOfSliderObjects.size();
     numLineConnect = listOfLineConnects.size();
+    numMultiplierObjects = listOfMultipliers.size();
+    numAdderObjects = listOfAdders.size();
 }
 
 //--------------------------------------------------------------
@@ -49,6 +51,18 @@ void ofApp::draw(){
     if (numLineConnect > 0) {
         for(int i = 0; i < numLineConnect;i++){
             listOfLineConnects.at(i)->draw();
+        }
+    }
+    
+    if(numAdderObjects > 0){
+        for(int i = 0; i < numAdderObjects;i++){
+            listOfAdders.at(i)->draw();
+        }
+    }
+    
+    if(numMultiplierObjects > 0){
+        for(int i = 0; i < numMultiplierObjects;i++){
+            listOfMultipliers.at(i)->draw();
         }
     }
     
@@ -86,7 +100,9 @@ void ofApp::mousePressed(int x, int y, int button){
     //If its near the top menu area just ignore the input
     if(y < 35) return;
     
+    //For selecting items
     bool itemSelected = false;
+    
     int x_coord = selectMenu.getXCoord(), y_coord = selectMenu.getYCoord();
     int x_bound = selectMenu.getXBound(), y_bound = selectMenu.getYBound();
     
@@ -111,9 +127,11 @@ void ofApp::mousePressed(int x, int y, int button){
                         addOutputObject(x, y);
                     }
                     else if(y > y_coord + 90 && y < y_coord + 120){
+                        cout << "Adder " << endl;
                         addAdderObject(x, y);
                     }
                     else if(y > y_coord + 120 && y < y_coord + 150){
+                        cout << "Multiplier " << endl;
                         addMultiplierObject(x, y);
                     }
                 }
@@ -122,7 +140,7 @@ void ofApp::mousePressed(int x, int y, int button){
             }
             
             //To select objects
-            else {
+            else if(onOff == 0){
                 cout<< "Checking to see if wavetable object is clicked" << endl;
                 for(int i = 0; i < numWaveTables; i++){
                     if(listOfWaveTables.at(i)->inBound(x, y)){
@@ -147,25 +165,39 @@ void ofApp::mousePressed(int x, int y, int button){
                 if(!itemSelected){
                     cout<< "Checking to see if output object is clicked" << endl;
                     for(int i = 0; i < numOutput; i++){
-                        itemSelected = true;
+                        if(listOfOutputs.at(i)->inBound(x, y)){
+                            listOfOutputs.at(i)->setAmIClicked(!listOfOutputs.at(i)->getAmIClicked());
+                            itemSelected = true;
+                        }
                     }
                 }
-                
-                if(!itemSelected){
-                    for(int i = 0; i < numLineConnect; i++){
-                        itemSelected = true;
-                    }
-                }
+             
+// Not yet for this. need to over ride function to do this
+//                if(!itemSelected){
+//                    for(int i = 0; i < numLineConnect; i++){
+//                        if(listOfLineConnects.at(i)->inBound(x, y)){
+//                            listOfLineConnects.at(i)->
+//                            setAmIClicked(!listOfLineConnects.at(i)->getAmIClicked());
+//                            itemSelected = true;
+//                        }
+//                    }
+//                }
                 
                 if(!itemSelected){
                     for(int i = 0; i < numAdderObjects; i++){
-                        itemSelected = true;
+                        if(listOfAdders.at(i)->inBound(x, y)){
+                            listOfAdders.at(i)->setAmIClicked(!listOfAdders.at(i)->getAmIClicked());
+                            itemSelected = true;
+                        }
                     }
                 }
                 
                 if(!itemSelected){
                     for(int i = 0; i < numMultiplierObjects; i++){
-                        itemSelected = true;
+                        if(listOfMultipliers.at(i)->inBound(x, y)){
+                            listOfMultipliers.at(i)->
+                            setAmIClicked(!listOfMultipliers.at(i)->getAmIClicked());
+                        }
                     }
                 }
             }
@@ -309,7 +341,7 @@ void ofApp::addOutputObject(int x, int y){
 void ofApp::addSliderObject(int x, int y){
     string name = "Slider";
     elementsGUI = new ofxUICanvas();
-    elementsGUI->setDimensions(100, 25);
+    elementsGUI->setDimensions(SLIDER_WIDTH, SLIDER_HEIGHT);
     elementsGUI->setPosition(x,y);
     ofAddListener(elementsGUI->newGUIEvent,this,&ofApp::guiEvent);
     
@@ -322,9 +354,11 @@ void ofApp::addSliderObject(int x, int y){
 }
 
 void ofApp::addAdderObject(int x, int y){
-    
+    adderPtr = new AdderObject(x, y);
+    listOfAdders.push_back(adderPtr);
 }
 
 void ofApp::addMultiplierObject(int x, int y){
-    
+    multiplierPtr = new MultiplierObject(x, y);
+    listOfMultipliers.push_back(multiplierPtr);
 }

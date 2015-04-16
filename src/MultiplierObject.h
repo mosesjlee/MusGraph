@@ -9,15 +9,22 @@
 #ifndef __MusGraph__MultiplierObject__
 #define __MusGraph__MultiplierObject__
 
+#define MULT_HEIGHT 30
+#define MULT_WIDTH 30
+
 #include <stdio.h>
 #include "ElementObject.h"
 
+
 class MultiplierObject : public ElementObject{
 public:
+    MultiplierObject(int x_coord, int y_coord);
     MultiplierObject();
     MultiplierObject(ElementObject * o1, ElementObject * o2);
+    MultiplierObject(ElementObject * o1, ElementObject * o2, int x_coord, int y_coord);
     ~MultiplierObject();
     float multiply(float a, float b);
+    void draw();
     float tick();
     void connectElement(ElementObject * o);
 private:

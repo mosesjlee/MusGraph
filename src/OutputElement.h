@@ -26,6 +26,9 @@
 #define DEFAULT_OUTPUT_NUM 1
 #define DEFAULT_BUF_NUM 1
 
+#define OUT_HEIGHT 30
+#define OUT_WIDTH 70
+
 
 class OutputElement : public ElementObject{
 public:
@@ -42,8 +45,6 @@ public:
     void setLeftInput(WaveTable * wPtr);
     void setRightInput(WaveTable * wPtr);
     
-    bool inBound(int x, int y);
-    
     void draw();
 private:
     ofRectangle outputTab;
@@ -53,9 +54,10 @@ private:
     int soundMode = MONO;
     float sampleRate = DEFAULT_SAMPLE_RATE;
     int bufsiz = DEFAULT_BUF_SIZE;
-    float volume = 0.6;
+
     vector<float> audio;
     
+    float volume = 0.6;
 };
 
 #endif /* defined(__MusGraph__OutputElement__) */

@@ -31,6 +31,11 @@ public:
     bool getAmIClicked(){return amIClicked;}
     void setAmIClicked(bool clicked){amIClicked = clicked;}
     
+    void setCoordinates(int x_coord, int y_coord){
+        x = x_coord;
+        y = y_coord;
+    }
+    
     bool inBound(int x_coord, int y_coord){
         if(x_coord < x_bound && x_coord > x && y_coord < y_bound && y_coord > y){
             return true;

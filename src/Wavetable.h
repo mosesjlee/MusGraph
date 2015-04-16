@@ -3,6 +3,8 @@
 #define USE_MATH_DEFINES
 #define MAX_SAMPLES 4096
 #define SR 44100
+#define WT_HEIGHT 30
+#define WT_WIDTH 50
 
 #include "ElementObject.h"
 #include <math.h>

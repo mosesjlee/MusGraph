@@ -1,5 +1,7 @@
 #pragma once
 
+//TODO Think of ways to connect objects with each other
+
 #include "ofMain.h"
 #include "MenuView.h"
 #include "Wavetable.h"
@@ -83,6 +85,7 @@ private:
     int initial_y;
     
     //Helper functions
+    void tickAllObjects();
     void setUpGUIElements();
     void addWaveTableObject(int x, int y);
     void addOutputObject(int x, int y);

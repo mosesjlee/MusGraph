@@ -9,6 +9,9 @@
 #ifndef __mySketch__SliderObject__
 #define __mySketch__SliderObject__
 
+#define SLIDER_HEIGHT 30
+#define SLIDER_WIDTH 100
+
 #include <stdio.h>
 #include "ofxUI.h"
 #include "ofxGui.h"
