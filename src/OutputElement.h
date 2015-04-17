@@ -49,8 +49,9 @@ public:
 private:
     ofRectangle outputTab;
     ofSoundStream stream;
-    WaveTable * lWavePtr;
-    WaveTable * rWavePtr;
+    ElementObject * elmtPtr;
+    WaveTable * lWavePtr = NULL;
+    WaveTable * rWavePtr = NULL;
     int soundMode = MONO;
     float sampleRate = DEFAULT_SAMPLE_RATE;
     int bufsiz = DEFAULT_BUF_SIZE;

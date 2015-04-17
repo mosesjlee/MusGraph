@@ -3,6 +3,7 @@
 //TODO Think of ways to connect objects with each other
 
 #include "ofMain.h"
+#include <math.h>
 #include "MenuView.h"
 #include "Wavetable.h"
 #include "ofxUI.h"
@@ -51,7 +52,8 @@ public:
     LineConnect * lineConnectPtr;
     AdderObject * adderPtr;
     MultiplierObject * multiplierPtr;
-    ElementObject * currObject;
+    ElementObject * currObject_1;
+    ElementObject * currObject_2;
     
     //For UI Elements
     ofxUICanvas * menuGUI;
@@ -92,6 +94,7 @@ private:
     void addSliderObject(int x, int y);
     void addAdderObject(int x, int y);
     void addMultiplierObject(int x, int y);
-    
+    bool selectItems(int x, int y, ElementObject ** obj);
+    float euclideanDistance(float x_1, float y_1, float x_2, float y_2);
 };
 

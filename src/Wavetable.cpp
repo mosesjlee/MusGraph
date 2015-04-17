@@ -30,7 +30,7 @@ WaveTable::WaveTable(int x_coord, int y_coord)
     sineTab.setHeight(WT_HEIGHT);
     x_bound = x + WT_WIDTH;
     y_bound = y + WT_HEIGHT;
-    type = "sine";
+    type = "Sine";
     
 }
 

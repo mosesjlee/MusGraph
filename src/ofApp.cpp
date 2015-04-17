@@ -100,9 +100,6 @@ void ofApp::mousePressed(int x, int y, int button){
     //If its near the top menu area just ignore the input
     if(y < 35) return;
     
-    //For selecting items
-    bool itemSelected = false;
-    
     int x_coord = selectMenu.getXCoord(), y_coord = selectMenu.getYCoord();
     int x_bound = selectMenu.getXBound(), y_bound = selectMenu.getYBound();
     
@@ -141,76 +138,18 @@ void ofApp::mousePressed(int x, int y, int button){
             
             //To select objects
             else if(onOff == 0){
-                cout<< "Checking to see if wavetable object is clicked" << endl;
-                for(int i = 0; i < numWaveTables; i++){
-                    if(listOfWaveTables.at(i)->inBound(x, y)){
-                    //Set the negation of the previous value
-                        listOfWaveTables.at(i)->setAmIClicked(!listOfWaveTables.at(i)->getAmIClicked());
-                        itemSelected = true;
-                        break;
-                    }
-                }
-            
-                if(!itemSelected){
-                    cout<< "Checking to see if slider object is clicked" << endl;
-                    for(int i = 0; i < numSliderObjects; i++){
-                        if(listOfSliderObjects.at(i)->inBound(x, y)){
-                            listOfSliderObjects.at(i)->
-                            setAmIClicked(!listOfSliderObjects.at(i)->getAmIClicked());
-                            itemSelected = true;
-                        }
-                    }
-                }
-                
-                if(!itemSelected){
-                    cout<< "Checking to see if output object is clicked" << endl;
-                    for(int i = 0; i < numOutput; i++){
-                        if(listOfOutputs.at(i)->inBound(x, y)){
-                            listOfOutputs.at(i)->setAmIClicked(!listOfOutputs.at(i)->getAmIClicked());
-                            itemSelected = true;
-                        }
-                    }
-                }
-             
-// Not yet for this. need to over ride function to do this
-//                if(!itemSelected){
-//                    for(int i = 0; i < numLineConnect; i++){
-//                        if(listOfLineConnects.at(i)->inBound(x, y)){
-//                            listOfLineConnects.at(i)->
-//                            setAmIClicked(!listOfLineConnects.at(i)->getAmIClicked());
-//                            itemSelected = true;
-//                        }
-//                    }
-//                }
-                
-                if(!itemSelected){
-                    for(int i = 0; i < numAdderObjects; i++){
-                        if(listOfAdders.at(i)->inBound(x, y)){
-                            listOfAdders.at(i)->setAmIClicked(!listOfAdders.at(i)->getAmIClicked());
-                            itemSelected = true;
-                        }
-                    }
-                }
-                
-                if(!itemSelected){
-                    for(int i = 0; i < numMultiplierObjects; i++){
-                        if(listOfMultipliers.at(i)->inBound(x, y)){
-                            listOfMultipliers.at(i)->
-                            setAmIClicked(!listOfMultipliers.at(i)->getAmIClicked());
-                        }
-                    }
+                bool isSelected = selectItems(x, y, &currObject_1);
+                if(isSelected){
+                    initial_x = x;
+                    initial_y = y;
+                    currLine = new ofPolyline();
+                    currLine->addVertex(initial_x, initial_y);
+                    
+                    //Create the line connect items
+                    currObject_1->setAmIClicked(!currObject_1->getAmIClicked());
                 }
             }
 
-            
-            
-            //Draw the line connect items
-            /*else if(onOff == 0){
-                initial_x = x;
-                initial_y = y;
-                currLine = new ofPolyline();
-                currLine->addVertex(initial_x, initial_y);
-            }*/
             
             break;
         case RIGHT_CLICK:
@@ -225,9 +164,21 @@ void ofApp::mouseReleased(int x, int y, int button){
     
     if (button == LEFT_CLICK && !selectMenu.getShowMenu() && currLine != NULL && onOff == 0) {
         currLine->lineTo(x,y);
-        lineConnectPtr = new LineConnect(currLine, initial_x, initial_y, x, y);
-        listOfLineConnects.push_back(lineConnectPtr);
-        currLine = NULL;
+        if(selectItems(x, y, &currObject_2) && euclideanDistance(initial_x, initial_y, x, y) > 10.0){
+            lineConnectPtr = new LineConnect(currLine, initial_x, initial_y, x, y);
+            lineConnectPtr->setFirstElement(currObject_1);
+            lineConnectPtr->setSecondElement(currObject_2);
+            lineConnectPtr->makeConnections();
+            listOfLineConnects.push_back(lineConnectPtr);
+            currLine = NULL;
+            
+        }
+        else {
+            if(currLine != NULL) {
+                currLine->clear();
+                currLine = NULL;
+            }
+        }
     }
     
 }
@@ -269,16 +220,32 @@ void ofApp::guiEvent(ofxUIEventArgs & e){
     }
     
     else if(name == "Slider"){
-        double freq = e.getSlider()->getValue();
+        double val = e.getSlider()->getValue();
         int currSliderID = e.getSlider()->getID();
+        string type = "";
         
         //Look for the slider ID
         for (int i = 0; i < numSliderObjects; i++) {
-            cout << "CurrSliderID: " << currSliderID << " SliderID: " <<
-            listOfSliderObjects.at(i)->getSliderID() << endl;
             
             if(listOfSliderObjects.at(i)->getSliderID() == currSliderID){
-                listOfSliderObjects.at(i)->getObjectToControl()->setFreq(freq);
+                
+                if(listOfSliderObjects.at(i)->getObjectToControl() != NULL){
+                    type = listOfSliderObjects.at(i)->getObjectToControl()->getType();
+                }
+                
+                if(type == "Sine"){
+                    ((WaveTable *) listOfSliderObjects.at(i)->getObjectToControl())->setFreq(val);
+                }
+                else if(type == "Output"){
+                    
+                }
+                else if(type == "Adder"){
+                    
+                }
+                else if(type == "Multiplier"){
+                    
+                }
+                
                 break;
             }
         }
@@ -309,7 +276,9 @@ void ofApp::exit(){
 }
 
 //--------------------------------------------------------------//
-// Helper Functions to organize code
+//--------------------------------------------------------------//
+// Helper Functions to organize code                            //
+//--------------------------------------------------------------//
 //--------------------------------------------------------------//
 //Set up ofxUI elements
 void ofApp::setUpGUIElements(){
@@ -332,25 +301,17 @@ void ofApp::addOutputObject(int x, int y){
     outputPtr = new OutputElement(x, y);
     outputPtr->setUpAudio(this);
     listOfOutputs.push_back(outputPtr);
-    
-    //This is hard coded This should not be like this
-    outputPtr->setLeftInput(listOfWaveTables.at(numWaveTables-1));
-    
 }
 
 void ofApp::addSliderObject(int x, int y){
     string name = "Slider";
     elementsGUI = new ofxUICanvas();
     elementsGUI->setDimensions(SLIDER_WIDTH, SLIDER_HEIGHT);
-    elementsGUI->setPosition(x,y);
     ofAddListener(elementsGUI->newGUIEvent,this,&ofApp::guiEvent);
     
     sliderPtr = new SliderObject(elementsGUI, name, 100, 1200, 440);
     sliderPtr->setCoord(x, y);
     listOfSliderObjects.push_back(sliderPtr);
-    
-    //This is just hard coded
-    sliderPtr->setObjectToControl(listOfWaveTables.at(numWaveTables-1));
 }
 
 void ofApp::addAdderObject(int x, int y){
@@ -358,7 +319,87 @@ void ofApp::addAdderObject(int x, int y){
     listOfAdders.push_back(adderPtr);
 }
 
+//Function to add multiplier objects
 void ofApp::addMultiplierObject(int x, int y){
     multiplierPtr = new MultiplierObject(x, y);
     listOfMultipliers.push_back(multiplierPtr);
+}
+
+//-------------------------------------------------------------------------------
+//Select Items based on locations
+//-------------------------------------------------------------------------------
+bool ofApp::selectItems(int x, int y, ElementObject ** eObj){
+    bool itemSelected = false;
+    cout<< "Checking to see if wavetable object is clicked" << endl;
+    for(int i = 0; i < numWaveTables; i++){
+        if(listOfWaveTables.at(i)->inBound(x, y)){
+            *eObj = listOfWaveTables.at(i);
+            itemSelected = true;
+            break;
+        }
+    }
+    
+    if(!itemSelected){
+        cout<< "Checking to see if slider object is clicked" << endl;
+        for(int i = 0; i < numSliderObjects; i++){
+            if(listOfSliderObjects.at(i)->inBound(x, y)){
+                *eObj = listOfSliderObjects.at(i);
+                itemSelected = true;
+                break;
+            }
+        }
+    }
+    
+    if(!itemSelected){
+        cout<< "Checking to see if output object is clicked" << endl;
+        for(int i = 0; i < numOutput; i++){
+            if(listOfOutputs.at(i)->inBound(x, y)){
+                *eObj = listOfOutputs.at(i);
+                itemSelected = true;
+                break;
+            }
+        }
+    }
+    
+    // Not yet for this. need to over ride function to do this
+    //                if(!itemSelected){
+    //                    for(int i = 0; i < numLineConnect; i++){
+    //                        if(listOfLineConnects.at(i)->inBound(x, y)){
+    //                            listOfLineConnects.at(i)->
+    //                            setAmIClicked(!listOfLineConnects.at(i)->getAmIClicked());
+    //                            itemSelected = true;
+    //                        }
+    //                    }
+    //                }
+    
+    if(!itemSelected){
+        cout<< "Checking to see if adder object is clicked" << endl;
+        for(int i = 0; i < numAdderObjects; i++){
+            if(listOfAdders.at(i)->inBound(x, y)){
+                *eObj = listOfAdders.at(i);
+                itemSelected = true;
+                break;
+            }
+        }
+    }
+    
+    if(!itemSelected){
+        cout<< "Checking to see if Mult object is clicked" << endl;
+        for(int i = 0; i < numMultiplierObjects; i++){
+            if(listOfMultipliers.at(i)->inBound(x, y)){
+                *eObj = listOfMultipliers.at(i);
+                itemSelected = true;
+                break;
+            }
+        }
+    }
+    
+    return itemSelected;
+}
+
+//-------------------------------------------------------------------------------
+float ofApp::euclideanDistance(float x_1, float y_1, float x_2, float y_2){
+    float x_val = pow((x_2 - x_1), 2.0f);
+    float y_val = pow((y_2 - y_1), 2.0f);
+    return sqrt(x_val + y_val);
 }

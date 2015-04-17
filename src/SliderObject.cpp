@@ -32,6 +32,8 @@ int SliderObject::getSliderID(){
 void SliderObject::setCoord(int x_coord, int y_coord){
     x = x_coord;
     y = y_coord;
+    x_bound = x + SLIDER_WIDTH;
+    y_bound = y + SLIDER_HEIGHT;
     sliderCanvas->setPosition(x_coord, y_coord);
 }
 
@@ -45,13 +47,11 @@ void SliderObject::draw(){
     
 }
 
-void SliderObject::setObjectToControl(void * objPtr){
+void SliderObject::setObjectToControl(ElementObject * objPtr){
     
-    string type = ((ElementObject *)objPtr)->getType();
+    string type = objPtr->getType();
     cout << "Slider control type: " << type << endl;
-    if(type == "sine"){
-        oscPtr = (WaveTable *) objPtr;
-    }
+    elementPtr = objPtr;
     
     //For future types
 //    else if (condition){
@@ -65,8 +65,8 @@ void SliderObject::setObjectToControl(void * objPtr){
 //    }
 }
 
-WaveTable * SliderObject::getObjectToControl(){
-    return oscPtr;
+ElementObject * SliderObject::getObjectToControl(){
+    return elementPtr;
 }
 
 ofxUISlider * SliderObject::getSliderRef()

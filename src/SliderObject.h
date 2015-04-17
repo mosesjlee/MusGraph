@@ -24,8 +24,8 @@ public:
     SliderObject();
     void setCoord(int x_coord, int y_coord);
     void setMinAndMax(float min, float max);
-    void setObjectToControl(void * objPtr);
-    WaveTable * getObjectToControl();
+    void setObjectToControl(ElementObject * objPtr);
+    ElementObject * getObjectToControl();
     void setSliderID(int id);
     int getSliderID();
     void draw();
@@ -35,7 +35,7 @@ public:
 private:
     string sliderName;
     int sliderID;
-    WaveTable * oscPtr;
+    ElementObject * elementPtr = NULL;
     ofxUISlider * slider;
     ofxUICanvas * sliderCanvas;
     

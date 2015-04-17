@@ -20,6 +20,7 @@ AdderObject::AdderObject(int x_coord, int y_coord){
     y = y_coord;
     x_bound = x + ADD_WIDTH;
     y_bound = y + ADD_HEIGHT;
+    type = "Adder";
 }
 
 AdderObject::AdderObject(ElementObject * o1, ElementObject * o2){
@@ -44,17 +45,17 @@ void AdderObject::draw(){
     ofRect(adderRect);
     
     stringstream text;
-    text << "+" << endl;
+    text << " + " << endl;
     ofSetColor(0, 0, 0);
-    ofDrawBitmapString(text.str(), x+10, y+20);
+    ofDrawBitmapString(text.str(), x+12, y+20);
 }
 
 float AdderObject::add(float a, float b){
-    
+    return a + b;
 }
 
 float AdderObject::tick(){
-    
+    return 0.00f;
 }
 
 void AdderObject::connectElement(ElementObject * o){

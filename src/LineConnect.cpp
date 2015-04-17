@@ -30,8 +30,10 @@ LineConnect::LineConnect(int x_start, int y_start, int x_end, int y_end){
 }
 
 LineConnect::~LineConnect(){
-    line->clear();
-    delete line;
+    if(line != NULL){
+        line->clear();
+        delete line;
+    }
 }
 
 void LineConnect::draw(){
@@ -40,6 +42,54 @@ void LineConnect::draw(){
     line->draw();
 }
 
+void LineConnect::setInitialCoord(int x_coord, int y_coord){
+    x_start = x_coord;
+    y_start = y_coord;
+    line->addVertex(x, y);
+}
+
+void LineConnect::setFinalCoord(int x_coord, int y_coord){
+    x_end = x_coord;
+    y_end = y_coord;
+    line->lineTo(x_end, y_end);
+}
+
+void LineConnect::setLine(ofPolyline * linePtr){
+    line = linePtr;
+}
+
+void LineConnect::setFirstElement(ElementObject * o){
+    o1 = o;
+}
+
+void LineConnect::setSecondElement(ElementObject * o){
+    o2 = o;
+}
+
+
+//These make all the connections amongst the objects
+void LineConnect::makeConnections(){
+    string o1_type = o1->getType();
+    string o2_type = o2->getType();
+    
+    if(o1_type == "Sine" && o2_type == "Output"){
+        ((OutputElement *) o2)->setLeftInput((WaveTable *) o1);
+    }
+    else if(o2_type == "Sine" && o1_type == "Output"){
+        ((OutputElement *) o1)->setLeftInput((WaveTable *) o2);
+    }
+    else if(o1_type == "Sine" && o2_type == "Slider"){
+        ((SliderObject *) o2)->setObjectToControl(o1);
+    }
+    else if(o2_type == "Sine" && o1_type == "Slider"){
+        ((SliderObject *) o1)->setObjectToControl(o2);
+    }
+    
+//Future connection points
+//    else if(){
+//        
+//    }
+}
 
 double LineConnect::lerp(double x_1, double y_1, double x_2, double y_2, double x)
 {

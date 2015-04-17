@@ -20,6 +20,7 @@ MultiplierObject::MultiplierObject(int x_coord, int y_coord){
     y = y_coord;
     x_bound = x + MULT_WIDTH;
     y_bound = y + MULT_HEIGHT;
+    type = "Multiplier";
 }
 
 MultiplierObject::MultiplierObject(ElementObject * o1, ElementObject * o2){

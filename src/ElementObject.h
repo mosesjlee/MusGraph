@@ -31,6 +31,9 @@ public:
     bool getAmIClicked(){return amIClicked;}
     void setAmIClicked(bool clicked){amIClicked = clicked;}
     
+    bool getConnectedByLine(){return connectedByLine;}
+    void setConnectedByLine(bool c){connectedByLine = c;}
+    
     void setCoordinates(int x_coord, int y_coord){
         x = x_coord;
         y = y_coord;
@@ -55,7 +58,8 @@ protected:
     int x_bound, y_bound;
     int inputs;
     int outputs;
-    bool amIClicked;
+    bool amIClicked = false;
+    bool connectedByLine = false;
 };
 
 #endif

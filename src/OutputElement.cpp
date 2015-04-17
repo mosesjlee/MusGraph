@@ -12,9 +12,12 @@ OutputElement::OutputElement(){
 
 OutputElement::OutputElement(int _x, int _y){
     x = _x; y = _y;
+    x_bound = x + OUT_WIDTH;
+    y_bound = y + OUT_HEIGHT;
     outputTab.setPosition(_x, _y);
     outputTab.setHeight(OUT_HEIGHT);
     outputTab.setWidth(OUT_WIDTH);
+    type = "Output";
 }
 
 OutputElement::~OutputElement(){
@@ -37,6 +40,9 @@ void OutputElement::setUpAudio(ofBaseApp * parent){
 void OutputElement::fillOutBuffer(float * output, int bufferSize, int nChannels){
     float lSample;
     float rSample;
+    
+    if(lWavePtr == NULL && rWavePtr == NULL) return;
+    
     if(soundMode == MONO || soundMode == LEFT_AUDIO){
         for(int i = 0; i < bufferSize; i++){
             lSample = lWavePtr->tick();
