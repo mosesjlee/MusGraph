@@ -5,7 +5,7 @@ WaveTable::WaveTable()
 	//Create a new table
 	table = new double[MAX_SAMPLES]; 
 	index = 0;
-
+    freq = 440.0;
 	for(int i = 0; i < MAX_SAMPLES; i++)
 	{
 		table[i] = sin(2 * M_PI * (double) i/MAX_SAMPLES);
@@ -16,6 +16,7 @@ WaveTable::WaveTable(int x_coord, int y_coord)
 {
     table = new double[MAX_SAMPLES];
     index = 0;
+    freq = 440.0;
     
     for(int i = 0; i < MAX_SAMPLES; i++)
     {
@@ -39,8 +40,9 @@ WaveTable::~WaveTable()
 	delete [] table;
 }
 
-void WaveTable::setFreq(double freq)
+void WaveTable::setFreq(double newFreq)
 {
+    freq = newFreq;
 	delta_i = freq * MAX_SAMPLES/SR;
 }
 

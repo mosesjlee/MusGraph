@@ -16,6 +16,7 @@
 #include "WaveTable.h"
 #include "SliderObject.h"
 
+
 #define MONO 0
 #define LEFT_AUDIO 1
 #define RIGHT_AUDIO 2
@@ -44,7 +45,7 @@ public:
     
     void setLeftInput(WaveTable * wPtr);
     void setRightInput(WaveTable * wPtr);
-    
+    void setInput(ElementObject * o);
     void draw();
 private:
     ofRectangle outputTab;
@@ -52,13 +53,16 @@ private:
     ElementObject * elmtPtr;
     WaveTable * lWavePtr = NULL;
     WaveTable * rWavePtr = NULL;
+    AdderObject * adderPtr = NULL;
+    SliderObject * sliderPtr = NULL;
+    string inputType = "";
     int soundMode = MONO;
     float sampleRate = DEFAULT_SAMPLE_RATE;
     int bufsiz = DEFAULT_BUF_SIZE;
 
     vector<float> audio;
     
-    float volume = 0.6;
+    float volume = 0.4;
 };
 
 #endif /* defined(__MusGraph__OutputElement__) */

@@ -14,6 +14,9 @@
 
 #include <stdio.h>
 #include "ElementObject.h"
+#include "WaveTable.h"
+#include "OutputElement.h"
+#include "SliderObject.h"
 
 
 class MultiplierObject : public ElementObject{
@@ -27,6 +30,7 @@ public:
     void draw();
     float tick();
     void connectElement(ElementObject * o);
+    
 private:
     ofRectangle multiplierRect;
     float * buf;

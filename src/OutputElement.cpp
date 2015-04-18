@@ -38,30 +38,56 @@ void OutputElement::setUpAudio(ofBaseApp * parent){
 }
 
 void OutputElement::fillOutBuffer(float * output, int bufferSize, int nChannels){
-    float lSample;
-    float rSample;
+    float lSample = 0.0f;
+    float rSample = 0.0f;
     
-    if(lWavePtr == NULL && rWavePtr == NULL) return;
+    
+    if(lWavePtr == NULL && rWavePtr == NULL && adderPtr == NULL) return;
+    
+    //cout << "In fill out buffer... type: " << inputType << endl;
     
     if(soundMode == MONO || soundMode == LEFT_AUDIO){
-        for(int i = 0; i < bufferSize; i++){
-            lSample = lWavePtr->tick();
-            output[i*nChannels    ] = lSample * volume;
+        if(inputType == "Sine"){
+            for(int i = 0; i < bufferSize; i++){
+                lSample = lWavePtr->tick();
+                output[i*nChannels    ] = lSample * volume;
+            }
+        }
+        else if(inputType == "Adder"){
+            for(int i = 0; i < bufferSize; i++){
+                rSample = lSample = adderPtr->tick();
+                output[i*nChannels    ] = lSample * volume;
+                output[i*nChannels + 1] = rSample * volume;
+            }
         }
     }
     else if(soundMode == RIGHT_AUDIO){
         for(int i = 0; i < bufferSize; i++){
-            rSample = rWavePtr->tick();
             output[i*nChannels + 1] = rSample * volume;
         }
     }
     else if(soundMode == STEREO){
         for(int i = 0; i < bufferSize; i++){
-            lSample = lWavePtr->tick();
-            rSample = rWavePtr->tick();
             output[i*nChannels    ] = lSample * volume;
             output[i*nChannels + 1] = rSample * volume;
         }
+    }
+}
+
+void OutputElement::setInput(ElementObject * o){
+    inputType = o->getType();
+    
+    if(inputType == "Sine"){
+        lWavePtr = (WaveTable *) o;
+    }
+    else if(inputType == "Adder"){
+        adderPtr = (AdderObject *) o;
+    }
+    else if(inputType == "Mulitplier"){
+        
+    }
+    else if(inputType == "Slider"){
+        ((SliderObject *) o)->setObjectToControl(o);
     }
 }
 

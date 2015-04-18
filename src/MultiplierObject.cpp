@@ -50,14 +50,29 @@ void MultiplierObject::draw(){
     ofDrawBitmapString(text.str(), x+10, y+20);
 }
 
-float MultiplierObject::multiply(float a, float b){
-    
-}
-
 float MultiplierObject::tick(){
+    if (o1 == NULL || o2 == NULL) {
+        cout << "one pointer in adder is NULL: " << endl;
+        return;
+    }
     
+    float o1_sample = ((WaveTable *) o1)->tick();
+    float o2_sample = ((WaveTable *) o2)->tick();
+    float val = o1_sample * o2_sample;
+    
+    if(val > 1.0f) val = 1.0f;
+    if(val < -1.0f) val = -1.0f;
+    
+    return val;
 }
 
 void MultiplierObject::connectElement(ElementObject * o){
-    
+    if (numElementsConnected == 0) {
+        o1 = o;
+        numElementsConnected = 1;
+    }
+    else {
+        o2 = o;
+        numElementsConnected = 2;
+    }
 }

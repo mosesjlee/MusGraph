@@ -19,11 +19,12 @@ public:
     void draw();
 
 private:
+    WaveTable * sinePtr;
     double * table;
     double initialPhase;
     double delta_i;
     double index;
-
+    double freq;
     //For the visual representation
     ofRectangle sineTab;
     

@@ -20,7 +20,7 @@
 
 class SliderObject : public ElementObject{
 public:
-    SliderObject(ofxUICanvas * parentCanvas, string name, float min, float max, float init);
+    SliderObject(ofxUICanvas * parentCanvas, string name, float min, float max, float init, int id);
     SliderObject();
     void setCoord(int x_coord, int y_coord);
     void setMinAndMax(float min, float max);

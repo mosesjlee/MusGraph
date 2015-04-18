@@ -73,11 +73,12 @@ void LineConnect::makeConnections(){
     string o2_type = o2->getType();
     
     if(o1_type == "Sine" && o2_type == "Output"){
-        ((OutputElement *) o2)->setLeftInput((WaveTable *) o1);
+        ((OutputElement *) o2)->setInput(o1);
     }
     else if(o2_type == "Sine" && o1_type == "Output"){
-        ((OutputElement *) o1)->setLeftInput((WaveTable *) o2);
+        ((OutputElement *) o1)->setInput(o2);
     }
+    
     else if(o1_type == "Sine" && o2_type == "Slider"){
         ((SliderObject *) o2)->setObjectToControl(o1);
     }
@@ -85,6 +86,41 @@ void LineConnect::makeConnections(){
         ((SliderObject *) o1)->setObjectToControl(o2);
     }
     
+    else if(o1_type == "Adder" && o2_type == "Sine"){
+        ((AdderObject *) o1)->connectElement(o2);
+    }
+    else if(o2_type == "Adder" && o1_type == "Sine"){
+        ((AdderObject *) o2)->connectElement(o1);
+    }
+    
+    else if(o1_type == "Adder" && o2_type == "Output"){
+        ((OutputElement *) o2)->setInput(o1);
+    }
+    else if(o2_type == "Adder" && o1_type == "Output"){
+        ((OutputElement *) o1)->setInput(o2);
+    }
+    
+    else if(o1_type == "Multiplier" && o2_type == "Sine"){
+        ((MultiplierObject *) o1)->connectElement(o2);
+    }
+    else if(o2_type == "Multiplier" && o1_type == "Sine"){
+        ((MultiplierObject *) o2)->connectElement(o1);
+    }
+    
+    else if(o1_type == "Multiplier" && o2_type == "Output"){
+        ((OutputElement *) o2)->setInput(o1);
+    }
+    else if(o2_type == "Multiplier" && o1_type == "Output"){
+        ((OutputElement *) o1)->setInput(o2);
+    }
+    
+    
+    else if(o1_type == "Sine" && o2_type == "Sine"){
+
+    }
+    else if(o2_type == "Sine" && o1_type == "Sine"){
+
+    }
 //Future connection points
 //    else if(){
 //        

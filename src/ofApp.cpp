@@ -171,6 +171,8 @@ void ofApp::mouseReleased(int x, int y, int button){
             lineConnectPtr->makeConnections();
             listOfLineConnects.push_back(lineConnectPtr);
             currLine = NULL;
+            currObject_1 = NULL;
+            currObject_2 = NULL;
             
         }
         else {
@@ -220,20 +222,28 @@ void ofApp::guiEvent(ofxUIEventArgs & e){
     }
     
     else if(name == "Slider"){
-        double val = e.getSlider()->getValue();
         int currSliderID = e.getSlider()->getID();
+        double val = e.getSlider()->getValue();
         string type = "";
-        
+        int index = 0;
         //Look for the slider ID
         for (int i = 0; i < numSliderObjects; i++) {
             
+
+            
             if(listOfSliderObjects.at(i)->getSliderID() == currSliderID){
                 
-                if(listOfSliderObjects.at(i)->getObjectToControl() != NULL){
-                    type = listOfSliderObjects.at(i)->getObjectToControl()->getType();
+                cout << "currSliderID: " << currSliderID <<
+                " getSliderID: " << listOfSliderObjects.at(i)->getSliderID() << endl;
+                
+                if(listOfSliderObjects.at(i)->getObjectToControl() == NULL){
+                    return;
                 }
                 
+                type = listOfSliderObjects.at(i)->getObjectToControl()->getType();
+                
                 if(type == "Sine"){
+                    //This is hard coded
                     ((WaveTable *) listOfSliderObjects.at(i)->getObjectToControl())->setFreq(val);
                 }
                 else if(type == "Output"){
@@ -245,7 +255,6 @@ void ofApp::guiEvent(ofxUIEventArgs & e){
                 else if(type == "Multiplier"){
                     
                 }
-                
                 break;
             }
         }
@@ -309,7 +318,7 @@ void ofApp::addSliderObject(int x, int y){
     elementsGUI->setDimensions(SLIDER_WIDTH, SLIDER_HEIGHT);
     ofAddListener(elementsGUI->newGUIEvent,this,&ofApp::guiEvent);
     
-    sliderPtr = new SliderObject(elementsGUI, name, 100, 1200, 440);
+    sliderPtr = new SliderObject(elementsGUI, name, 100, 1200, 440, numSliderObjects);
     sliderPtr->setCoord(x, y);
     listOfSliderObjects.push_back(sliderPtr);
 }
@@ -330,7 +339,7 @@ void ofApp::addMultiplierObject(int x, int y){
 //-------------------------------------------------------------------------------
 bool ofApp::selectItems(int x, int y, ElementObject ** eObj){
     bool itemSelected = false;
-    cout<< "Checking to see if wavetable object is clicked" << endl;
+    //cout<< "Checking to see if wavetable object is clicked" << endl;
     for(int i = 0; i < numWaveTables; i++){
         if(listOfWaveTables.at(i)->inBound(x, y)){
             *eObj = listOfWaveTables.at(i);
@@ -340,7 +349,7 @@ bool ofApp::selectItems(int x, int y, ElementObject ** eObj){
     }
     
     if(!itemSelected){
-        cout<< "Checking to see if slider object is clicked" << endl;
+        //cout<< "Checking to see if slider object is clicked" << endl;
         for(int i = 0; i < numSliderObjects; i++){
             if(listOfSliderObjects.at(i)->inBound(x, y)){
                 *eObj = listOfSliderObjects.at(i);
@@ -351,7 +360,7 @@ bool ofApp::selectItems(int x, int y, ElementObject ** eObj){
     }
     
     if(!itemSelected){
-        cout<< "Checking to see if output object is clicked" << endl;
+        //cout<< "Checking to see if output object is clicked" << endl;
         for(int i = 0; i < numOutput; i++){
             if(listOfOutputs.at(i)->inBound(x, y)){
                 *eObj = listOfOutputs.at(i);
@@ -373,7 +382,7 @@ bool ofApp::selectItems(int x, int y, ElementObject ** eObj){
     //                }
     
     if(!itemSelected){
-        cout<< "Checking to see if adder object is clicked" << endl;
+        //cout<< "Checking to see if adder object is clicked" << endl;
         for(int i = 0; i < numAdderObjects; i++){
             if(listOfAdders.at(i)->inBound(x, y)){
                 *eObj = listOfAdders.at(i);
@@ -384,7 +393,7 @@ bool ofApp::selectItems(int x, int y, ElementObject ** eObj){
     }
     
     if(!itemSelected){
-        cout<< "Checking to see if Mult object is clicked" << endl;
+        //cout<< "Checking to see if Mult object is clicked" << endl;
         for(int i = 0; i < numMultiplierObjects; i++){
             if(listOfMultipliers.at(i)->inBound(x, y)){
                 *eObj = listOfMultipliers.at(i);
