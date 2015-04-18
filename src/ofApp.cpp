@@ -164,8 +164,17 @@ void ofApp::mouseReleased(int x, int y, int button){
     
     if (button == LEFT_CLICK && !selectMenu.getShowMenu() && currLine != NULL && onOff == 0) {
         currLine->lineTo(x,y);
+        
+        int x_1, y_1, x_2, y_2;
+        
         if(selectItems(x, y, &currObject_2) && euclideanDistance(initial_x, initial_y, x, y) > 10.0){
-            lineConnectPtr = new LineConnect(currLine, initial_x, initial_y, x, y);
+            x_1 = currObject_1->getXCoord();
+            y_1 = currObject_1->getYCoord();
+            x_2 = currObject_2->getXCoord();
+            y_2 = currObject_2->getYCoord();
+            
+            lineConnectPtr = new LineConnect(currLine, x_1, y_1, x_2, y_2);
+            
             lineConnectPtr->setFirstElement(currObject_1);
             lineConnectPtr->setSecondElement(currObject_2);
             lineConnectPtr->makeConnections();
@@ -229,12 +238,7 @@ void ofApp::guiEvent(ofxUIEventArgs & e){
         //Look for the slider ID
         for (int i = 0; i < numSliderObjects; i++) {
             
-
-            
             if(listOfSliderObjects.at(i)->getSliderID() == currSliderID){
-                
-                cout << "currSliderID: " << currSliderID <<
-                " getSliderID: " << listOfSliderObjects.at(i)->getSliderID() << endl;
                 
                 if(listOfSliderObjects.at(i)->getObjectToControl() == NULL){
                     return;

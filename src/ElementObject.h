@@ -34,6 +34,9 @@ public:
     bool getConnectedByLine(){return connectedByLine;}
     void setConnectedByLine(bool c){connectedByLine = c;}
     
+    int getXCoord(){return x;}
+    int getYCoord(){return y;}
+    
     void setCoordinates(int x_coord, int y_coord){
         x = x_coord;
         y = y_coord;
