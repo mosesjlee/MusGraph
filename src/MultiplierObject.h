@@ -13,13 +13,13 @@
 #define MULT_WIDTH 30
 
 #include <stdio.h>
-#include "ElementObject.h"
+#include "TickableElement.h"
 #include "WaveTable.h"
 #include "OutputElement.h"
 #include "SliderObject.h"
 
 
-class MultiplierObject : public ElementObject{
+class MultiplierObject : public TickableElement{
 public:
     MultiplierObject(int x_coord, int y_coord);
     MultiplierObject();

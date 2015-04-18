@@ -7,8 +7,9 @@
 #define WT_WIDTH 50
 
 #include "ElementObject.h"
+#include "TickableElement.h"
 #include <math.h>
-class WaveTable : public ElementObject
+class WaveTable : public TickableElement
 {
 public:
     WaveTable();

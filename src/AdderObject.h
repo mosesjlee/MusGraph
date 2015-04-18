@@ -13,10 +13,10 @@
 #define ADD_WIDTH 30
 
 #include <stdio.h>
-#include "ElementObject.h"
+#include "TickableElement.h"
 #include "WaveTable.h"
 
-class AdderObject : public ElementObject{
+class AdderObject : public TickableElement{
 public:
     AdderObject();
     AdderObject(int x_coord, int y_coord);

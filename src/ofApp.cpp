@@ -234,32 +234,30 @@ void ofApp::guiEvent(ofxUIEventArgs & e){
         int currSliderID = e.getSlider()->getID();
         double val = e.getSlider()->getValue();
         string type = "";
-        int index = 0;
+        
         //Look for the slider ID
-        for (int i = 0; i < numSliderObjects; i++) {
             
-            if(listOfSliderObjects.at(i)->getSliderID() == currSliderID){
+        if(listOfSliderObjects.at(currSliderID)->getSliderID() == currSliderID){
                 
-                if(listOfSliderObjects.at(i)->getObjectToControl() == NULL){
-                    return;
-                }
+            if(listOfSliderObjects.at(currSliderID)->getObjectToControl() == NULL){
+                return;
+            }
                 
-                type = listOfSliderObjects.at(i)->getObjectToControl()->getType();
+                //cout << "currSliderID: " << currSliderID << " curr index: " << i << endl;
                 
-                if(type == "Sine"){
-                    //This is hard coded
-                    ((WaveTable *) listOfSliderObjects.at(i)->getObjectToControl())->setFreq(val);
-                }
-                else if(type == "Output"){
+            type = listOfSliderObjects.at(currSliderID)->getObjectToControl()->getType();
+                
+            if(type == "Sine"){
+                ((WaveTable *) listOfSliderObjects.at(currSliderID)->getObjectToControl())->setFreq(val);
+            }
+            else if(type == "Output"){
                     
-                }
-                else if(type == "Adder"){
+            }
+            else if(type == "Adder"){
                     
-                }
-                else if(type == "Multiplier"){
+            }
+            else if(type == "Multiplier"){
                     
-                }
-                break;
             }
         }
     }

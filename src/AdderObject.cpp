@@ -20,16 +20,14 @@ AdderObject::AdderObject(int x_coord, int y_coord){
     y = y_coord;
     x_bound = x + ADD_WIDTH;
     y_bound = y + ADD_HEIGHT;
-    buf = new float[BUF_SIZ];
     type = "Adder";
 }
 
 AdderObject::AdderObject(ElementObject * o1, ElementObject * o2){
-    
+    type = "Adder";
 }
 
 AdderObject::~AdderObject(){
-    delete [] buf;
 }
 
 void AdderObject::draw(){
@@ -46,34 +44,9 @@ void AdderObject::draw(){
     ofRect(adderRect);
     
     stringstream text;
-    text << " + " << endl;
+    text << "+" << endl;
     ofSetColor(0, 0, 0);
     ofDrawBitmapString(text.str(), x+12, y+20);
-}
-
-//May not need this
-void AdderObject::fillBuf(){
-    if (o1 == NULL || o2 == NULL) {
-        cout << "one pointer in adder is NULL: " << endl;
-        return;
-    }
-    
-    float o1_sample = 0.0f;
-    float o2_sample = 0.0f;
-    float val = 0.0f;
-    
-    for(int i = 0; i < BUF_SIZ; i++){
-        o1_sample = ((WaveTable *) o1)->tick();
-        o2_sample = ((WaveTable *) o2)->tick();
-        val = o1_sample + o2_sample;
-        
-        if(val > 1.0f) val = 1.0f;
-        if(val < -1.0f) val = -1.0f;
-        
-        buf[i] = val;
-    }
-    
-    countBufElem = BUF_SIZ;
 }
 
 
@@ -83,8 +56,9 @@ float AdderObject::tick(){
         return;
     }
     
-    float o1_sample = ((WaveTable *) o1)->tick();
-    float o2_sample = ((WaveTable *) o2)->tick();
+    float o1_sample = ((TickableElement *) o1)->tick();
+    float o2_sample = ((TickableElement *) o2)->tick();
+    
     float val = o1_sample + o2_sample;
     
     if(val > 1.0f) val = 1.0f;
@@ -101,6 +75,5 @@ void AdderObject::connectElement(ElementObject * o){
     else {
         o2 = o;
         numElementsConnected = 2;
-        fillBuf();
     }
 }

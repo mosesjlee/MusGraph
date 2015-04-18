@@ -48,6 +48,7 @@
 		91D54C511AD8E7A90023E49A /* MenuView.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91D54C4F1AD8E7A90023E49A /* MenuView.cpp */; };
 		91D54C541AD8E8700023E49A /* OutputElement.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91D54C521AD8E8700023E49A /* OutputElement.cpp */; };
 		91D54C571AD8E88C0023E49A /* LineConnect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91D54C551AD8E88C0023E49A /* LineConnect.cpp */; };
+		91E0C7751AE32118004041C6 /* NumberBoxObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91E0C7731AE32118004041C6 /* NumberBoxObject.cpp */; };
 		933A2227713C720CEFF80FD9 /* tinyxml.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2B40EDA85BEB63E46785BC29 /* tinyxml.cpp */; };
 		9A83D1B3FB64456BC907667F /* ofxUIMinimalSlider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2BE7216430113F333B8351ED /* ofxUIMinimalSlider.cpp */; };
 		9BE4AE0AA2B8C436BDFE9D4D /* ofxUIDragableLabelButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FFD5D3C9D38E29DB72B32254 /* ofxUIDragableLabelButton.cpp */; };
@@ -225,6 +226,9 @@
 		91D54C531AD8E8700023E49A /* OutputElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OutputElement.h; sourceTree = "<group>"; };
 		91D54C551AD8E88C0023E49A /* LineConnect.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LineConnect.cpp; sourceTree = "<group>"; };
 		91D54C561AD8E88C0023E49A /* LineConnect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LineConnect.h; sourceTree = "<group>"; };
+		91E0C7731AE32118004041C6 /* NumberBoxObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NumberBoxObject.cpp; sourceTree = "<group>"; };
+		91E0C7741AE32118004041C6 /* NumberBoxObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NumberBoxObject.h; sourceTree = "<group>"; };
+		91E0C7761AE32326004041C6 /* TickableElement.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TickableElement.h; sourceTree = "<group>"; };
 		9345327AA463407B3DADBADE /* ofxUIWaveform.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = ofxUIWaveform.cpp; path = ../../../addons/ofxUI/src/ofxUIWaveform.cpp; sourceTree = SOURCE_ROOT; };
 		938214A2795AA8FED29086DB /* ofxMidiConstants.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxMidiConstants.h; path = ../../../addons/ofxMidi/src/ofxMidiConstants.h; sourceTree = SOURCE_ROOT; };
 		938F5A098A216B403906129C /* ofxUIImage.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = ofxUIImage.cpp; path = ../../../addons/ofxUI/src/ofxUIImage.cpp; sourceTree = SOURCE_ROOT; };
@@ -652,6 +656,9 @@
 				91733BE31ADDEB2D0024A56E /* AdderObject.h */,
 				91733BE51ADDEB400024A56E /* MultiplierObject.cpp */,
 				91733BE61ADDEB400024A56E /* MultiplierObject.h */,
+				91E0C7731AE32118004041C6 /* NumberBoxObject.cpp */,
+				91E0C7741AE32118004041C6 /* NumberBoxObject.h */,
+				91E0C7761AE32326004041C6 /* TickableElement.h */,
 			);
 			path = src;
 			sourceTree = SOURCE_ROOT;
@@ -821,6 +828,7 @@
 				F8D05F7C7F785CE323983B47 /* ofxUITextInput.cpp in Sources */,
 				04C82720B149CE576B8CBB06 /* ofxUIToggle.cpp in Sources */,
 				E3A1109F67D711D6C256031E /* ofxUIToggleMatrix.cpp in Sources */,
+				91E0C7751AE32118004041C6 /* NumberBoxObject.cpp in Sources */,
 				60012C723B05938A3D388335 /* ofxUIValuePlotter.cpp in Sources */,
 				AE281BEBF3A00F1FC37F3DA0 /* ofxUIWaveform.cpp in Sources */,
 				82845E1F8C90E1F5A99D9868 /* ofxUIWidget.cpp in Sources */,
