@@ -24,6 +24,7 @@ void ofApp::update(){
     numLineConnect = listOfLineConnects.size();
     numMultiplierObjects = listOfMultipliers.size();
     numAdderObjects = listOfAdders.size();
+    numNumBoxObjects = listOfNumBox.size();
 }
 
 //--------------------------------------------------------------
@@ -63,6 +64,12 @@ void ofApp::draw(){
     if(numMultiplierObjects > 0){
         for(int i = 0; i < numMultiplierObjects;i++){
             listOfMultipliers.at(i)->draw();
+        }
+    }
+    
+    if(numNumBoxObjects > 0){
+        for(int i = 0; i < numNumBoxObjects;i++){
+            listOfNumBox.at(i)->draw();
         }
     }
     
@@ -127,9 +134,13 @@ void ofApp::mousePressed(int x, int y, int button){
                         cout << "Adder " << endl;
                         addAdderObject(x, y);
                     }
-                    else if(y > y_coord + 120 && y < y_coord + 150){
+                    else if(y > y_coord + 120 && y < y_coord + 140){
                         cout << "Multiplier " << endl;
                         addMultiplierObject(x, y);
+                    }
+                    else if(y > y_coord + 140 && y < y_coord + 180){
+                        cout << "Number Box " << endl;
+                        addNumberBoxObject(x, y);
                     }
                 }
                 selectMenu.setShowMenu(false);
@@ -215,6 +226,7 @@ void ofApp::audioOut(float *output, int bufferSize, int nChannels){
     float sample;
     
     //Noise
+    //This is hard coded
     if(onOff == 1 && numOutput > 0) {
         listOfOutputs.at(0)->fillOutBuffer(output, bufferSize, nChannels);
     }
@@ -225,12 +237,12 @@ void ofApp::guiEvent(ofxUIEventArgs & e){
     string name = e.getName();
     
     //For the getting of the value
-    if(name == "On/Off"){
+    if(name == "On/Off") {
         onOff = e.getToggle()->getValue();
         cout << "Toggle value: " << onOff << endl;
     }
     
-    else if(name == "Slider"){
+    else if(name == "Slider") {
         int currSliderID = e.getSlider()->getID();
         double val = e.getSlider()->getValue();
         string type = "";
@@ -243,7 +255,7 @@ void ofApp::guiEvent(ofxUIEventArgs & e){
                 return;
             }
                 
-                //cout << "currSliderID: " << currSliderID << " curr index: " << i << endl;
+            //cout << "currSliderID: " << currSliderID << " curr index: " << i << endl;
                 
             type = listOfSliderObjects.at(currSliderID)->getObjectToControl()->getType();
                 
@@ -258,6 +270,10 @@ void ofApp::guiEvent(ofxUIEventArgs & e){
             }
             else if(type == "Multiplier"){
                     
+            }
+            else if(type == "NumberBox"){
+                ((NumberBoxObject *) listOfSliderObjects.at(currSliderID)->
+                 getObjectToControl())->setMyValue(val);
             }
         }
     }
@@ -330,10 +346,14 @@ void ofApp::addAdderObject(int x, int y){
     listOfAdders.push_back(adderPtr);
 }
 
-//Function to add multiplier objects
 void ofApp::addMultiplierObject(int x, int y){
     multiplierPtr = new MultiplierObject(x, y);
     listOfMultipliers.push_back(multiplierPtr);
+}
+
+void ofApp::addNumberBoxObject(int x, int y){
+    nbPtr = new NumberBoxObject(x, y);
+    listOfNumBox.push_back(nbPtr);
 }
 
 //-------------------------------------------------------------------------------
@@ -399,6 +419,16 @@ bool ofApp::selectItems(int x, int y, ElementObject ** eObj){
         for(int i = 0; i < numMultiplierObjects; i++){
             if(listOfMultipliers.at(i)->inBound(x, y)){
                 *eObj = listOfMultipliers.at(i);
+                itemSelected = true;
+                break;
+            }
+        }
+    }
+    
+    if(!itemSelected){
+        for(int i = 0; i < numNumBoxObjects; i++){
+            if(listOfNumBox.at(i)->inBound(x, y)){
+                *eObj = listOfNumBox.at(i);
                 itemSelected = true;
                 break;
             }

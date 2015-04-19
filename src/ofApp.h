@@ -12,6 +12,7 @@
 #include "LineConnect.h"
 #include "AdderObject.h"
 #include "MultiplierObject.h"
+#include "NumberBoxObject.h"
 
 //Pred
 #define LEFT_CLICK 0
@@ -52,6 +53,8 @@ public:
     LineConnect * lineConnectPtr;
     AdderObject * adderPtr;
     MultiplierObject * multiplierPtr;
+    NumberBoxObject * nbPtr;
+    
     ElementObject * currObject_1;
     ElementObject * currObject_2;
     
@@ -69,6 +72,7 @@ public:
     int numSliderObjects = 0;
     int numAdderObjects = 0;
     int numMultiplierObjects = 0;
+    int numNumBoxObjects = 0;
     
     
 private:
@@ -78,6 +82,7 @@ private:
     vector<LineConnect *> listOfLineConnects;
     vector<AdderObject *> listOfAdders;
     vector<MultiplierObject *> listOfMultipliers;
+    vector<NumberBoxObject *> listOfNumBox;
     
     //For the output
     int onOff = 0;
@@ -94,6 +99,7 @@ private:
     void addSliderObject(int x, int y);
     void addAdderObject(int x, int y);
     void addMultiplierObject(int x, int y);
+    void addNumberBoxObject(int x, int y);
     bool selectItems(int x, int y, ElementObject ** obj);
     float euclideanDistance(float x_1, float y_1, float x_2, float y_2);
 };

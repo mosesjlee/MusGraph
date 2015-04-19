@@ -86,6 +86,13 @@ void LineConnect::makeConnections(){
         ((SliderObject *) o1)->setObjectToControl(o2);
     }
     
+    else if(o1_type == "NumberBox" && o2_type == "Slider"){
+        ((SliderObject *) o2)->setObjectToControl(o1);
+    }
+    else if(o2_type == "NumberBox" && o1_type == "Slider"){
+        ((SliderObject *) o1)->setObjectToControl(o2);
+    }
+    
     else if(o1_type == "Adder" && o2_type == "Sine"){
         ((AdderObject *) o1)->connectElement(o2);
     }
@@ -121,10 +128,6 @@ void LineConnect::makeConnections(){
     else if(o2_type == "Sine" && o1_type == "Sine"){
 
     }
-//Future connection points
-//    else if(){
-//        
-//    }
 }
 
 double LineConnect::lerp(double x_1, double y_1, double x_2, double y_2, double x)

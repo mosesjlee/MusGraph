@@ -14,7 +14,6 @@
 #include "ofSoundStream.h"
 #include "LineConnect.h"
 #include "WaveTable.h"
-#include "SliderObject.h"
 
 
 #define MONO 0
@@ -54,7 +53,7 @@ private:
     WaveTable * lWavePtr = NULL;
     WaveTable * rWavePtr = NULL;
     AdderObject * adderPtr = NULL;
-    SliderObject * sliderPtr = NULL;
+    MultiplierObject * multPtr = NULL;
     string inputType = "";
     int soundMode = MONO;
     float sampleRate = DEFAULT_SAMPLE_RATE;

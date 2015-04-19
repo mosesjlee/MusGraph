@@ -62,7 +62,7 @@ float MultiplierObject::tick(){
     
     if(val > 1.0f) val = 1.0f;
     if(val < -1.0f) val = -1.0f;
-    
+    cout << "What is val: " << val <<endl;
     return val;
 }
 

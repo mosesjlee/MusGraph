@@ -42,7 +42,7 @@ void OutputElement::fillOutBuffer(float * output, int bufferSize, int nChannels)
     float rSample = 0.0f;
     
     
-    if(lWavePtr == NULL && rWavePtr == NULL && adderPtr == NULL) return;
+    if(lWavePtr == NULL && rWavePtr == NULL && adderPtr == NULL && multPtr == NULL) return;
     
     //cout << "In fill out buffer... type: " << inputType << endl;
     
@@ -56,6 +56,13 @@ void OutputElement::fillOutBuffer(float * output, int bufferSize, int nChannels)
         else if(inputType == "Adder"){
             for(int i = 0; i < bufferSize; i++){
                 rSample = lSample = adderPtr->tick();
+                output[i*nChannels    ] = lSample * volume;
+                output[i*nChannels + 1] = rSample * volume;
+            }
+        }
+        else if(inputType == "Multiplier"){
+            for(int i = 0; i < bufferSize; i++){
+                rSample = lSample = multPtr->tick();
                 output[i*nChannels    ] = lSample * volume;
                 output[i*nChannels + 1] = rSample * volume;
             }
@@ -84,7 +91,7 @@ void OutputElement::setInput(ElementObject * o){
         adderPtr = (AdderObject *) o;
     }
     else if(inputType == "Mulitplier"){
-        
+        multPtr = (MultiplierObject *) o;
     }
     else if(inputType == "Slider"){
         ((SliderObject *) o)->setObjectToControl(o);

@@ -38,6 +38,7 @@ public:
     void setSecondElement(ElementObject * o);
     
     void makeConnections();
+    void disconnect();
     
 private:
     ElementObject * o1;

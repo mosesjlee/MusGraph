@@ -17,6 +17,7 @@
 #include "ofxGui.h"
 #include "Wavetable.h"
 #include "ElementObject.h"
+#include "NumberBoxObject.h"
 
 class SliderObject : public ElementObject{
 public:

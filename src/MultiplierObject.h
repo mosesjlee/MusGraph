@@ -15,8 +15,6 @@
 #include <stdio.h>
 #include "TickableElement.h"
 #include "WaveTable.h"
-#include "OutputElement.h"
-#include "SliderObject.h"
 
 
 class MultiplierObject : public TickableElement{
