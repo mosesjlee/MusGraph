@@ -18,6 +18,7 @@ MenuView::MenuView(int height, int width){
     menuListItems.push_back("Output");
     menuListItems.push_back("Adder");
     menuListItems.push_back("Multiplier");
+    menuListItems.push_back("Number Box");
 }
 
 MenuView::MenuView()
@@ -28,6 +29,7 @@ MenuView::MenuView()
     menuListItems.push_back("Output");
     menuListItems.push_back("Adder");
     menuListItems.push_back("Multiplier");
+    menuListItems.push_back("Number Box");
 }
 
 MenuView::~MenuView()
@@ -98,6 +100,10 @@ void MenuView::drawMenu()
     text << menuListItems.at(3) << endl;
     text << endl;
     text << menuListItems.at(4) << endl;
+    text << endl;
+    text << menuListItems.at(5) << endl;
+    text << endl;
+    
     ofDrawBitmapString(text.str(), x + 10, y + 20);
 }
 

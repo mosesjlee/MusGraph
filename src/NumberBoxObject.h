@@ -18,6 +18,7 @@ public:
     NumberBoxObject(int x, int y);
     ~NumberBoxObject();
     void setMyValue(int v);
+    int getValue();
 private:
     ofRectangle numberRect;
     int myValue;

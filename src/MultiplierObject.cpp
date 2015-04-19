@@ -56,8 +56,8 @@ float MultiplierObject::tick(){
         return;
     }
     
-    float o1_sample = ((TickableElement *) o1)->tick();
-    float o2_sample = ((TickableElement *) o2)->tick();
+    float o1_sample = ((WaveTable *) o1)->tick();
+    float o2_sample = ((WaveTable *) o2)->tick();
     float val = o1_sample * o2_sample;
     
     if(val > 1.0f) val = 1.0f;
