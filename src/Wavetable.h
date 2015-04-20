@@ -16,19 +16,22 @@ public:
     WaveTable(int, int);
     ~WaveTable();
     void setFreq(double);
+    void setInput(ElementObject *);
     double tick();
     void draw();
 
 private:
     WaveTable * sinePtr;
+    ElementObject * input;
     double * table;
     double initialPhase;
     double delta_i;
     double index;
     double freq;
-    
     //For the visual representation
     ofRectangle sineTab;
+    
+    
     
     //Do i need?
     double lerp(double, double, double, double, double);

@@ -15,6 +15,7 @@
 #include <stdio.h>
 #include "TickableElement.h"
 #include "NumberBoxObject.h"
+#include "MultiplierObject.h"
 #include "WaveTable.h"
 
 class AdderObject : public TickableElement{
@@ -28,9 +29,12 @@ public:
     void draw();
     void fillBuf();
     void connectElement(ElementObject * o);
+    void connectOutElement(WaveTable * wPtr);
+    void sendOut(float);
     
 private:
     ofRectangle adderRect;
+    WaveTable * sPtr;
     float * buf;
     int countBufElem = 0;
     int outputCounter = 0;

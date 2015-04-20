@@ -92,15 +92,26 @@ void LineConnect::makeConnections(){
     else if(o2_type == "NumberBox" && o1_type == "Slider"){
         ((SliderObject *) o1)->setObjectToControl(o2);
     }
+
+    else if(o1_type == "NumberBox" && o2_type == "Sine"){
+        ((NumberBoxObject *) o1)->setOutputConnection((WaveTable *) o2);
+    }
+    else if(o2_type == "NumberBox" && o1_type == "Sine"){
+        ((NumberBoxObject *) o2)->setOutputConnection((WaveTable *) o1);
+    }
     
     else if(o1_type == "NumberBox" && o2_type == "Adder"){
+        ((AdderObject *) o2)->connectElement(o1);
     }
     else if(o2_type == "NumberBox" && o1_type == "Adder"){
+        ((AdderObject *) o1)->connectElement(o2);
     }
 
     else if(o1_type == "NumberBox" && o2_type == "Multiplier"){
+        ((MultiplierObject *) o2)->connectElement(o1);
     }
     else if(o2_type == "NumberBox" && o1_type == "Multiplier"){
+        ((MultiplierObject *) o1)->connectElement(o2);
     }
     
     else if(o1_type == "Adder" && o2_type == "Sine"){
@@ -123,20 +134,14 @@ void LineConnect::makeConnections(){
     else if(o2_type == "Multiplier" && o1_type == "Sine"){
         ((MultiplierObject *) o2)->connectElement(o1);
     }
-    
-    else if(o1_type == "Multiplier" && o2_type == "Output"){
-        ((OutputElement *) o2)->setInput(o1);
-    }
-    else if(o2_type == "Multiplier" && o1_type == "Output"){
-        ((OutputElement *) o1)->setInput(o2);
-    }
-    
-    
-    else if(o1_type == "Sine" && o2_type == "Sine"){
 
+    
+    
+    else if(o1_type == "Multiplier" && o2_type == "Adder"){
+        ((AdderObject *) o2)->connectElement(o1);
     }
-    else if(o2_type == "Sine" && o1_type == "Sine"){
-
+    else if(o1_type == "Adder" && o2_type == "Multiplier"){
+        ((AdderObject *) o1)->connectElement(o2);
     }
 }
 

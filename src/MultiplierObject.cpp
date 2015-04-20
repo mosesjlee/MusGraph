@@ -52,7 +52,7 @@ void MultiplierObject::draw(){
 
 float MultiplierObject::tick(){
     if (o1 == NULL || o2 == NULL) {
-        cout << "one pointer in adder is NULL: " << endl;
+        cout << "one pointer in multiplier is NULL: " << endl;
         return;
     }
     
@@ -73,8 +73,8 @@ float MultiplierObject::tick(){
     
     float val = o1_sample * o2_sample;
     
-    if(val > 1.0f) val = 1.0f;
-    if(val < -1.0f) val = -1.0f;
+    //    if(val > 1.0f) val = 1.0f;
+    //    if(val < -1.0f) val = -1.0f;
     
     return val;
 }
