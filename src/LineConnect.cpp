@@ -114,9 +114,12 @@ void LineConnect::makeConnections(){
         ((MultiplierObject *) o1)->connectElement(o2);
     }
     
+    //This is hard coded
     else if(o1_type == "Adder" && o2_type == "Sine"){
-        ((AdderObject *) o1)->connectElement(o2);
+        ((WaveTable *) o2)->setInput(o1);
     }
+    //ABOVE IS HARD CODED
+    
     else if(o2_type == "Adder" && o1_type == "Sine"){
         ((AdderObject *) o2)->connectElement(o1);
     }

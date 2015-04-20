@@ -41,7 +41,7 @@ void NumberBoxObject::setOutputConnection(WaveTable * sptr){
 }
 
 void NumberBoxObject::controlOutObject(){
-    sinePtr->setFreq(myValue);
+    if(sinePtr != NULL) sinePtr->setFreq(myValue);
 }
 
 void NumberBoxObject::draw(){

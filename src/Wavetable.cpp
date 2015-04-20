@@ -1,4 +1,5 @@
 #include "Wavetable.h"
+#include "AdderObject.h"
 
 WaveTable::WaveTable()
 {
@@ -40,7 +41,7 @@ WaveTable::~WaveTable()
 	delete [] table;
 }
 
-void WaveTable::setFreq(double newFreq)
+void WaveTable::setFreq(float newFreq)
 {
     freq = newFreq;
 	delta_i = freq * MAX_SAMPLES/SR;
@@ -48,6 +49,8 @@ void WaveTable::setFreq(double newFreq)
 
 double WaveTable::tick()
 {
+    if(input != NULL) setFreq(((AdderObject *) input)->tick());
+    
 	double val = table[(int) index];
 
 	//Increment by delta i
@@ -60,6 +63,10 @@ double WaveTable::tick()
 	return val;
 }
 
+void WaveTable::setInput(ElementObject * o){
+    cout << "Sine just connected Input: " << endl;
+    input = o;
+}
 
 double WaveTable::lerp(double x_1, double y_1, double x_2, double y_2, double x)
 {

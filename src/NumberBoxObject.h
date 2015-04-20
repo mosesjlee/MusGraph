@@ -31,7 +31,7 @@ public:
 private:
     ofRectangle numberRect;
     WaveTable * sinePtr;
-    float myValue = 10.0f;
+    float myValue = 100.0f;
 };
 
 #endif /* defined(__MusGraph__NumberBoxObject__) */

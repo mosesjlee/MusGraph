@@ -336,7 +336,7 @@ void ofApp::addSliderObject(int x, int y){
     elementsGUI->setDimensions(SLIDER_WIDTH, SLIDER_HEIGHT);
     ofAddListener(elementsGUI->newGUIEvent,this,&ofApp::guiEvent);
     
-    sliderPtr = new SliderObject(elementsGUI, name, 100, 1200, 440, numSliderObjects);
+    sliderPtr = new SliderObject(elementsGUI, name, 1, 1000, 440, numSliderObjects);
     sliderPtr->setCoord(x, y);
     listOfSliderObjects.push_back(sliderPtr);
 }

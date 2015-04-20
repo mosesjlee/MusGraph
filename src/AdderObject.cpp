@@ -82,7 +82,6 @@ float AdderObject::tick(){
     
 //    if(val > 1.0f) val = 1.0f;
 //    if(val < -1.0f) val = -1.0f;
-    if(sPtr != NULL) sendOut(val);
     return val;
 }
 
@@ -106,6 +105,7 @@ void AdderObject::connectElement(ElementObject * o){
         numElementsConnected = 2;
     }
     else {
+        cout << "S Pointer Connected: " << endl;
         sPtr = (WaveTable *) o;
         numElementsConnected = 3;
     }

@@ -15,14 +15,14 @@ public:
     WaveTable();
     WaveTable(int, int);
     ~WaveTable();
-    void setFreq(double);
+    void setFreq(float);
     void setInput(ElementObject *);
     double tick();
     void draw();
 
 private:
     WaveTable * sinePtr;
-    ElementObject * input;
+    ElementObject * input = NULL;
     double * table;
     double initialPhase;
     double delta_i;
