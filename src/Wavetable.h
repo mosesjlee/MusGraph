@@ -26,6 +26,7 @@ private:
     double delta_i;
     double index;
     double freq;
+    
     //For the visual representation
     ofRectangle sineTab;
     

@@ -29,10 +29,19 @@ NumberBoxObject::~NumberBoxObject(){
 
 void NumberBoxObject::setMyValue(float v){
     myValue = v;
+    if(sinePtr != NULL) controlOutObject();
 }
 
 float NumberBoxObject::sendValue(){
-    return 0.00f;
+    return myValue;
+}
+
+void NumberBoxObject::setOutputConnection(WaveTable * sptr){
+    sinePtr = sptr;
+}
+
+void NumberBoxObject::controlOutObject(){
+    sinePtr->setFreq(myValue);
 }
 
 void NumberBoxObject::draw(){

@@ -16,7 +16,6 @@
 #include "ElementObject.h"
 #include "WaveTable.h"
 #include "SliderObject.h"
-#include "OutputElement.h"
 
 class NumberBoxObject : public ElementObject{
 public:
@@ -26,6 +25,9 @@ public:
     void setMyValue(float v);
     float sendValue();
     void draw();
+    void setOutputConnection(WaveTable * sptr);
+    void controlOutObject();
+    
 private:
     ofRectangle numberRect;
     WaveTable * sinePtr;
