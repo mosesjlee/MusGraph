@@ -15,6 +15,7 @@
 #include <stdio.h>
 #include "TickableElement.h"
 #include "WaveTable.h"
+#include "NumberBoxObject.h"
 
 
 class MultiplierObject : public TickableElement{
@@ -33,6 +34,8 @@ private:
     ofRectangle multiplierRect;
     float * buf;
     int numElementsConnected = 0;
+    string o1_type;
+    string o2_type;
     ElementObject * o1 = NULL;
     ElementObject * o2 = NULL;
 };

@@ -9,6 +9,7 @@
 #ifndef mySketch_ElementObject_h
 #define mySketch_ElementObject_h
 #define BUF_SIZ 1024
+
 #include <stdio.h>
 #include <string>
 #include <ctype.h>

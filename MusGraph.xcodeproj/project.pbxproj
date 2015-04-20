@@ -645,7 +645,6 @@
 				91D54C491AD8E79D0023E49A /* SliderObject.h */,
 				91D54C4A1AD8E79D0023E49A /* Wavetable.cpp */,
 				91D54C4B1AD8E79D0023E49A /* Wavetable.h */,
-				E4B69E1D0A3A1BDC003C02F2 /* main.cpp */,
 				E4B69E1E0A3A1BDC003C02F2 /* ofApp.cpp */,
 				E4B69E1F0A3A1BDC003C02F2 /* ofApp.h */,
 				91D54C521AD8E8700023E49A /* OutputElement.cpp */,
@@ -658,6 +657,7 @@
 				91733BE61ADDEB400024A56E /* MultiplierObject.h */,
 				91E0C7731AE32118004041C6 /* NumberBoxObject.cpp */,
 				91E0C7741AE32118004041C6 /* NumberBoxObject.h */,
+				E4B69E1D0A3A1BDC003C02F2 /* main.cpp */,
 				91E0C7761AE32326004041C6 /* TickableElement.h */,
 			);
 			path = src;

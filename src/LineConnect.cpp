@@ -93,6 +93,16 @@ void LineConnect::makeConnections(){
         ((SliderObject *) o1)->setObjectToControl(o2);
     }
     
+    else if(o1_type == "NumberBox" && o2_type == "Adder"){
+    }
+    else if(o2_type == "NumberBox" && o1_type == "Adder"){
+    }
+
+    else if(o1_type == "NumberBox" && o2_type == "Multiplier"){
+    }
+    else if(o2_type == "NumberBox" && o1_type == "Multiplier"){
+    }
+    
     else if(o1_type == "Adder" && o2_type == "Sine"){
         ((AdderObject *) o1)->connectElement(o2);
     }

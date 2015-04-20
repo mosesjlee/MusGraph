@@ -14,6 +14,7 @@
 
 #include <stdio.h>
 #include "TickableElement.h"
+#include "NumberBoxObject.h"
 #include "WaveTable.h"
 
 class AdderObject : public TickableElement{
@@ -34,6 +35,8 @@ private:
     int countBufElem = 0;
     int outputCounter = 0;
     int numElementsConnected = 0;
+    string o1_type;
+    string o2_type;
     ElementObject * o1 = NULL;
     ElementObject * o2 = NULL;
 };

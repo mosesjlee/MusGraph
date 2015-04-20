@@ -41,11 +41,9 @@ void OutputElement::fillOutBuffer(float * output, int bufferSize, int nChannels)
     float lSample = 0.0f;
     float rSample = 0.0f;
     
-    
     if(lWavePtr == NULL && rWavePtr == NULL && adderPtr == NULL && multPtr == NULL) return;
     
     //cout << "In fill out buffer... type: " << inputType << endl;
-    
     if(soundMode == MONO || soundMode == LEFT_AUDIO){
         if(inputType == "Sine"){
             for(int i = 0; i < bufferSize; i++){
@@ -61,6 +59,7 @@ void OutputElement::fillOutBuffer(float * output, int bufferSize, int nChannels)
             }
         }
         else if(inputType == "Multiplier"){
+            
             for(int i = 0; i < bufferSize; i++){
                 rSample = lSample = multPtr->tick();
                 output[i*nChannels    ] = lSample * volume;
@@ -84,17 +83,18 @@ void OutputElement::fillOutBuffer(float * output, int bufferSize, int nChannels)
 void OutputElement::setInput(ElementObject * o){
     inputType = o->getType();
     
+    cout << "Connecting: " << inputType << endl;
+    
     if(inputType == "Sine"){
         lWavePtr = (WaveTable *) o;
     }
     else if(inputType == "Adder"){
         adderPtr = (AdderObject *) o;
+        cout << "I am: " << adderPtr->getType() << endl;
     }
-    else if(inputType == "Mulitplier"){
+    else if(inputType == "Multiplier"){
         multPtr = (MultiplierObject *) o;
-    }
-    else if(inputType == "Slider"){
-        ((SliderObject *) o)->setObjectToControl(o);
+        cout << "I am: " << multPtr->getType() << endl;
     }
 }
 

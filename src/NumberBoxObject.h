@@ -28,6 +28,7 @@ public:
     void draw();
 private:
     ofRectangle numberRect;
+    WaveTable * sinePtr;
     float myValue = 10.0f;
 };
 
