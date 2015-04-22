@@ -16,6 +16,7 @@
 #include "OutputElement.h"
 #include "WaveTable.h"
 #include "SliderObject.h"
+#include "TickableElement.h"
 
 class LineConnect : public ElementObject{
     

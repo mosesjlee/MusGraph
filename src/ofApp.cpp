@@ -1,4 +1,5 @@
 #include "ofApp.h"
+
 //--------------------------------------------------------------
 void ofApp::setup(){
     
@@ -9,9 +10,8 @@ void ofApp::setup(){
     setUpGUIElements();
     
     //Create a menuView object
-    selectMenu.setSize(200, 100);
+    selectMenu.setSize(300, 100);
     selectMenu.setMenuColor(101, 123, 140);
-    
     
     ofSetFrameRate(60);
 }
@@ -24,6 +24,7 @@ void ofApp::update(){
     numLineConnect = listOfLineConnects.size();
     numMultiplierObjects = listOfMultipliers.size();
     numAdderObjects = listOfAdders.size();
+    numDividerObjects = listOfDividers.size();
     numNumBoxObjects = listOfNumBox.size();
 }
 
@@ -67,6 +68,12 @@ void ofApp::draw(){
         }
     }
     
+    if(numDividerObjects > 0){
+        for(int i = 0; i < numDividerObjects;i++){
+            listOfDividers.at(i)->draw();
+        }
+    }
+    
     if(numNumBoxObjects > 0){
         for(int i = 0; i < numNumBoxObjects;i++){
             listOfNumBox.at(i)->draw();
@@ -82,7 +89,6 @@ void ofApp::draw(){
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
-    
 }
 
 //--------------------------------------------------------------
@@ -117,30 +123,36 @@ void ofApp::mousePressed(int x, int y, int button){
             if(selectMenu.getShowMenu()){
                 if(x > x_coord && x < x_bound && y > y_coord && y < y_bound){
                     cout << "In menu: " << endl;
+                    int x_loc = selectMenu.getXCoord();
+                    int y_loc = selectMenu.getYCoord();
                     
                     if(y > y_coord && y < y_coord + 30){
-                        addWaveTableObject(x, y);
+                        addWaveTableObject(x_loc, y_loc);
                     }
                     else if(y > y_coord + 30 && y < y_coord + 60){
                         cout << "second menu" << endl;
-                        addSliderObject(x, y);
+                        addSliderObject(x_loc, y_loc);
 
                     }
                     else if(y > y_coord + 60 && y < y_coord + 90){
                         cout << "third menu" << endl;
-                        addOutputObject(x, y);
+                        addOutputObject(x_loc, y_loc);
                     }
                     else if(y > y_coord + 90 && y < y_coord + 120){
                         cout << "Adder " << endl;
-                        addAdderObject(x, y);
+                        addAdderObject(x_loc, y_loc);
                     }
                     else if(y > y_coord + 120 && y < y_coord + 140){
                         cout << "Multiplier " << endl;
-                        addMultiplierObject(x, y);
+                        addMultiplierObject(x_loc, y_loc);
                     }
                     else if(y > y_coord + 140 && y < y_coord + 180){
+                        cout << "Divider " << endl;
+                        addDividerObject(x_loc, y_loc);
+                    }
+                    else if(y > y_coord + 180 && y < y_coord + 220){
                         cout << "Number Box " << endl;
-                        addNumberBoxObject(x, y);
+                        addNumberBoxObject(x_loc, y_loc);
                     }
                 }
                 selectMenu.setShowMenu(false);
@@ -202,7 +214,6 @@ void ofApp::mouseReleased(int x, int y, int button){
             }
         }
     }
-    
 }
 
 //--------------------------------------------------------------
@@ -238,6 +249,10 @@ void ofApp::guiEvent(ofxUIEventArgs & e){
     if(name == "On/Off") {
         onOff = e.getToggle()->getValue();
         cout << "Toggle value: " << onOff << endl;
+    }
+    
+    else if (name == "Save Configuration"){
+        cout << "Saving Configuration: " << endl;
     }
     
     else if(name == "Slider") {
@@ -304,9 +319,7 @@ void ofApp::guiEvent(ofxUIEventArgs & e){
 //--------------------------------------------------------------
 void ofApp::exit(){
     delete menuGUI;
-    //Free the objects
-    int listSize = 0;
-    
+    delete saveMenuGUI;
     
     /*if((listSize = listOfWaveTables->size()) > 0){
      for(int i = 0; i < listSize; i++){
@@ -325,9 +338,15 @@ void ofApp::setUpGUIElements(){
     
     //create the object for the menu element canvas
     menuGUI = new ofxUICanvas();
-    menuGUI->setDimensions(150, 32);
-    onOffButton = menuGUI->addLabelToggle("On/Off", false);
+    menuGUI->setDimensions(100, 32);
+    onOffButton = menuGUI->addToggle("On/Off", false);
     ofAddListener(menuGUI->newGUIEvent,this,&ofApp::guiEvent);
+    
+    saveMenuGUI = new ofxUICanvas();
+    saveMenuGUI->setDimensions(150, 32);
+    saveMenuGUI->setPosition(100, 0);
+    saveButton = saveMenuGUI->addButton("Save Configuration", false);
+    ofAddListener(saveMenuGUI->newGUIEvent,this,&ofApp::guiEvent);
     
 }
 
@@ -362,6 +381,12 @@ void ofApp::addMultiplierObject(int x, int y){
     listOfMultipliers.push_back(multiplierPtr);
 }
 
+void ofApp::addDividerObject(int x, int y){
+    dividerPtr = new DividerObject(x, y);
+    listOfDividers.push_back(dividerPtr);
+}
+
+
 void ofApp::addNumberBoxObject(int x, int y){
     elementsGUI = new ofxUICanvas();
     ofAddListener(elementsGUI->newGUIEvent,this,&ofApp::guiEvent);
@@ -375,6 +400,7 @@ void ofApp::addNumberBoxObject(int x, int y){
 //-------------------------------------------------------------------------------
 bool ofApp::selectItems(int x, int y, ElementObject ** eObj){
     bool itemSelected = false;
+    
     //cout<< "Checking to see if wavetable object is clicked" << endl;
     for(int i = 0; i < numWaveTables; i++){
         if(listOfWaveTables.at(i)->inBound(x, y)){
@@ -440,6 +466,16 @@ bool ofApp::selectItems(int x, int y, ElementObject ** eObj){
     }
     
     if(!itemSelected){
+        for(int i = 0; i < numDividerObjects; i++){
+            if(listOfDividers.at(i)->inBound(x, y)){
+                *eObj = listOfDividers.at(i);
+                itemSelected = true;
+                return true;
+            }
+        }
+    }
+    
+    if(!itemSelected){
         for(int i = 0; i < numNumBoxObjects; i++){
             if(listOfNumBox.at(i)->inBound(x, y)){
                 *eObj = listOfNumBox.at(i);
@@ -450,11 +486,4 @@ bool ofApp::selectItems(int x, int y, ElementObject ** eObj){
     }
     
     return itemSelected;
-}
-
-//-------------------------------------------------------------------------------
-float ofApp::euclideanDistance(float x_1, float y_1, float x_2, float y_2){
-    float x_val = pow((x_2 - x_1), 2.0f);
-    float y_val = pow((y_2 - y_1), 2.0f);
-    return sqrt(x_val + y_val);
 }

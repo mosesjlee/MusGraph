@@ -54,6 +54,7 @@ private:
     WaveTable * rWavePtr = NULL;
     AdderObject * adderPtr = NULL;
     MultiplierObject * multPtr = NULL;
+    TickableElement * tickElmPtr = NULL;
     string inputType = "";
     int soundMode = MONO;
     float sampleRate = DEFAULT_SAMPLE_RATE;

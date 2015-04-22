@@ -45,26 +45,10 @@ void OutputElement::fillOutBuffer(float * output, int bufferSize, int nChannels)
     
     //cout << "In fill out buffer... type: " << inputType << endl;
     if(soundMode == MONO || soundMode == LEFT_AUDIO){
-        if(inputType == "Sine"){
-            for(int i = 0; i < bufferSize; i++){
-                lSample = lWavePtr->tick();
-                output[i*nChannels    ] = lSample * volume;
-            }
-        }
-        else if(inputType == "Adder"){
-            for(int i = 0; i < bufferSize; i++){
-                rSample = lSample = adderPtr->tick();
-                output[i*nChannels    ] = lSample * volume;
-                output[i*nChannels + 1] = rSample * volume;
-            }
-        }
-        else if(inputType == "Multiplier"){
-            
-            for(int i = 0; i < bufferSize; i++){
-                rSample = lSample = multPtr->tick();
-                output[i*nChannels    ] = lSample * volume;
-                output[i*nChannels + 1] = rSample * volume;
-            }
+        for(int i = 0; i < bufferSize; i++){
+            rSample = lSample = tickElmPtr->tick();
+            output[i*nChannels    ] = lSample * volume;
+            output[i*nChannels + 1] = rSample * volume;
         }
     }
     else if(soundMode == RIGHT_AUDIO){
@@ -84,18 +68,20 @@ void OutputElement::setInput(ElementObject * o){
     inputType = o->getType();
     
     cout << "Connecting: " << inputType << endl;
+
     
-    if(inputType == "Sine"){
-        lWavePtr = (WaveTable *) o;
-    }
-    else if(inputType == "Adder"){
-        adderPtr = (AdderObject *) o;
-        cout << "I am: " << adderPtr->getType() << endl;
-    }
-    else if(inputType == "Multiplier"){
-        multPtr = (MultiplierObject *) o;
-        cout << "I am: " << multPtr->getType() << endl;
-    }
+    tickElmPtr = (TickableElement *) o;
+//    if(inputType == "Sine"){
+//        lWavePtr = (WaveTable *) o;
+//    }
+//    else if(inputType == "Adder"){
+//        adderPtr = (AdderObject *) o;
+//        cout << "I am: " << adderPtr->getType() << endl;
+//    }
+//    else if(inputType == "Multiplier"){
+//        multPtr = (MultiplierObject *) o;
+//        cout << "I am: " << multPtr->getType() << endl;
+//    }
 }
 
 void OutputElement::setVolume(float newVolume){

@@ -69,9 +69,13 @@ void LineConnect::setSecondElement(ElementObject * o){
 
 //These make all the connections amongst the objects
 void LineConnect::makeConnections(){
+    //Always NULL check
+    if(o1 == NULL || o2 == NULL) return;
+    
     string o1_type = o1->getType();
     string o2_type = o2->getType();
     
+    //Connections below this line order doe not matter
     if(o1_type == "Sine" && o2_type == "Output"){
         ((OutputElement *) o2)->setInput(o1);
     }

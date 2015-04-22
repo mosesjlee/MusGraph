@@ -3,7 +3,6 @@
 //TODO Think of ways to connect objects with each other
 
 #include "ofMain.h"
-#include <math.h>
 #include "MenuView.h"
 #include "Wavetable.h"
 #include "ofxUI.h"
@@ -12,7 +11,9 @@
 #include "LineConnect.h"
 #include "AdderObject.h"
 #include "MultiplierObject.h"
+#include "DividerObject.h"
 #include "NumberBoxObject.h"
+#include "AppUtilityFunctions.h"
 
 //Pred
 #define LEFT_CLICK 0
@@ -46,6 +47,9 @@ public:
     void audioOut(float * output, int bufferSize, int nChannels);
     void exit();
     
+    
+private:
+    //To create the visual elements
     MenuView selectMenu;
     WaveTable * waveTablePtr;
     SliderObject * sliderPtr;
@@ -53,16 +57,17 @@ public:
     LineConnect * lineConnectPtr;
     AdderObject * adderPtr;
     MultiplierObject * multiplierPtr;
+    DividerObject * dividerPtr;
     NumberBoxObject * nbPtr;
     
-    ElementObject * currObject_1;
-    ElementObject * currObject_2;
-    
-    //For UI Elements
-    ofxUICanvas * menuGUI;
-    ofxUIButton * onOffButton;
-    ofxUICanvas * elementsGUI;
-    ofPolyline * currLine;
+    vector<WaveTable *> listOfWaveTables;
+    vector<SliderObject *> listOfSliderObjects;
+    vector<OutputElement *> listOfOutputs;
+    vector<LineConnect *> listOfLineConnects;
+    vector<AdderObject *> listOfAdders;
+    vector<MultiplierObject *> listOfMultipliers;
+    vector<DividerObject *> listOfDividers;
+    vector<NumberBoxObject *> listOfNumBox;
     
     //Counters for the different objects on screen
     int menuItem = 0;
@@ -73,16 +78,7 @@ public:
     int numAdderObjects = 0;
     int numMultiplierObjects = 0;
     int numNumBoxObjects = 0;
-    
-    
-private:
-    vector<WaveTable *> listOfWaveTables;
-    vector<SliderObject *> listOfSliderObjects;
-    vector<OutputElement *> listOfOutputs;
-    vector<LineConnect *> listOfLineConnects;
-    vector<AdderObject *> listOfAdders;
-    vector<MultiplierObject *> listOfMultipliers;
-    vector<NumberBoxObject *> listOfNumBox;
+    int numDividerObjects = 0;
     
     //For the output
     int onOff = 0;
@@ -91,16 +87,33 @@ private:
     int initial_x;
     int initial_y;
     
+    ElementObject * currObject_1;
+    ElementObject * currObject_2;
+    
+    //For UI Elements
+    ofxUICanvas * menuGUI;
+    ofxUIButton * onOffButton;
+    ofxUICanvas * saveMenuGUI;
+    ofxUIButton * saveButton;
+    ofxUICanvas * elementsGUI;
+    ofPolyline * currLine;
+
+    //To save Configurations
+    ofFile file;
+    
     //Helper functions
-    void tickAllObjects();
     void setUpGUIElements();
     void addWaveTableObject(int x, int y);
     void addOutputObject(int x, int y);
     void addSliderObject(int x, int y);
     void addAdderObject(int x, int y);
     void addMultiplierObject(int x, int y);
+    void addDividerObject(int x, int y);
     void addNumberBoxObject(int x, int y);
     bool selectItems(int x, int y, ElementObject ** obj);
-    float euclideanDistance(float x_1, float y_1, float x_2, float y_2);
+    
+    bool saveConfiguration();
+    bool loadConfiguration();
+    
 };
 
