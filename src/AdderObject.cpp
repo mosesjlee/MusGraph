@@ -13,42 +13,19 @@ AdderObject::AdderObject(){
 }
 
 AdderObject::AdderObject(int x_coord, int y_coord){
-    adderRect.setPosition(x_coord, y_coord);
-    adderRect.setHeight(ADD_HEIGHT);
-    adderRect.setWidth(ADD_WIDTH);
+    displayRect.setPosition(x_coord, y_coord);
+    displayRect.setHeight(MATH_HEIGHT);
+    displayRect.setWidth(MATH_WIDTH);
     x = x_coord;
     y = y_coord;
-    x_bound = x + ADD_WIDTH;
-    y_bound = y + ADD_HEIGHT;
+    x_bound = x + MATH_WIDTH;
+    y_bound = y + MATH_HEIGHT;
     type = "Adder";
-}
-
-AdderObject::AdderObject(ElementObject * o1, ElementObject * o2){
-    type = "Adder";
+    mySymbol = "+";
 }
 
 AdderObject::~AdderObject(){
 }
-
-void AdderObject::draw(){
-    if(!amIClicked){
-        ofSetColor(0, 0, 0);
-        ofNoFill();
-    }
-    else {
-        ofSetColor(125, 100, 100);
-        ofFill();
-    }
-    
-    ofSetLineWidth(2);
-    ofRect(adderRect);
-    
-    stringstream text;
-    text << "+" << endl;
-    ofSetColor(0, 0, 0);
-    ofDrawBitmapString(text.str(), x+12, y+20);
-}
-
 
 float AdderObject::tick(){
     if (o1 == NULL || o2 == NULL) {

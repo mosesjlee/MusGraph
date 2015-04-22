@@ -8,11 +8,17 @@
 
 #include "NumberBoxObject.h"
 
+std::string Convert (float number){
+    std::ostringstream buff;
+    buff<<number;
+    return buff.str();
+}
+
 NumberBoxObject::NumberBoxObject(){
     
 }
 
-NumberBoxObject::NumberBoxObject(int x_coord, int y_coord){
+NumberBoxObject::NumberBoxObject(int x_coord, int y_coord, ofxUICanvas * parentCanvas, int id){
     x = x_coord;
     y = y_coord;
     x_bound = x + NUMBER_WIDTH;
@@ -21,14 +27,31 @@ NumberBoxObject::NumberBoxObject(int x_coord, int y_coord){
     numberRect.setHeight(NUMBER_HEIGHT);
     numberRect.setWidth(NUMBER_WIDTH);
     type = "NumberBox";
+    
+    numberBoxCanvas = parentCanvas;
+    numberBoxCanvas->setDimensions(NUMBER_WIDTH, NUMBER_HEIGHT);
+    numberBoxCanvas->setPosition(x, y);
+    textBox = numberBoxCanvas->addTextInput(type, Convert(myValue));
+    textBox->setID(id);
+    textBox->setOnlyNumericInput(true);
+    textBox->setVisible(false);
+    textBoxID = id;
 }
 
 NumberBoxObject::~NumberBoxObject(){
-    
+    delete textBox;
+    delete numberBoxCanvas;
+}
+
+int NumberBoxObject::getMyID(){
+    return textBoxID;
 }
 
 void NumberBoxObject::setMyValue(float v){
     myValue = v;
+    textBox->setTextString(Convert(myValue));
+    textBox->ofxUIWidget::setVisible(false);
+    amIClicked = false;
     if(sinePtr != NULL) controlOutObject();
 }
 
@@ -44,10 +67,19 @@ void NumberBoxObject::controlOutObject(){
     if(sinePtr != NULL) sinePtr->setFreq(myValue);
 }
 
+void NumberBoxObject::setAmIClicked(bool clicked){
+    textBox->setVisible(clicked);
+    amIClicked = clicked;
+}
+
 void NumberBoxObject::draw(){
     if(!amIClicked){
         ofSetColor(0, 0, 0);
         ofNoFill();
+        stringstream text;
+        text << "" << myValue << endl;
+        ofSetColor(0, 0, 0);
+        ofDrawBitmapString(text.str(), x+5, y+20);
     }
     else {
         ofSetColor(125, 100, 100);
@@ -57,8 +89,5 @@ void NumberBoxObject::draw(){
     ofSetLineWidth(2);
     ofRect(numberRect);
     
-    stringstream text;
-    text << "" << myValue << endl;
-    ofSetColor(0, 0, 0);
-    ofDrawBitmapString(text.str(), x+5, y+20);
+
 }

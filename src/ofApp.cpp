@@ -222,8 +222,6 @@ void ofApp::dragEvent(ofDragInfo dragInfo){
 
 //--------------------------------------------------------------
 void ofApp::audioOut(float *output, int bufferSize, int nChannels){
-    float volume = 1.0;
-    float sample;
     
     //Noise
     //This is hard coded
@@ -277,6 +275,22 @@ void ofApp::guiEvent(ofxUIEventArgs & e){
             }
         }
     }
+    else if(name == "NumberBox"){
+        cout << "in number box" << endl;
+        ofxUITextInput *ti = (ofxUITextInput *) e.widget;
+        
+        int numberBoxID = ti->getID();
+        string newValue = ti->getTextString();
+        cout << "New text value: " << newValue << endl;
+        
+        if(listOfNumBox.at(numberBoxID)->getMyID() == numberBoxID){
+        
+            if(ti->getInputTriggerType() == OFX_UI_TEXTINPUT_ON_ENTER){
+                cout << "ON ENTER: ";
+                listOfNumBox.at(numberBoxID)->setMyValue(atof(newValue.data()));
+            }
+        }
+    }
     
     //These are for future inputs
     //    else if(){
@@ -290,7 +304,6 @@ void ofApp::guiEvent(ofxUIEventArgs & e){
 //--------------------------------------------------------------
 void ofApp::exit(){
     delete menuGUI;
-    delete elementsGUI;
     //Free the objects
     int listSize = 0;
     
@@ -331,12 +344,10 @@ void ofApp::addOutputObject(int x, int y){
 }
 
 void ofApp::addSliderObject(int x, int y){
-    string name = "Slider";
     elementsGUI = new ofxUICanvas();
-    elementsGUI->setDimensions(SLIDER_WIDTH, SLIDER_HEIGHT);
     ofAddListener(elementsGUI->newGUIEvent,this,&ofApp::guiEvent);
     
-    sliderPtr = new SliderObject(elementsGUI, name, 1, 1000, 440, numSliderObjects);
+    sliderPtr = new SliderObject(elementsGUI, "Slider", 0, 1000, 440, numSliderObjects);
     sliderPtr->setCoord(x, y);
     listOfSliderObjects.push_back(sliderPtr);
 }
@@ -352,7 +363,10 @@ void ofApp::addMultiplierObject(int x, int y){
 }
 
 void ofApp::addNumberBoxObject(int x, int y){
-    nbPtr = new NumberBoxObject(x, y);
+    elementsGUI = new ofxUICanvas();
+    ofAddListener(elementsGUI->newGUIEvent,this,&ofApp::guiEvent);
+    
+    nbPtr = new NumberBoxObject(x, y, elementsGUI, numNumBoxObjects);
     listOfNumBox.push_back(nbPtr);
 }
 
@@ -366,7 +380,7 @@ bool ofApp::selectItems(int x, int y, ElementObject ** eObj){
         if(listOfWaveTables.at(i)->inBound(x, y)){
             *eObj = listOfWaveTables.at(i);
             itemSelected = true;
-            break;
+            return true;
         }
     }
     
@@ -376,7 +390,7 @@ bool ofApp::selectItems(int x, int y, ElementObject ** eObj){
             if(listOfSliderObjects.at(i)->inBound(x, y)){
                 *eObj = listOfSliderObjects.at(i);
                 itemSelected = true;
-                break;
+                return true;
             }
         }
     }
@@ -387,7 +401,7 @@ bool ofApp::selectItems(int x, int y, ElementObject ** eObj){
             if(listOfOutputs.at(i)->inBound(x, y)){
                 *eObj = listOfOutputs.at(i);
                 itemSelected = true;
-                break;
+                return true;
             }
         }
     }
@@ -409,7 +423,7 @@ bool ofApp::selectItems(int x, int y, ElementObject ** eObj){
             if(listOfAdders.at(i)->inBound(x, y)){
                 *eObj = listOfAdders.at(i);
                 itemSelected = true;
-                break;
+                return true;
             }
         }
     }
@@ -420,7 +434,7 @@ bool ofApp::selectItems(int x, int y, ElementObject ** eObj){
             if(listOfMultipliers.at(i)->inBound(x, y)){
                 *eObj = listOfMultipliers.at(i);
                 itemSelected = true;
-                break;
+                return true;
             }
         }
     }
@@ -430,7 +444,7 @@ bool ofApp::selectItems(int x, int y, ElementObject ** eObj){
             if(listOfNumBox.at(i)->inBound(x, y)){
                 *eObj = listOfNumBox.at(i);
                 itemSelected = true;
-                break;
+                return true;
             }
         }
     }

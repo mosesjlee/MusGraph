@@ -13,7 +13,10 @@
 
 class TickableElement : public ElementObject{
 public:
-    float tick();
+    virtual float tick() = 0;
+protected:
+    ofRectangle displayRect;
+    int countBufElem = 0;
 };
 
 #endif

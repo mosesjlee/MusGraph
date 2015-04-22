@@ -30,7 +30,7 @@ public:
     void setNumOutputs(int o){outputs = o;}
     
     bool getAmIClicked(){return amIClicked;}
-    void setAmIClicked(bool clicked){amIClicked = clicked;}
+    virtual void setAmIClicked(bool clicked){amIClicked = clicked;}
     
     bool getConnectedByLine(){return connectedByLine;}
     void setConnectedByLine(bool c){connectedByLine = c;}
@@ -55,6 +55,7 @@ public:
     //These functions will remain virtual so that subclasses
     //can implement however way they choose
     virtual void draw() = 0;
+    
 protected:
     std::string type;
     int x, y;

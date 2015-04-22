@@ -13,41 +13,20 @@ MultiplierObject::MultiplierObject(){
 }
 
 MultiplierObject::MultiplierObject(int x_coord, int y_coord){
-    multiplierRect.setPosition(x_coord, y_coord);
-    multiplierRect.setHeight(MULT_HEIGHT);
-    multiplierRect.setWidth(MULT_WIDTH);
+    displayRect.setPosition(x_coord, y_coord);
+    displayRect.setHeight(MATH_HEIGHT);
+    displayRect.setWidth(MATH_WIDTH);
     x = x_coord;
     y = y_coord;
-    x_bound = x + MULT_WIDTH;
-    y_bound = y + MULT_HEIGHT;
+    x_bound = x + MATH_WIDTH;
+    y_bound = y + MATH_HEIGHT;
     type = "Multiplier";
+    mySymbol = "*";
 }
 
-MultiplierObject::MultiplierObject(ElementObject * o1, ElementObject * o2){
-    
-}
 
 MultiplierObject::~MultiplierObject(){
     
-}
-
-void MultiplierObject::draw(){
-    if(!amIClicked){
-        ofSetColor(0, 0, 0);
-        ofNoFill();
-    }
-    else {
-        ofSetColor(125, 100, 100);
-        ofFill();
-    }
-    
-    ofSetLineWidth(2);
-    ofRect(multiplierRect);
-    
-    stringstream text;
-    text << "*" << endl;
-    ofSetColor(0, 0, 0);
-    ofDrawBitmapString(text.str(), x+10, y+20);
 }
 
 float MultiplierObject::tick(){
@@ -90,4 +69,8 @@ void MultiplierObject::connectElement(ElementObject * o){
         o2_type = o->getType();
         numElementsConnected = 2;
     }
+}
+
+void MultiplierObject::connectOutElement(WaveTable * wPtr){
+    sPtr = wPtr;
 }

@@ -43,6 +43,7 @@
 		856AA354D08AB4B323081444 /* ofxBaseGui.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9604B925D32EE39065747725 /* ofxBaseGui.cpp */; };
 		91733BE41ADDEB2D0024A56E /* AdderObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91733BE21ADDEB2D0024A56E /* AdderObject.cpp */; };
 		91733BE71ADDEB400024A56E /* MultiplierObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91733BE51ADDEB400024A56E /* MultiplierObject.cpp */; };
+		91C014E81AE7185D00B80712 /* DividerObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91C014E61AE7185D00B80712 /* DividerObject.cpp */; };
 		91D54C4C1AD8E79E0023E49A /* SliderObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91D54C481AD8E79D0023E49A /* SliderObject.cpp */; };
 		91D54C4D1AD8E79E0023E49A /* Wavetable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91D54C4A1AD8E79D0023E49A /* Wavetable.cpp */; };
 		91D54C511AD8E7A90023E49A /* MenuView.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91D54C4F1AD8E7A90023E49A /* MenuView.cpp */; };
@@ -211,10 +212,13 @@
 		8B5F60B902BFFD95E99AAB34 /* ofxUIImageSampler.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = ofxUIImageSampler.cpp; path = ../../../addons/ofxUI/src/ofxUIImageSampler.cpp; sourceTree = SOURCE_ROOT; };
 		8F8238006E98A8E39851968C /* ofxUIButton.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = ofxUIButton.cpp; path = ../../../addons/ofxUI/src/ofxUIButton.cpp; sourceTree = SOURCE_ROOT; };
 		907C5B5E104864A2D3A25745 /* ofxToggle.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = ofxToggle.cpp; path = ../../../addons/ofxGui/src/ofxToggle.cpp; sourceTree = SOURCE_ROOT; };
+		91461AD61AE7749F001072B1 /* MathObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MathObject.h; sourceTree = "<group>"; };
 		91733BE21ADDEB2D0024A56E /* AdderObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AdderObject.cpp; sourceTree = "<group>"; };
 		91733BE31ADDEB2D0024A56E /* AdderObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdderObject.h; sourceTree = "<group>"; };
 		91733BE51ADDEB400024A56E /* MultiplierObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MultiplierObject.cpp; sourceTree = "<group>"; };
 		91733BE61ADDEB400024A56E /* MultiplierObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MultiplierObject.h; sourceTree = "<group>"; wrapsLines = 0; };
+		91C014E61AE7185D00B80712 /* DividerObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DividerObject.cpp; sourceTree = "<group>"; };
+		91C014E71AE7185D00B80712 /* DividerObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DividerObject.h; sourceTree = "<group>"; };
 		91D54C481AD8E79D0023E49A /* SliderObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SliderObject.cpp; sourceTree = "<group>"; };
 		91D54C491AD8E79D0023E49A /* SliderObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SliderObject.h; sourceTree = "<group>"; };
 		91D54C4A1AD8E79D0023E49A /* Wavetable.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Wavetable.cpp; sourceTree = "<group>"; };
@@ -638,27 +642,30 @@
 		E4B69E1C0A3A1BDC003C02F2 /* src */ = {
 			isa = PBXGroup;
 			children = (
-				91D54C4E1AD8E7A90023E49A /* ElementObject.h */,
-				91D54C4F1AD8E7A90023E49A /* MenuView.cpp */,
-				91D54C501AD8E7A90023E49A /* MenuView.h */,
-				91D54C481AD8E79D0023E49A /* SliderObject.cpp */,
-				91D54C491AD8E79D0023E49A /* SliderObject.h */,
-				91D54C4A1AD8E79D0023E49A /* Wavetable.cpp */,
-				91D54C4B1AD8E79D0023E49A /* Wavetable.h */,
-				E4B69E1E0A3A1BDC003C02F2 /* ofApp.cpp */,
-				E4B69E1F0A3A1BDC003C02F2 /* ofApp.h */,
-				91D54C521AD8E8700023E49A /* OutputElement.cpp */,
-				91D54C531AD8E8700023E49A /* OutputElement.h */,
-				91D54C551AD8E88C0023E49A /* LineConnect.cpp */,
-				91D54C561AD8E88C0023E49A /* LineConnect.h */,
-				91733BE21ADDEB2D0024A56E /* AdderObject.cpp */,
-				91733BE31ADDEB2D0024A56E /* AdderObject.h */,
-				91733BE51ADDEB400024A56E /* MultiplierObject.cpp */,
-				91733BE61ADDEB400024A56E /* MultiplierObject.h */,
-				91E0C7731AE32118004041C6 /* NumberBoxObject.cpp */,
-				91E0C7741AE32118004041C6 /* NumberBoxObject.h */,
 				E4B69E1D0A3A1BDC003C02F2 /* main.cpp */,
+				E4B69E1F0A3A1BDC003C02F2 /* ofApp.h */,
+				E4B69E1E0A3A1BDC003C02F2 /* ofApp.cpp */,
+				91D54C501AD8E7A90023E49A /* MenuView.h */,
+				91D54C4F1AD8E7A90023E49A /* MenuView.cpp */,
+				91D54C4E1AD8E7A90023E49A /* ElementObject.h */,
+				91D54C491AD8E79D0023E49A /* SliderObject.h */,
+				91D54C481AD8E79D0023E49A /* SliderObject.cpp */,
+				91D54C561AD8E88C0023E49A /* LineConnect.h */,
+				91D54C551AD8E88C0023E49A /* LineConnect.cpp */,
+				91D54C531AD8E8700023E49A /* OutputElement.h */,
+				91D54C521AD8E8700023E49A /* OutputElement.cpp */,
+				91E0C7741AE32118004041C6 /* NumberBoxObject.h */,
+				91E0C7731AE32118004041C6 /* NumberBoxObject.cpp */,
 				91E0C7761AE32326004041C6 /* TickableElement.h */,
+				91D54C4B1AD8E79D0023E49A /* Wavetable.h */,
+				91D54C4A1AD8E79D0023E49A /* Wavetable.cpp */,
+				91461AD61AE7749F001072B1 /* MathObject.h */,
+				91733BE61ADDEB400024A56E /* MultiplierObject.h */,
+				91733BE51ADDEB400024A56E /* MultiplierObject.cpp */,
+				91733BE31ADDEB2D0024A56E /* AdderObject.h */,
+				91733BE21ADDEB2D0024A56E /* AdderObject.cpp */,
+				91C014E71AE7185D00B80712 /* DividerObject.h */,
+				91C014E61AE7185D00B80712 /* DividerObject.cpp */,
 			);
 			path = src;
 			sourceTree = SOURCE_ROOT;
@@ -774,6 +781,7 @@
 				63B57AC5BF4EF088491E0317 /* ofxXmlSettings.cpp in Sources */,
 				933A2227713C720CEFF80FD9 /* tinyxml.cpp in Sources */,
 				9D44DC88EF9E7991B4A09951 /* tinyxmlerror.cpp in Sources */,
+				91C014E81AE7185D00B80712 /* DividerObject.cpp in Sources */,
 				91733BE41ADDEB2D0024A56E /* AdderObject.cpp in Sources */,
 				5A4349E9754D6FA14C0F2A3A /* tinyxmlparser.cpp in Sources */,
 				BCC8D420CBA9217E437D2D76 /* ofxRtMidiIn.cpp in Sources */,
@@ -852,6 +860,7 @@
 			baseConfigurationReference = E4EB6923138AFD0F00A09F29 /* Project.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(NATIVE_ARCH)";
+				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
 				CONFIGURATION_BUILD_DIR = "$(SRCROOT)/bin/";
 				COPY_PHASE_STRIP = NO;
 				DEAD_CODE_STRIPPING = YES;
@@ -897,6 +906,7 @@
 			baseConfigurationReference = E4EB6923138AFD0F00A09F29 /* Project.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(NATIVE_ARCH)";
+				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
 				CONFIGURATION_BUILD_DIR = "$(SRCROOT)/bin/";
 				COPY_PHASE_STRIP = YES;
 				DEAD_CODE_STRIPPING = YES;

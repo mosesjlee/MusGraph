@@ -18,7 +18,9 @@ MenuView::MenuView(int height, int width){
     menuListItems.push_back("Output");
     menuListItems.push_back("Adder");
     menuListItems.push_back("Multiplier");
+    menuListItems.push_back("Divider");
     menuListItems.push_back("Number Box");
+    
 }
 
 MenuView::MenuView()

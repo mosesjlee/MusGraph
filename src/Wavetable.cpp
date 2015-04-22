@@ -4,32 +4,32 @@
 WaveTable::WaveTable()
 {
 	//Create a new table
-	table = new double[MAX_SAMPLES]; 
+	table = new float[MAX_SAMPLES];
 	index = 0;
     freq = 440.0;
 	for(int i = 0; i < MAX_SAMPLES; i++)
 	{
-		table[i] = sin(2 * M_PI * (double) i/MAX_SAMPLES);
+		table[i] = sin(2 * M_PI * (float) i/MAX_SAMPLES);
 	}
 }
 
 WaveTable::WaveTable(int x_coord, int y_coord)
 {
-    table = new double[MAX_SAMPLES];
+    table = new float[MAX_SAMPLES];
     index = 0;
     freq = 440.0;
     
     for(int i = 0; i < MAX_SAMPLES; i++)
     {
-        table[i] = sin(2 * M_PI * (double) i/MAX_SAMPLES);
+        table[i] = sin(2 * M_PI * (float) i/MAX_SAMPLES);
     }
     
     //Set the coordinates and the visual representation
-    x = sineTab.x = x_coord;
-    y = sineTab.y = y_coord;
+    x = displayRect.x = x_coord;
+    y = displayRect.y = y_coord;
     
-    sineTab.setWidth(WT_WIDTH);
-    sineTab.setHeight(WT_HEIGHT);
+    displayRect.setWidth(WT_WIDTH);
+    displayRect.setHeight(WT_HEIGHT);
     x_bound = x + WT_WIDTH;
     y_bound = y + WT_HEIGHT;
     type = "Sine";
@@ -47,11 +47,11 @@ void WaveTable::setFreq(float newFreq)
 	delta_i = freq * MAX_SAMPLES/SR;
 }
 
-double WaveTable::tick()
+float WaveTable::tick()
 {
     if(input != NULL) setFreq(((AdderObject *) input)->tick());
     
-	double val = table[(int) index];
+	float val = table[(int) index];
 
 	//Increment by delta i
 	index += delta_i;
@@ -84,7 +84,7 @@ void WaveTable::draw(){
     }
     
     ofSetLineWidth(2);
-    ofRect(sineTab);
+    ofRect(displayRect);
     
     stringstream text;
     text << "Sine" << endl;

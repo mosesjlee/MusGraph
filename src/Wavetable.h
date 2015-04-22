@@ -17,19 +17,17 @@ public:
     ~WaveTable();
     void setFreq(float);
     void setInput(ElementObject *);
-    double tick();
+    float tick();
     void draw();
 
 private:
     WaveTable * sinePtr;
     ElementObject * input = NULL;
-    double * table;
-    double initialPhase;
-    double delta_i;
-    double index;
-    double freq;
-    //For the visual representation
-    ofRectangle sineTab;
+    float * table;
+    float initialPhase;
+    float delta_i;
+    float index;
+    float freq;
     
     
     
