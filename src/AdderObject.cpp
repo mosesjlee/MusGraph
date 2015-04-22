@@ -37,23 +37,12 @@ float AdderObject::tick(){
     float o1_sample;
     float o2_sample;
     
-    if(o1_type == "Sine")
-        o1_sample = ((WaveTable *) o1)->tick();
-    else if(o1_type == "Adder")
-        o1_sample = ((AdderObject *) o1)->tick();
-    else if(o1_type == "Multiplier")
-        o1_sample = ((MultiplierObject *) o1)->tick();
-    else if(o1_type == "NumberBox")
-        o1_sample = ((NumberBoxObject *) o1)->sendValue();
+    if(o1_type == "NumberBox") o1_sample = ((NumberBoxObject *) o1)->sendValue();
+    else o1_sample = ((TickableElement *) o1)->tick();
     
-    if(o2_type == "Sine")
-        o2_sample = ((WaveTable *) o2)->tick();
-    else if(o2_type == "Adder")
-        o2_sample = ((AdderObject *) o2)->tick();
-    else if(o2_type == "Multiplier")
-        o2_sample = ((MultiplierObject *) o2)->tick();
-    else if(o2_type == "NumberBox")
-        o2_sample = ((NumberBoxObject *) o2)->sendValue();
+    
+    if(o2_type == "NumberBox") o2_sample = ((NumberBoxObject *) o2)->sendValue();
+    else o2_sample = ((TickableElement *) o2)->tick();
     
     float val = o1_sample + o2_sample;
     
@@ -62,28 +51,6 @@ float AdderObject::tick(){
     return val;
 }
 
-void AdderObject::connectOutElement(WaveTable * wPtr){
-    sPtr = wPtr;
-}
-
 void AdderObject::sendOut(float v){
     sPtr->setFreq(v);
-}
-
-void AdderObject::connectElement(ElementObject * o){
-    if (numElementsConnected == 0) {
-        o1 = o;
-        o1_type = o->getType();
-        numElementsConnected = 1;
-    }
-    else if(numElementsConnected == 1){
-        o2 = o;
-        o2_type = o->getType();
-        numElementsConnected = 2;
-    }
-    else {
-        cout << "S Pointer Connected: " << endl;
-        sPtr = (WaveTable *) o;
-        numElementsConnected = 3;
-    }
 }

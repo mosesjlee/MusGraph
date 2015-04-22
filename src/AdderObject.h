@@ -22,14 +22,10 @@ public:
     ~AdderObject();
     float tick();
     void fillBuf();
-    void connectElement(ElementObject * o);
-    void connectOutElement(WaveTable * wPtr);
     void sendOut(float);
     
 private:
     float * buf;
-    int countBufElem = 0;
-    int outputCounter = 0;
 };
 
 #endif /* defined(__MusGraph__AdderObject__) */

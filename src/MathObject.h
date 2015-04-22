@@ -18,31 +18,13 @@
 
 class MathObject : public TickableElement{
 public:
-    virtual void connectElement(ElementObject * o) = 0;
-    virtual void connectOutElement(WaveTable * wPtr) = 0;
+    virtual void connectElement(ElementObject * o);
+    virtual void connectOutElement(WaveTable * wPtr);
     
-    void draw(){
-        if(!amIClicked){
-            ofSetColor(0, 0, 0);
-            ofNoFill();
-        }
-        else {
-            ofSetColor(125, 100, 100);
-            ofFill();
-        }
-    
-        ofSetLineWidth(2);
-        ofRect(displayRect);
-    
-        stringstream text;
-        text << mySymbol << endl;
-        ofSetColor(0, 0, 0);
-        ofDrawBitmapString(text.str(), x+12, y+20);
-        }
+    void draw();
     
 protected:
     string mySymbol;
-    int outputCounter = 0;
     int numElementsConnected = 0;
     string o1_type;
     string o2_type;

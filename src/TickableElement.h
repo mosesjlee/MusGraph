@@ -14,9 +14,9 @@
 class TickableElement : public ElementObject{
 public:
     virtual float tick() = 0;
+    void draw();
 protected:
     ofRectangle displayRect;
-    int countBufElem = 0;
 };
 
 #endif

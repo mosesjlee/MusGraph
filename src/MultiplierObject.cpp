@@ -39,15 +39,11 @@ float MultiplierObject::tick(){
     float o1_sample;
     float o2_sample;
     
-    if(o1_type == "Sine")
-        o1_sample = ((WaveTable *) o1)->tick();
-    else if(o1_type == "NumberBox")
-        o1_sample = ((NumberBoxObject *) o1)->sendValue();
+    if(o1_type == "NumberBox") o1_sample = ((NumberBoxObject *) o1)->sendValue();
+    else o1_sample = ((TickableElement *) o1)->tick();
     
-    if(o2_type == "Sine")
-        o2_sample = ((WaveTable *) o2)->tick();
-    else if(o2_type == "NumberBox")
-        o2_sample = ((NumberBoxObject *) o2)->sendValue();
+    if(o2_type == "NumberBox") o2_sample = ((NumberBoxObject *) o2)->sendValue();
+    else o2_sample = ((TickableElement *) o2)->tick();
     
     
     float val = o1_sample * o2_sample;
@@ -56,21 +52,4 @@ float MultiplierObject::tick(){
     //    if(val < -1.0f) val = -1.0f;
     
     return val;
-}
-
-void MultiplierObject::connectElement(ElementObject * o){
-    if (numElementsConnected == 0) {
-        o1 = o;
-        o1_type = o->getType();
-        numElementsConnected = 1;
-    }
-    else {
-        o2 = o;
-        o2_type = o->getType();
-        numElementsConnected = 2;
-    }
-}
-
-void MultiplierObject::connectOutElement(WaveTable * wPtr){
-    sPtr = wPtr;
 }

@@ -49,7 +49,6 @@ int NumberBoxObject::getMyID(){
 
 void NumberBoxObject::setMyValue(float v){
     myValue = v;
-    textBox->setTextString(Convert(myValue));
     textBox->ofxUIWidget::setVisible(false);
     amIClicked = false;
     if(sinePtr != NULL) controlOutObject();

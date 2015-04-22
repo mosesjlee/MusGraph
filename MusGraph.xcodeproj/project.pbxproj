@@ -41,6 +41,8 @@
 		837220E80EB56CD44AD27F2A /* ofxSlider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 15F2C6477A769C03A56D1401 /* ofxSlider.cpp */; };
 		83D9F930112E0944444124EE /* ofxMidiOut.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04F77E5C73A62E2E77C78EC6 /* ofxMidiOut.cpp */; };
 		856AA354D08AB4B323081444 /* ofxBaseGui.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9604B925D32EE39065747725 /* ofxBaseGui.cpp */; };
+		91461AD81AE77F6C001072B1 /* MathObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91461AD71AE77F6C001072B1 /* MathObject.cpp */; };
+		91461ADA1AE77FC3001072B1 /* TickableElement.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91461AD91AE77FC3001072B1 /* TickableElement.cpp */; };
 		91733BE41ADDEB2D0024A56E /* AdderObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91733BE21ADDEB2D0024A56E /* AdderObject.cpp */; };
 		91733BE71ADDEB400024A56E /* MultiplierObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91733BE51ADDEB400024A56E /* MultiplierObject.cpp */; };
 		91C014E81AE7185D00B80712 /* DividerObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91C014E61AE7185D00B80712 /* DividerObject.cpp */; };
@@ -213,6 +215,8 @@
 		8F8238006E98A8E39851968C /* ofxUIButton.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = ofxUIButton.cpp; path = ../../../addons/ofxUI/src/ofxUIButton.cpp; sourceTree = SOURCE_ROOT; };
 		907C5B5E104864A2D3A25745 /* ofxToggle.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = ofxToggle.cpp; path = ../../../addons/ofxGui/src/ofxToggle.cpp; sourceTree = SOURCE_ROOT; };
 		91461AD61AE7749F001072B1 /* MathObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MathObject.h; sourceTree = "<group>"; };
+		91461AD71AE77F6C001072B1 /* MathObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MathObject.cpp; sourceTree = "<group>"; };
+		91461AD91AE77FC3001072B1 /* TickableElement.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TickableElement.cpp; sourceTree = "<group>"; };
 		91733BE21ADDEB2D0024A56E /* AdderObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AdderObject.cpp; sourceTree = "<group>"; };
 		91733BE31ADDEB2D0024A56E /* AdderObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdderObject.h; sourceTree = "<group>"; };
 		91733BE51ADDEB400024A56E /* MultiplierObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MultiplierObject.cpp; sourceTree = "<group>"; };
@@ -657,9 +661,11 @@
 				91E0C7741AE32118004041C6 /* NumberBoxObject.h */,
 				91E0C7731AE32118004041C6 /* NumberBoxObject.cpp */,
 				91E0C7761AE32326004041C6 /* TickableElement.h */,
+				91461AD91AE77FC3001072B1 /* TickableElement.cpp */,
 				91D54C4B1AD8E79D0023E49A /* Wavetable.h */,
 				91D54C4A1AD8E79D0023E49A /* Wavetable.cpp */,
 				91461AD61AE7749F001072B1 /* MathObject.h */,
+				91461AD71AE77F6C001072B1 /* MathObject.cpp */,
 				91733BE61ADDEB400024A56E /* MultiplierObject.h */,
 				91733BE51ADDEB400024A56E /* MultiplierObject.cpp */,
 				91733BE31ADDEB2D0024A56E /* AdderObject.h */,
@@ -778,6 +784,7 @@
 				B56FE57CC35806596D38118C /* ofxSliderGroup.cpp in Sources */,
 				1CD33E884D9E3358252E82A1 /* ofxToggle.cpp in Sources */,
 				91D54C541AD8E8700023E49A /* OutputElement.cpp in Sources */,
+				91461AD81AE77F6C001072B1 /* MathObject.cpp in Sources */,
 				63B57AC5BF4EF088491E0317 /* ofxXmlSettings.cpp in Sources */,
 				933A2227713C720CEFF80FD9 /* tinyxml.cpp in Sources */,
 				9D44DC88EF9E7991B4A09951 /* tinyxmlerror.cpp in Sources */,
@@ -786,6 +793,7 @@
 				5A4349E9754D6FA14C0F2A3A /* tinyxmlparser.cpp in Sources */,
 				BCC8D420CBA9217E437D2D76 /* ofxRtMidiIn.cpp in Sources */,
 				3AEFE4FA8AD5C72671AD07F8 /* ofxRtMidiOut.cpp in Sources */,
+				91461ADA1AE77FC3001072B1 /* TickableElement.cpp in Sources */,
 				1A86B7721CAEBC6F1C572C45 /* ofxBaseMidi.cpp in Sources */,
 				63F9FE1D90234FA6DE6F509E /* ofxMidi.cpp in Sources */,
 				0BFC9C20FD7E3C8D5873AA97 /* ofxMidiIn.cpp in Sources */,

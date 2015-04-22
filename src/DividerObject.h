@@ -10,12 +10,15 @@
 #define __MusGraph__DividerObject__
 
 #include <stdio.h>
-#include "TickableElement.h"
+#include "MathObject.h"
 
-//class DividerObject : public MathObject{
-//public:
-//
-//private:
-//};
+class DividerObject : public MathObject{
+public:
+    DividerObject();
+    DividerObject(int x, int y);
+    ~DividerObject();
+    float tick();
+private:
+};
 
 #endif /* defined(__MusGraph__DividerObject__) */

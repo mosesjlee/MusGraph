@@ -18,7 +18,6 @@ public:
     void setFreq(float);
     void setInput(ElementObject *);
     float tick();
-    void draw();
 
 private:
     WaveTable * sinePtr;

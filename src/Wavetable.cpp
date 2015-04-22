@@ -72,22 +72,3 @@ double WaveTable::lerp(double x_1, double y_1, double x_2, double y_2, double x)
 {
 	return y_1 + (y_2 - y_1) * (x - x_1)/(x_2-x_1);
 }
-
-void WaveTable::draw(){
-    if(!amIClicked){
-        ofSetColor(0, 0, 0);
-        ofNoFill();
-    }
-    else {
-        ofSetColor(125, 100, 100);
-        ofFill();
-    }
-    
-    ofSetLineWidth(2);
-    ofRect(displayRect);
-    
-    stringstream text;
-    text << "Sine" << endl;
-    ofSetColor(0, 0, 0);
-    ofDrawBitmapString(text.str(), x+8, y+20);
-}
