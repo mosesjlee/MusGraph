@@ -51,20 +51,8 @@ void SliderObject::draw(){
 
 void SliderObject::setObjectToControl(ElementObject * objPtr){
     
-    string type = objPtr->getType();
-    cout << "Slider control type: " << type << endl;
     elementPtr = objPtr;
     
-    //For future types
-//    else if (condition){
-//        
-//    }
-//    else if (condition){
-//        
-//    }
-//    else if (condition){
-//        
-//    }
 }
 
 ElementObject * SliderObject::getObjectToControl(){

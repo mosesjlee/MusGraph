@@ -32,7 +32,7 @@ MultiplierObject::~MultiplierObject(){
 float MultiplierObject::tick(){
     if (o1 == NULL || o2 == NULL) {
         cout << "one pointer in multiplier is NULL: " << endl;
-        return;
+        return 0.00;
     }
     
     

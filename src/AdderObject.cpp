@@ -30,7 +30,7 @@ AdderObject::~AdderObject(){
 float AdderObject::tick(){
     if (o1 == NULL || o2 == NULL) {
         cout << "one pointer in adder is NULL: " << endl;
-        return;
+        return 0.00;
     }
     
     
