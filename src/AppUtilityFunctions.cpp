@@ -8,9 +8,6 @@
 
 #include "AppUtilityFunctions.h"
 
-//Variables I may need
-ofFile configFile;
-
 //-------------------------------------------------------------------------------
 //-------------------------------------------------------------------------------
 //-------------------------------------------------------------------------------
@@ -23,6 +20,8 @@ float euclideanDistance(float x_1, float y_1, float x_2, float y_2){
     return sqrt(x_val + y_val);
 }
 
+//------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------------
 //------------------------------------------------------------------------------------
 bool selectItemsHelper(int x, int y, ElementObject ** eObj, vector<ElementObject *> * listOfObj, int numElem){
     bool itemSelected = false;
@@ -38,8 +37,63 @@ bool selectItemsHelper(int x, int y, ElementObject ** eObj, vector<ElementObject
     return itemSelected;
 }
 
+std::string Convert (float number){
+    std::ostringstream buff;
+    buff<<number;
+    return buff.str();
+}
+
+void createFile(){
+    string fileName = "myconfig";
+    string directoryText = "configs/" + fileName + ".txt";
+    ofFile configFile(directoryText, ofFile::ReadWrite);
+    configFile.create();
+}
+
 //-------------------------------------------------------------------------------------
-void writeElementsToFile(vector<ElementObject *> *, int){
-    configFile.open("configs.txt");
+void writeElementsToFile(vector<ElementObject *> * list, int size){
+    if(list->size() <= 0) return;
+    
+    
+    string fileName = "myconfig";
+    string directoryText = "configs/" + fileName + ".txt";
+    string textToSave;
+    string tempText;
+    ofBuffer bufToWrite;
+    ofFile configFile;
+    
+    for(int i = 0; i < list->size(); i++){
+        tempText = (list->at(i)->getType()) + ";" + Convert(list->at(i)->getXCoord()) +
+                       ";" + Convert(list->at(i)->getYCoord()) + "\n";
+        textToSave += tempText;
+    }
+    
+    char * s = new char[textToSave.length()];
+    for(int i = 0; i < textToSave.length(); i++){
+        s[i] = textToSave.at(i);
+    }
+    
+    bufToWrite.set(s, textToSave.length());
+    
+    configFile.open(directoryText, ofFile::Append, false);
+    configFile.writeFromBuffer(bufToWrite);
+    configFile.close();
+    
+    delete [] s;
+}
+
+//-------------------------------------------------------------------------------------
+void loadElementsFromFile(){
+    string fileName = "myconfig";
+    string directoryText = "configs/" + fileName + ".txt";
+    ofFile configFile;
+    ofBuffer readBuf;
+    
+    if(configFile.doesFileExist(directoryText, true)){
+        configFile.open(directoryText, ofFile::ReadOnly, false);
+        readBuf = configFile.readToBuffer();
+        //if(readBuf.getText() != "") tagList.push_back(readBuf.getText());
+        return true;
+    }
     
 }

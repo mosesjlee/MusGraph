@@ -93,7 +93,6 @@ void ofApp::keyPressed(int key){
 
 //--------------------------------------------------------------
 void ofApp::keyReleased(int key){
-    
 }
 
 //--------------------------------------------------------------
@@ -253,6 +252,20 @@ void ofApp::guiEvent(ofxUIEventArgs & e){
     
     else if (name == "Save Configuration"){
         cout << "Saving Configuration: " << endl;
+        int value = e.getButton()->getValue();
+        cout << "Value: " << value <<endl;
+        
+        if(value == 1){
+            createFile();
+        
+            writeElementsToFile((ELEMVECT) &listOfWaveTables, numWaveTables);
+            writeElementsToFile((ELEMVECT) &listOfSliderObjects, numSliderObjects);
+            writeElementsToFile((ELEMVECT) &listOfNumBox, numNumBoxObjects);
+            writeElementsToFile((ELEMVECT) &listOfOutputs, numOutput);
+            writeElementsToFile((ELEMVECT) &listOfAdders, numAdderObjects);
+            writeElementsToFile((ELEMVECT) &listOfMultipliers, numMultiplierObjects);
+            writeElementsToFile((ELEMVECT) &listOfDividers, numDividerObjects);
+        }
     }
     
     else if(name == "Slider") {
@@ -267,8 +280,6 @@ void ofApp::guiEvent(ofxUIEventArgs & e){
             if(listOfSliderObjects.at(currSliderID)->getObjectToControl() == NULL){
                 return;
             }
-                
-            //cout << "currSliderID: " << currSliderID << " curr index: " << i << endl;
                 
             type = listOfSliderObjects.at(currSliderID)->getObjectToControl()->getType();
                 
@@ -292,7 +303,7 @@ void ofApp::guiEvent(ofxUIEventArgs & e){
     }
     else if(name == "NumberBox"){
         cout << "in number box" << endl;
-        ofxUITextInput *ti = (ofxUITextInput *) e.widget;
+        ofxUITextInput * ti = (ofxUITextInput *) e.widget;
         
         int numberBoxID = ti->getID();
         string newValue = ti->getTextString();
@@ -314,8 +325,7 @@ void ofApp::guiEvent(ofxUIEventArgs & e){
     
 }
 //--------------------------------------------------------------
-//TODO find a way to delete dynamically allocated objects without
-//seg fault
+//Deletes dynamically allocated objects
 //--------------------------------------------------------------
 void ofApp::exit(){
     delete menuGUI;
@@ -387,10 +397,16 @@ void ofApp::setUpGUIElements(){
     ofAddListener(menuGUI->newGUIEvent,this,&ofApp::guiEvent);
     
     saveMenuGUI = new ofxUICanvas();
-    saveMenuGUI->setDimensions(150, 32);
+    saveMenuGUI->setDimensions(160, 32);
     saveMenuGUI->setPosition(100, 0);
     saveButton = saveMenuGUI->addButton("Save Configuration", false);
     ofAddListener(saveMenuGUI->newGUIEvent,this,&ofApp::guiEvent);
+    
+    loadConfigMenu = new ofxUICanvas();
+    loadConfigMenu->setDimensions(160, 32);
+    loadConfigMenu->setPosition(260, 0);
+    loadButton = loadConfigMenu->addButton("Load Configuration", false);
+    ofAddListener(loadConfigMenu->newGUIEvent,this,&ofApp::guiEvent);
 }
 
 void ofApp::addWaveTableObject(int x, int y){
@@ -407,7 +423,7 @@ void ofApp::addOutputObject(int x, int y){
 
 void ofApp::addSliderObject(int x, int y){
     elementsGUI = new ofxUICanvas();
-    ofAddListener(elementsGUI->newGUIEvent,this,&ofApp::guiEvent);
+    ofAddListener(elementsGUI->newGUIEvent, this, &ofApp::guiEvent);
     
     sliderPtr = new SliderObject(elementsGUI, "Slider", 0, 1000, 440, numSliderObjects);
     sliderPtr->setCoord(x, y);
@@ -432,7 +448,7 @@ void ofApp::addDividerObject(int x, int y){
 
 void ofApp::addNumberBoxObject(int x, int y){
     elementsGUI = new ofxUICanvas();
-    ofAddListener(elementsGUI->newGUIEvent,this,&ofApp::guiEvent);
+    ofAddListener(elementsGUI->newGUIEvent, this, &ofApp::guiEvent);
     
     nbPtr = new NumberBoxObject(x, y, elementsGUI, numNumBoxObjects);
     listOfNumBox.push_back(nbPtr);
@@ -444,44 +460,25 @@ void ofApp::addNumberBoxObject(int x, int y){
 bool ofApp::selectItems(int x, int y, ElementObject ** eObj){
     bool itemSelected = false;
     
-    itemSelected = selectItemsHelper(x, y, eObj,
-                                      (vector<ElementObject *> *) &listOfWaveTables,
-                                      numWaveTables);
+    itemSelected = selectItemsHelper(x, y, eObj, (ELEMVECT) &listOfWaveTables, numWaveTables);
     
-    if(!itemSelected){
-        itemSelected = selectItemsHelper(x, y, eObj,
-                                         (vector<ElementObject *> *) &listOfSliderObjects,
-                                         numSliderObjects);
-    }
+    if(!itemSelected)
+        itemSelected = selectItemsHelper(x, y, eObj, (ELEMVECT) &listOfSliderObjects, numSliderObjects);
     
-    if(!itemSelected){
-        itemSelected = selectItemsHelper(x, y, eObj,
-                                         (vector<ElementObject *> *) &listOfOutputs,
-                                         numOutput);
-    }
+    if(!itemSelected)
+        itemSelected = selectItemsHelper(x, y, eObj, (ELEMVECT) &listOfOutputs, numOutput);
     
-    if(!itemSelected){
-        itemSelected = selectItemsHelper(x, y, eObj,
-                                         (vector<ElementObject *> *) &listOfAdders,
-                                         numAdderObjects);
-    }
+    if(!itemSelected)
+        itemSelected = selectItemsHelper(x, y, eObj, (ELEMVECT) &listOfAdders, numAdderObjects);
     
-    if(!itemSelected){
-        itemSelected = selectItemsHelper(x, y, eObj,
-                                         (vector<ElementObject *> *) &listOfMultipliers,
-                                         numMultiplierObjects);
-    }
+    if(!itemSelected)
+        itemSelected = selectItemsHelper(x, y, eObj, (ELEMVECT) &listOfMultipliers, numMultiplierObjects);
     
-    if(!itemSelected){
-        itemSelected = selectItemsHelper(x, y, eObj,
-                                         (vector<ElementObject *> *) &listOfDividers,
-                                         numDividerObjects);
-    }
+    if(!itemSelected)
+        itemSelected = selectItemsHelper(x, y, eObj, (ELEMVECT) &listOfDividers, numDividerObjects);
     
-    if(!itemSelected){
-        itemSelected = selectItemsHelper(x, y, eObj,
-                                         (vector<ElementObject *> *) &listOfNumBox,
-                                         numNumBoxObjects);
-    }
+    if(!itemSelected)
+        itemSelected = selectItemsHelper(x, y, eObj, (ELEMVECT) &listOfNumBox, numNumBoxObjects);
+    
     return itemSelected;
 }

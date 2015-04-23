@@ -18,8 +18,10 @@
 //Methods
 float euclideanDistance(float x_1, float y_1, float x_2, float y_2);
 bool selectItemsHelper(int x, int y, ElementObject ** eObj, vector<ElementObject *> *, int);
-
 void writeElementsToFile(vector<ElementObject *> *, int);
-
+void loadElementsFromFile();
+void loadElementsFromFile(string fileName);
+void createFile();
+string Convert(float);
 void tickAllObjects();
 #endif /* defined(__MusGraph__AppUtilityFunctions__) */

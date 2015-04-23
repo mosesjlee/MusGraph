@@ -8,7 +8,7 @@
 
 #include "NumberBoxObject.h"
 
-std::string Convert (float number){
+std::string ConvertMyValue (float number){
     std::ostringstream buff;
     buff<<number;
     return buff.str();
@@ -31,7 +31,7 @@ NumberBoxObject::NumberBoxObject(int x_coord, int y_coord, ofxUICanvas * parentC
     numberBoxCanvas = parentCanvas;
     numberBoxCanvas->setDimensions(NUMBER_WIDTH, NUMBER_HEIGHT);
     numberBoxCanvas->setPosition(x, y);
-    textBox = numberBoxCanvas->addTextInput(type, Convert(myValue));
+    textBox = numberBoxCanvas->addTextInput(type, ConvertMyValue(myValue));
     textBox->setID(id);
     textBox->setOnlyNumericInput(true);
     textBox->setVisible(false);

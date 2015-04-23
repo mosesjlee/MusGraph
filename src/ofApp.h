@@ -69,6 +69,9 @@ private:
     vector<DividerObject *> listOfDividers;
     vector<NumberBoxObject *> listOfNumBox;
     
+    //For casting purposes
+    typedef vector<ElementObject *> * ELEMVECT;
+    
     //Counters for the different objects on screen
     int menuItem = 0;
     int numWaveTables = 0;
@@ -93,8 +96,13 @@ private:
     //For UI Elements
     ofxUICanvas * menuGUI;
     ofxUIButton * onOffButton;
+    
     ofxUICanvas * saveMenuGUI;
     ofxUIButton * saveButton;
+    
+    ofxUICanvas * loadConfigMenu;
+    ofxUIButton * loadButton;
+    
     ofxUICanvas * elementsGUI;
     ofPolyline * currLine;
 
