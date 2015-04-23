@@ -321,11 +321,55 @@ void ofApp::exit(){
     delete menuGUI;
     delete saveMenuGUI;
     
-    /*if((listSize = listOfWaveTables->size()) > 0){
-     for(int i = 0; i < listSize; i++){
-     //delete listOfWaveTables->at(i);
-     }
-     }*/
+    if(numWaveTables > 0){
+        for(int i = 0; i < numWaveTables; i++){
+            delete listOfWaveTables.at(i);
+        }
+    }
+    
+    if(numSliderObjects > 0){
+        for(int i = 0; i < numSliderObjects; i++){
+            delete listOfSliderObjects.at(i);
+        }
+    }
+
+    if(numOutput > 0) {
+        for(int i = 0; i < numOutput; i++){
+            delete listOfOutputs.at(i);
+        }
+    }
+    
+    if(numLineConnect > 0){
+        for(int i = 0; i < numLineConnect; i++){
+            delete listOfLineConnects.at(i);
+        }
+    }
+    
+    if(numMultiplierObjects > 0){
+        for(int i = 0; i < numMultiplierObjects; i++){
+            delete listOfMultipliers.at(i);
+        }
+    }
+    
+    if(numAdderObjects > 0){
+        for(int i = 0; i < numAdderObjects; i++){
+            delete listOfAdders.at(i);
+        }
+    }
+    
+    if(numDividerObjects > 0){
+        for(int i = 0; i < numDividerObjects; i++){
+            delete listOfDividers.at(i);
+        }
+    }
+    
+    if(numNumBoxObjects > 0){
+        for(int i = 0; i < numNumBoxObjects; i++){
+            delete listOfNumBox.at(i);
+        }
+    }
+    
+    cout << "Deleted all objects sucessfully" << endl;
 }
 
 //--------------------------------------------------------------//
@@ -347,7 +391,6 @@ void ofApp::setUpGUIElements(){
     saveMenuGUI->setPosition(100, 0);
     saveButton = saveMenuGUI->addButton("Save Configuration", false);
     ofAddListener(saveMenuGUI->newGUIEvent,this,&ofApp::guiEvent);
-    
 }
 
 void ofApp::addWaveTableObject(int x, int y){

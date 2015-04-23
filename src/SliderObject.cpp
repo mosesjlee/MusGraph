@@ -20,7 +20,6 @@ SliderObject::SliderObject(ofxUICanvas * parentCanvas, string name, float min, f
 }
 
 SliderObject::~SliderObject(){
-    delete slider;
     delete sliderCanvas;
 }
 
