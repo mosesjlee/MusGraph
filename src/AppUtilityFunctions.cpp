@@ -8,6 +8,14 @@
 
 #include "AppUtilityFunctions.h"
 
+//Variables I may need
+ofFile configFile;
+
+//-------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------
 //-------------------------------------------------------------------------------
 float euclideanDistance(float x_1, float y_1, float x_2, float y_2){
     float x_val = pow((x_2 - x_1), 2.0f);
@@ -15,8 +23,8 @@ float euclideanDistance(float x_1, float y_1, float x_2, float y_2){
     return sqrt(x_val + y_val);
 }
 
-//-------------------------------------------------------------------------------
-bool selectItems(int x, int y, ElementObject ** eObj, vector<ElementObject *> * listOfObj, int numElem){
+//------------------------------------------------------------------------------------
+bool selectItemsHelper(int x, int y, ElementObject ** eObj, vector<ElementObject *> * listOfObj, int numElem){
     bool itemSelected = false;
     
     //cout<< "Checking to see if wavetable object is clicked" << endl;
@@ -28,4 +36,10 @@ bool selectItems(int x, int y, ElementObject ** eObj, vector<ElementObject *> * 
         }
     }
     return itemSelected;
+}
+
+//-------------------------------------------------------------------------------------
+void writeElementsToFile(vector<ElementObject *> *, int){
+    configFile.open("configs.txt");
+    
 }

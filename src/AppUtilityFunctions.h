@@ -13,8 +13,13 @@
 #include <math.h>
 #include "ElementObject.h"
 
+//Instance Variables I may need
+
+//Methods
 float euclideanDistance(float x_1, float y_1, float x_2, float y_2);
-bool selectItems(int x, int y, ElementObject ** eObj, vector<ElementObject *> * listOfObj, int numElem);
+bool selectItemsHelper(int x, int y, ElementObject ** eObj, vector<ElementObject *> *, int);
+
+void writeElementsToFile(vector<ElementObject *> *, int);
 
 void tickAllObjects();
 #endif /* defined(__MusGraph__AppUtilityFunctions__) */

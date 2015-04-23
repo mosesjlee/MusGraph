@@ -39,7 +39,6 @@ NumberBoxObject::NumberBoxObject(int x_coord, int y_coord, ofxUICanvas * parentC
 }
 
 NumberBoxObject::~NumberBoxObject(){
-    delete textBox;
     delete numberBoxCanvas;
 }
 

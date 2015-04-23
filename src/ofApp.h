@@ -112,8 +112,5 @@ private:
     void addNumberBoxObject(int x, int y);
     bool selectItems(int x, int y, ElementObject ** obj);
     
-    bool saveConfiguration();
-    bool loadConfiguration();
-    
 };
 

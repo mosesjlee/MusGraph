@@ -10,7 +10,7 @@ void ofApp::setup(){
     setUpGUIElements();
     
     //Create a menuView object
-    selectMenu.setSize(300, 100);
+    selectMenu.setSize(250, 100);
     selectMenu.setMenuColor(101, 123, 140);
     
     ofSetFrameRate(60);
@@ -126,7 +126,7 @@ void ofApp::mousePressed(int x, int y, int button){
                     int x_loc = selectMenu.getXCoord();
                     int y_loc = selectMenu.getYCoord();
                     
-                    if(y > y_coord && y < y_coord + 30){
+                    if(y > y_coord && y < y_coord + 25){
                         addWaveTableObject(x_loc, y_loc);
                     }
                     else if(y > y_coord + 30 && y < y_coord + 60){
@@ -146,11 +146,11 @@ void ofApp::mousePressed(int x, int y, int button){
                         cout << "Multiplier " << endl;
                         addMultiplierObject(x_loc, y_loc);
                     }
-                    else if(y > y_coord + 140 && y < y_coord + 180){
+                    else if(y > y_coord + 140 && y < y_coord + 170){
                         cout << "Divider " << endl;
                         addDividerObject(x_loc, y_loc);
                     }
-                    else if(y > y_coord + 180 && y < y_coord + 220){
+                    else if(y > y_coord + 170 && y < y_coord + 220){
                         cout << "Number Box " << endl;
                         addNumberBoxObject(x_loc, y_loc);
                     }
@@ -401,89 +401,44 @@ void ofApp::addNumberBoxObject(int x, int y){
 bool ofApp::selectItems(int x, int y, ElementObject ** eObj){
     bool itemSelected = false;
     
-    //cout<< "Checking to see if wavetable object is clicked" << endl;
-    for(int i = 0; i < numWaveTables; i++){
-        if(listOfWaveTables.at(i)->inBound(x, y)){
-            *eObj = listOfWaveTables.at(i);
-            itemSelected = true;
-            return true;
-        }
+    itemSelected = selectItemsHelper(x, y, eObj,
+                                      (vector<ElementObject *> *) &listOfWaveTables,
+                                      numWaveTables);
+    
+    if(!itemSelected){
+        itemSelected = selectItemsHelper(x, y, eObj,
+                                         (vector<ElementObject *> *) &listOfSliderObjects,
+                                         numSliderObjects);
     }
     
     if(!itemSelected){
-        //cout<< "Checking to see if slider object is clicked" << endl;
-        for(int i = 0; i < numSliderObjects; i++){
-            if(listOfSliderObjects.at(i)->inBound(x, y)){
-                *eObj = listOfSliderObjects.at(i);
-                itemSelected = true;
-                return true;
-            }
-        }
+        itemSelected = selectItemsHelper(x, y, eObj,
+                                         (vector<ElementObject *> *) &listOfOutputs,
+                                         numOutput);
     }
     
     if(!itemSelected){
-        //cout<< "Checking to see if output object is clicked" << endl;
-        for(int i = 0; i < numOutput; i++){
-            if(listOfOutputs.at(i)->inBound(x, y)){
-                *eObj = listOfOutputs.at(i);
-                itemSelected = true;
-                return true;
-            }
-        }
-    }
-    
-    // Not yet for this. need to over ride function to do this
-    //                if(!itemSelected){
-    //                    for(int i = 0; i < numLineConnect; i++){
-    //                        if(listOfLineConnects.at(i)->inBound(x, y)){
-    //                            listOfLineConnects.at(i)->
-    //                            setAmIClicked(!listOfLineConnects.at(i)->getAmIClicked());
-    //                            itemSelected = true;
-    //                        }
-    //                    }
-    //                }
-    
-    if(!itemSelected){
-        //cout<< "Checking to see if adder object is clicked" << endl;
-        for(int i = 0; i < numAdderObjects; i++){
-            if(listOfAdders.at(i)->inBound(x, y)){
-                *eObj = listOfAdders.at(i);
-                itemSelected = true;
-                return true;
-            }
-        }
+        itemSelected = selectItemsHelper(x, y, eObj,
+                                         (vector<ElementObject *> *) &listOfAdders,
+                                         numAdderObjects);
     }
     
     if(!itemSelected){
-        //cout<< "Checking to see if Mult object is clicked" << endl;
-        for(int i = 0; i < numMultiplierObjects; i++){
-            if(listOfMultipliers.at(i)->inBound(x, y)){
-                *eObj = listOfMultipliers.at(i);
-                itemSelected = true;
-                return true;
-            }
-        }
+        itemSelected = selectItemsHelper(x, y, eObj,
+                                         (vector<ElementObject *> *) &listOfMultipliers,
+                                         numMultiplierObjects);
     }
     
     if(!itemSelected){
-        for(int i = 0; i < numDividerObjects; i++){
-            if(listOfDividers.at(i)->inBound(x, y)){
-                *eObj = listOfDividers.at(i);
-                itemSelected = true;
-                return true;
-            }
-        }
+        itemSelected = selectItemsHelper(x, y, eObj,
+                                         (vector<ElementObject *> *) &listOfDividers,
+                                         numDividerObjects);
     }
     
     if(!itemSelected){
-        for(int i = 0; i < numNumBoxObjects; i++){
-            if(listOfNumBox.at(i)->inBound(x, y)){
-                *eObj = listOfNumBox.at(i);
-                itemSelected = true;
-                return true;
-            }
-        }
+        itemSelected = selectItemsHelper(x, y, eObj,
+                                         (vector<ElementObject *> *) &listOfNumBox,
+                                         numNumBoxObjects);
     }
-    
     return itemSelected;
 }
