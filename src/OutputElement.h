@@ -46,6 +46,7 @@ public:
     void setRightInput(WaveTable * wPtr);
     void setInput(ElementObject * o);
     void draw();
+    
 private:
     ofRectangle outputTab;
     ofSoundStream stream;

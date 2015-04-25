@@ -135,6 +135,13 @@ void LineConnect::makeConnections(){
         ((OutputElement *) o1)->setInput(o2);
     }
     
+    else if(o1_type == "Divider" && o2_type == "Output"){
+        ((OutputElement *) o2)->setInput(o1);
+    }
+    else if(o2_type == "Divider" && o1_type == "Output"){
+        ((OutputElement *) o1)->setInput(o2);
+    }
+    
     else if(o1_type == "Multiplier" && o2_type == "Sine"){
         ((MultiplierObject *) o1)->connectElement(o2);
     }
@@ -142,7 +149,12 @@ void LineConnect::makeConnections(){
         ((MultiplierObject *) o2)->connectElement(o1);
     }
 
-    
+    else if(o1_type == "Divider" && o2_type == "Sine"){
+        ((DividerObject *) o1)->connectElement(o2);
+    }
+    else if(o2_type == "Divider" && o1_type == "Sine"){
+        ((DividerObject *) o2)->connectElement(o1);
+    }
     
     else if(o1_type == "Multiplier" && o2_type == "Adder"){
         ((AdderObject *) o2)->connectElement(o1);

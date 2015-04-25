@@ -309,6 +309,7 @@ void ofApp::guiEvent(ofxUIEventArgs & e){
             }
         }
     }
+    
     else if(name == "NumberBox"){
         cout << "in number box" << endl;
         ofxUITextInput * ti = (ofxUITextInput *) e.widget;
@@ -325,12 +326,6 @@ void ofApp::guiEvent(ofxUIEventArgs & e){
             }
         }
     }
-    
-    //These are for future inputs
-    //    else if(){
-    //
-    //    }
-    
 }
 //--------------------------------------------------------------
 //Deletes dynamically allocated objects
@@ -546,6 +541,5 @@ void ofApp::createObjects(vector<string> * listOfObjects){
         }
         
     }
-    
     delete listOfObjects;
 }
