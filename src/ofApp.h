@@ -119,6 +119,7 @@ private:
     void addDividerObject(int x, int y);
     void addNumberBoxObject(int x, int y);
     bool selectItems(int x, int y, ElementObject ** obj);
+    void createObjects(vector<string> * listOfObjects);
     
 };
 

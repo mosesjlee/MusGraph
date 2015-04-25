@@ -1,3 +1,11 @@
-Sine;432;144
-Slider;628;118
-Output;601;228
+Sine;340;132
+Sine;395;451
+Slider;102;150
+Slider;741;143
+Slider;737;403
+NumberBox;248;155
+NumberBox;620;105
+NumberBox;664;322
+Output;535;520
+Adder;482;342
+Multiplier;468;155

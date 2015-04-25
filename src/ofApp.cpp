@@ -257,7 +257,6 @@ void ofApp::guiEvent(ofxUIEventArgs & e){
         
         if(value == 1){
             createFile();
-        
             writeElementsToFile((ELEMVECT) &listOfWaveTables, numWaveTables);
             writeElementsToFile((ELEMVECT) &listOfSliderObjects, numSliderObjects);
             writeElementsToFile((ELEMVECT) &listOfNumBox, numNumBoxObjects);
@@ -265,6 +264,15 @@ void ofApp::guiEvent(ofxUIEventArgs & e){
             writeElementsToFile((ELEMVECT) &listOfAdders, numAdderObjects);
             writeElementsToFile((ELEMVECT) &listOfMultipliers, numMultiplierObjects);
             writeElementsToFile((ELEMVECT) &listOfDividers, numDividerObjects);
+        }
+    }
+    
+    else if(name == "Load Configuration"){
+        cout << "Load Configs: " << endl;
+        int value = e.getButton()->getValue();
+        
+        if(value == 1){
+            createObjects(loadElementsFromFileToBuffer());
         }
     }
     
@@ -425,7 +433,7 @@ void ofApp::addSliderObject(int x, int y){
     elementsGUI = new ofxUICanvas();
     ofAddListener(elementsGUI->newGUIEvent, this, &ofApp::guiEvent);
     
-    sliderPtr = new SliderObject(elementsGUI, "Slider", 0, 1000, 440, numSliderObjects);
+    sliderPtr = new SliderObject(elementsGUI, "Slider", 0, 1000, 440, listOfSliderObjects.size());
     sliderPtr->setCoord(x, y);
     listOfSliderObjects.push_back(sliderPtr);
 }
@@ -450,7 +458,7 @@ void ofApp::addNumberBoxObject(int x, int y){
     elementsGUI = new ofxUICanvas();
     ofAddListener(elementsGUI->newGUIEvent, this, &ofApp::guiEvent);
     
-    nbPtr = new NumberBoxObject(x, y, elementsGUI, numNumBoxObjects);
+    nbPtr = new NumberBoxObject(x, y, elementsGUI, listOfNumBox.size());
     listOfNumBox.push_back(nbPtr);
 }
 
@@ -481,4 +489,63 @@ bool ofApp::selectItems(int x, int y, ElementObject ** eObj){
         itemSelected = selectItemsHelper(x, y, eObj, (ELEMVECT) &listOfNumBox, numNumBoxObjects);
     
     return itemSelected;
+}
+
+//Create the objects based on the config file string
+void ofApp::createObjects(vector<string> * listOfObjects){
+    cout << "in creating objects: " << endl;
+    
+    string temp = "";
+    string x_pos = "";
+    string y_pos = "";
+    const string delimiter = ";";
+    string holder = "";
+    int first_pos = 0;
+    int second_pos = 0;
+    for(int i = 0; i < listOfObjects->size(); i++){
+        holder = "";
+        temp = "";
+        x_pos = "";
+        y_pos = "";
+        
+        holder = listOfObjects->at(i);
+        first_pos = holder.find(delimiter);
+        second_pos = holder.find_last_of(delimiter);
+        
+        for ( int j = 0; j < first_pos; j++){
+            temp += holder.substr()[j];
+        }
+        
+        for ( int j = first_pos + 1; j < second_pos; j++){
+            x_pos += holder.substr()[j];
+        }
+        
+        for ( int j = second_pos + 1; j < holder.size(); j++){
+            y_pos += holder.substr()[j];
+        }
+        
+        cout << "Creating: " << temp << " At: " << x_pos << ", " << y_pos << endl;
+        
+        if(temp == "Sine"){
+            addWaveTableObject(atoi(&x_pos.substr()[0]), atoi(&y_pos.substr()[0]));
+        }
+        else if(temp == "Output"){
+            addOutputObject(atoi(&x_pos.substr()[0]), atoi(&y_pos.substr()[0]));
+        }
+        else if(temp == "Slider"){
+            addSliderObject(atoi(&x_pos.substr()[0]), atoi(&y_pos.substr()[0]));
+        }
+        else if(temp == "NumberBox"){
+            addNumberBoxObject(atoi(&x_pos.substr()[0]), atoi(&y_pos.substr()[0]));
+        }
+        else if(temp == "Adder"){
+            addAdderObject(atoi(&x_pos.substr()[0]), atoi(&y_pos.substr()[0]));
+        }
+        else if(temp == "Multiplier"){
+            addMultiplierObject(atoi(&x_pos.substr()[0]), atoi(&y_pos.substr()[0]));
+        }
+        
+    }
+    
+    delete listOfObjects;
 }

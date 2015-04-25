@@ -83,17 +83,23 @@ void writeElementsToFile(vector<ElementObject *> * list, int size){
 }
 
 //-------------------------------------------------------------------------------------
-void loadElementsFromFile(){
+vector<string> * loadElementsFromFileToBuffer(){
     string fileName = "myconfig";
     string directoryText = "configs/" + fileName + ".txt";
     ofFile configFile;
     ofBuffer readBuf;
+    vector<string> * listOfObjects = new vector<string>();;
+    
     
     if(configFile.doesFileExist(directoryText, true)){
         configFile.open(directoryText, ofFile::ReadOnly, false);
         readBuf = configFile.readToBuffer();
+        cout << "Found file now reading: " << endl;
+//        return readBuf;
         //if(readBuf.getText() != "") tagList.push_back(readBuf.getText());
-        return true;
+        while (!readBuf.isLastLine()) {
+            listOfObjects->push_back(readBuf.getNextLine());
+        }
     }
-    
+    return listOfObjects;
 }

@@ -41,11 +41,11 @@ void OutputElement::fillOutBuffer(float * output, int bufferSize, int nChannels)
     float lSample = 0.0f;
     float rSample = 0.0f;
     
-    cout << "Filling out" << endl;
+    //cout << "Filling out" << endl;
     
     if(tickElmPtr == NULL) return;
     
-    cout << "In fill out buffer... type: " << inputType << endl;
+    //cout << "In fill out buffer... type: " << inputType << endl;
     if(soundMode == MONO || soundMode == LEFT_AUDIO){
         for(int i = 0; i < bufferSize; i++){
             rSample = lSample = tickElmPtr->tick();
