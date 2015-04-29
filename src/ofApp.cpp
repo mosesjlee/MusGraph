@@ -89,6 +89,32 @@ void ofApp::draw(){
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
+    if(key == DELETE_KEY){
+        if(currObject_1 != NULL){
+            string type = currObject_1->getType();
+            if(type == "Sine"){
+                
+            }
+            else if(type == "Output"){
+                
+            }
+            else if(type == "Slider"){
+                
+            }
+            else if(type == "NumberBox"){
+                
+            }
+            else if(type == "Adder"){
+                
+            }
+            else if(type == "Multiplier"){
+                
+            }
+            else if(type == "Divider"){
+                
+            }
+        }
+    }
 }
 
 //--------------------------------------------------------------
@@ -184,6 +210,8 @@ void ofApp::mousePressed(int x, int y, int button){
 //--------------------------------------------------------------
 void ofApp::mouseReleased(int x, int y, int button){
     
+    bool validConnection = false;
+    
     if (button == LEFT_CLICK && !selectMenu.getShowMenu() && currLine != NULL && onOff == 0) {
         currLine->lineTo(x,y);
         
@@ -192,6 +220,7 @@ void ofApp::mouseReleased(int x, int y, int button){
         if(selectItems(x, y, &currObject_2) && euclideanDistance(initial_x, initial_y, x, y) > 10.0){
             x_1 = currObject_1->getXCoord();
             y_1 = currObject_1->getYCoord();
+            
             x_2 = currObject_2->getXCoord();
             y_2 = currObject_2->getYCoord();
             
@@ -199,8 +228,16 @@ void ofApp::mouseReleased(int x, int y, int button){
             
             lineConnectPtr->setFirstElement(currObject_1);
             lineConnectPtr->setSecondElement(currObject_2);
-            lineConnectPtr->makeConnections();
-            listOfLineConnects.push_back(lineConnectPtr);
+            
+            validConnection = lineConnectPtr->makeConnections();
+            
+            if(validConnection){
+                listOfLineConnects.push_back(lineConnectPtr);
+            }
+            else {
+                delete lineConnectPtr;
+            }
+            
             currLine = NULL;
             currObject_1 = NULL;
             currObject_2 = NULL;
@@ -264,6 +301,7 @@ void ofApp::guiEvent(ofxUIEventArgs & e){
             writeElementsToFile((ELEMVECT) &listOfAdders, numAdderObjects);
             writeElementsToFile((ELEMVECT) &listOfMultipliers, numMultiplierObjects);
             writeElementsToFile((ELEMVECT) &listOfDividers, numDividerObjects);
+            writeElementsToFile((ELEMVECT) &listOfLineConnects, numLineConnect);
         }
     }
     
@@ -283,7 +321,7 @@ void ofApp::guiEvent(ofxUIEventArgs & e){
         
         //Look for the slider ID
             
-        if(listOfSliderObjects.at(currSliderID)->getSliderID() == currSliderID){
+        if(listOfSliderObjects.at(currSliderID)->getMyID() == currSliderID){
                 
             if(listOfSliderObjects.at(currSliderID)->getObjectToControl() == NULL){
                 return;
@@ -319,9 +357,7 @@ void ofApp::guiEvent(ofxUIEventArgs & e){
         cout << "New text value: " << newValue << endl;
         
         if(listOfNumBox.at(numberBoxID)->getMyID() == numberBoxID){
-        
             if(ti->getInputTriggerType() == OFX_UI_TEXTINPUT_ON_ENTER){
-                cout << "ON ENTER: ";
                 listOfNumBox.at(numberBoxID)->setMyValue(atof(newValue.data()));
             }
         }
@@ -415,12 +451,14 @@ void ofApp::setUpGUIElements(){
 void ofApp::addWaveTableObject(int x, int y){
     waveTablePtr = new WaveTable(x, y);
     waveTablePtr->setFreq(440);
+    waveTablePtr->setMyID(listOfWaveTables.size());
     listOfWaveTables.push_back(waveTablePtr);
 }
 
 void ofApp::addOutputObject(int x, int y){
     outputPtr = new OutputElement(x, y);
     outputPtr->setUpAudio(this);
+    outputPtr->setMyID(listOfOutputs.size());
     listOfOutputs.push_back(outputPtr);
 }
 
@@ -435,16 +473,19 @@ void ofApp::addSliderObject(int x, int y){
 
 void ofApp::addAdderObject(int x, int y){
     adderPtr = new AdderObject(x, y);
+    adderPtr->setMyID(listOfAdders.size());
     listOfAdders.push_back(adderPtr);
 }
 
 void ofApp::addMultiplierObject(int x, int y){
     multiplierPtr = new MultiplierObject(x, y);
+    multiplierPtr->setMyID(listOfMultipliers.size());
     listOfMultipliers.push_back(multiplierPtr);
 }
 
 void ofApp::addDividerObject(int x, int y){
     dividerPtr = new DividerObject(x, y);
+    dividerPtr->setMyID(listOfDividers.size());
     listOfDividers.push_back(dividerPtr);
 }
 
@@ -493,51 +534,167 @@ void ofApp::createObjects(vector<string> * listOfObjects){
     string temp = "";
     string x_pos = "";
     string y_pos = "";
+    string x_end_pos = "";
+    string y_end_pos = "";
+    string id_1 = "";
+    string id_2 = "";
+    string type_1 = "";
+    string type_2 = "";
+    
     const string delimiter = ";";
     string holder = "";
+    
     int first_pos = 0;
     int second_pos = 0;
+    int third_pos = 0;
+    int fourth_pos = 0;
+    int fifth_pos = 0;
+    int sixth_pos = 0;
+    int seventh_pos = 0;
+    int eighth_pos = 0;
+    
     for(int i = 0; i < listOfObjects->size(); i++){
         holder = "";
         temp = "";
         x_pos = "";
         y_pos = "";
         
+        //Only for line connects
+        x_end_pos = "";
+        y_end_pos = "";
+        id_1 = "";
+        id_2 = "";
+        type_1 = "";
+        type_2 = "";
+        
         holder = listOfObjects->at(i);
         first_pos = holder.find(delimiter);
-        second_pos = holder.find_last_of(delimiter);
+        second_pos = findPosition(&holder, first_pos+1, delimiter.substr()[0]);
         
         for ( int j = 0; j < first_pos; j++){
             temp += holder.substr()[j];
         }
-        
         for ( int j = first_pos + 1; j < second_pos; j++){
             x_pos += holder.substr()[j];
         }
         
         for ( int j = second_pos + 1; j < holder.size(); j++){
+            if(holder.substr()[j] == delimiter.substr()[0]) break;
             y_pos += holder.substr()[j];
         }
         
-        cout << "Creating: " << temp << " At: " << x_pos << ", " << y_pos << endl;
+        if(temp != "LineConnect"){
         
-        if(temp == "Sine"){
-            addWaveTableObject(atoi(&x_pos.substr()[0]), atoi(&y_pos.substr()[0]));
+            cout << "Creating: " << temp << " At: " << x_pos << ", " << y_pos << endl;
+        
+            if(temp == "Sine"){
+                addWaveTableObject(atoi(&x_pos.substr()[0]), atoi(&y_pos.substr()[0]));
+            }
+            else if(temp == "Output"){
+                addOutputObject(atoi(&x_pos.substr()[0]), atoi(&y_pos.substr()[0]));
+            }
+            else if(temp == "Slider"){
+                addSliderObject(atoi(&x_pos.substr()[0]), atoi(&y_pos.substr()[0]));
+            }
+            else if(temp == "NumberBox"){
+                addNumberBoxObject(atoi(&x_pos.substr()[0]), atoi(&y_pos.substr()[0]));
+            }
+            else if(temp == "Adder"){
+                addAdderObject(atoi(&x_pos.substr()[0]), atoi(&y_pos.substr()[0]));
+            }
+            else if(temp == "Multiplier"){
+                addMultiplierObject(atoi(&x_pos.substr()[0]), atoi(&y_pos.substr()[0]));
+            }
         }
-        else if(temp == "Output"){
-            addOutputObject(atoi(&x_pos.substr()[0]), atoi(&y_pos.substr()[0]));
-        }
-        else if(temp == "Slider"){
-            addSliderObject(atoi(&x_pos.substr()[0]), atoi(&y_pos.substr()[0]));
-        }
-        else if(temp == "NumberBox"){
-            addNumberBoxObject(atoi(&x_pos.substr()[0]), atoi(&y_pos.substr()[0]));
-        }
-        else if(temp == "Adder"){
-            addAdderObject(atoi(&x_pos.substr()[0]), atoi(&y_pos.substr()[0]));
-        }
-        else if(temp == "Multiplier"){
-            addMultiplierObject(atoi(&x_pos.substr()[0]), atoi(&y_pos.substr()[0]));
+        else {
+            third_pos = findPosition(&holder, second_pos+1, delimiter.substr()[0]);
+            fourth_pos = findPosition(&holder, third_pos+1, delimiter.substr()[0]);
+            fifth_pos = findPosition(&holder, fourth_pos+1, delimiter.substr()[0]);
+            sixth_pos = findPosition(&holder, fifth_pos+1, delimiter.substr()[0]);
+            seventh_pos = findPosition(&holder, sixth_pos+1, delimiter.substr()[0]);
+            eighth_pos = findPosition(&holder, seventh_pos+1, delimiter.substr()[0]);
+            
+            for ( int j = third_pos + 1; j < fourth_pos; j++){
+                x_end_pos += holder.substr()[j];
+            }
+            
+            for ( int j = fourth_pos + 1; j < fifth_pos; j++){
+                y_end_pos += holder.substr()[j];
+            }
+
+            for ( int j = fifth_pos + 1; j < sixth_pos; j++){
+                id_1 += holder.substr()[j];
+            }
+            
+            
+            for ( int j = sixth_pos + 1; j < seventh_pos; j++){
+                type_1 += holder.substr()[j];
+            }
+            for ( int j = seventh_pos + 1; j < eighth_pos; j++){
+                id_2 += holder.substr()[j];
+            }
+            for ( int j = eighth_pos + 1; j < holder.size(); j++){
+                type_2 += holder.substr()[j];
+            }
+            
+            cout << "Creating: " << temp << " from: " << x_pos << ", " << y_pos << " to: " <<
+            x_end_pos << ", " << y_end_pos << " connects: " << type_1 << " to: " << type_2 << endl;
+            
+            lineConnectPtr = new LineConnect(atoi(&x_pos.substr()[0]),
+                                             atoi(&y_pos.substr()[0]),
+                                             atoi(&x_end_pos.substr()[0]),
+                                             atoi(&y_end_pos.substr()[0]));
+            
+            ELEMVECT o1, o2;
+            
+            if(type_1 == "Sine"){
+                o1 = (ELEMVECT) listOfWaveTables.at(atoi(&id_1.substr()[0]));
+            }
+            else if(type_1 == "Output"){
+                o1 = (ELEMVECT) listOfOutputs.at(atoi(&id_1.substr()[0]));
+            }
+            else if(type_1 == "NumberBox"){
+                o1 = (ELEMVECT) listOfNumBox.at(atoi(&id_1.substr()[0]));
+            }
+            else if(type_1 == "Slider"){
+                o1 = (ELEMVECT) listOfSliderObjects.at(atoi(&id_1.substr()[0]));
+            }
+            else if(type_1 == "Multiplier"){
+                o1 = (ELEMVECT) listOfMultipliers.at(atoi(&id_1.substr()[0]));
+            }
+            else if(type_1 == "Adder"){
+                o1 = (ELEMVECT) listOfAdders.at(atoi(&id_1.substr()[0]));
+            }
+            else if(type_1 == "Divider"){
+                o1 = (ELEMVECT) listOfDividers.at(atoi(&id_1.substr()[0]));
+            }
+            
+            if(type_2 == "Sine"){
+                o2 = (ELEMVECT) listOfWaveTables.at(atoi(&id_2.substr()[0]));
+            }
+            else if(type_2 == "Output"){
+                o2 = (ELEMVECT) listOfOutputs.at(atoi(&id_2.substr()[0]));
+            }
+            else if(type_2 == "NumberBox"){
+                o2 = (ELEMVECT) listOfNumBox.at(atoi(&id_2.substr()[0]));
+            }
+            else if(type_2 == "Slider"){
+                o2 = (ELEMVECT) listOfSliderObjects.at(atoi(&id_2.substr()[0]));
+            }
+            else if(type_2 == "Multiplier"){
+                o2 = (ELEMVECT) listOfMultipliers.at(atoi(&id_2.substr()[0]));
+            }
+            else if(type_2 == "Adder"){
+                o2 = (ELEMVECT) listOfAdders.at(atoi(&id_2.substr()[0]));
+            }
+            else if(type_2 == "Divider"){
+                o2 = (ELEMVECT) listOfDividers.at(atoi(&id_2.substr()[0]));
+            }
+            
+            lineConnectPtr->setFirstElement((ElementObject *) o1);
+            lineConnectPtr->setSecondElement((ElementObject *) o2);
+            lineConnectPtr->makeConnections();
+            listOfLineConnects.push_back(lineConnectPtr);
         }
         
     }

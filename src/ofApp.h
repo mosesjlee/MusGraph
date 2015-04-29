@@ -25,6 +25,7 @@
 #define LEFT_CHEVRON 44
 #define RIGHT_CHEVRON 46
 #define RETURN_KEY 13
+#define DELETE_KEY 127
 #define SPACE_BAR 32
 
 class ofApp : public ofBaseApp{

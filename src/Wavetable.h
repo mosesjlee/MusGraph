@@ -21,7 +21,9 @@ public:
 
 private:
     WaveTable * sinePtr;
+    
     ElementObject * input = NULL;
+    
     float * table;
     float initialPhase;
     float delta_i;

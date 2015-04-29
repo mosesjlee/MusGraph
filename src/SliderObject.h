@@ -28,14 +28,12 @@ public:
     void setObjectToControl(ElementObject * objPtr);
     ElementObject * getObjectToControl();
     void setSliderID(int id);
-    int getSliderID();
     void draw();
     
     ofxUISlider * getSliderRef();
     ~SliderObject();
 private:
     string sliderName;
-    int sliderID;
     ElementObject * elementPtr = NULL;
     ofxUISlider * slider;
     ofxUICanvas * sliderCanvas;

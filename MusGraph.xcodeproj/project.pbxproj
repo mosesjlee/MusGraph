@@ -45,6 +45,8 @@
 		91461ADA1AE77FC3001072B1 /* TickableElement.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91461AD91AE77FC3001072B1 /* TickableElement.cpp */; };
 		91733BE41ADDEB2D0024A56E /* AdderObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91733BE21ADDEB2D0024A56E /* AdderObject.cpp */; };
 		91733BE71ADDEB400024A56E /* MultiplierObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91733BE51ADDEB400024A56E /* MultiplierObject.cpp */; };
+		9187E4041AF0B0550063B4CC /* DelayEffect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9187E4011AF0B0550063B4CC /* DelayEffect.cpp */; };
+		9187E4051AF0B0550063B4CC /* DelayLine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9187E4031AF0B0550063B4CC /* DelayLine.cpp */; };
 		91B1A7181AE80B960048C985 /* AppUtilityFunctions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91B1A7161AE80B960048C985 /* AppUtilityFunctions.cpp */; };
 		91C014E81AE7185D00B80712 /* DividerObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91C014E61AE7185D00B80712 /* DividerObject.cpp */; };
 		91D54C4C1AD8E79E0023E49A /* SliderObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91D54C481AD8E79D0023E49A /* SliderObject.cpp */; };
@@ -222,6 +224,10 @@
 		91733BE31ADDEB2D0024A56E /* AdderObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdderObject.h; sourceTree = "<group>"; };
 		91733BE51ADDEB400024A56E /* MultiplierObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MultiplierObject.cpp; sourceTree = "<group>"; };
 		91733BE61ADDEB400024A56E /* MultiplierObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MultiplierObject.h; sourceTree = "<group>"; wrapsLines = 0; };
+		9187E4001AF0B0550063B4CC /* delayef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = delayef.h; sourceTree = "<group>"; };
+		9187E4011AF0B0550063B4CC /* DelayEffect.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DelayEffect.cpp; sourceTree = "<group>"; };
+		9187E4021AF0B0550063B4CC /* delayl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = delayl.h; sourceTree = "<group>"; };
+		9187E4031AF0B0550063B4CC /* DelayLine.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DelayLine.cpp; sourceTree = "<group>"; };
 		91B1A7161AE80B960048C985 /* AppUtilityFunctions.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AppUtilityFunctions.cpp; sourceTree = "<group>"; };
 		91B1A7171AE80B960048C985 /* AppUtilityFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppUtilityFunctions.h; sourceTree = "<group>"; };
 		91C014E61AE7185D00B80712 /* DividerObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DividerObject.cpp; sourceTree = "<group>"; };
@@ -667,6 +673,10 @@
 				91E0C7731AE32118004041C6 /* NumberBoxObject.cpp */,
 				91E0C7761AE32326004041C6 /* TickableElement.h */,
 				91461AD91AE77FC3001072B1 /* TickableElement.cpp */,
+				9187E4001AF0B0550063B4CC /* delayef.h */,
+				9187E4011AF0B0550063B4CC /* DelayEffect.cpp */,
+				9187E4021AF0B0550063B4CC /* delayl.h */,
+				9187E4031AF0B0550063B4CC /* DelayLine.cpp */,
 				91D54C4B1AD8E79D0023E49A /* Wavetable.h */,
 				91D54C4A1AD8E79D0023E49A /* Wavetable.cpp */,
 				91461AD61AE7749F001072B1 /* MathObject.h */,
@@ -811,6 +821,7 @@
 				91D54C4D1AD8E79E0023E49A /* Wavetable.cpp in Sources */,
 				F1E8DE8734BA6F69A5112FA8 /* ofxUIBaseDraws.cpp in Sources */,
 				C381F2B7CFD84C0E540EB4BC /* ofxUIBiLabelSlider.cpp in Sources */,
+				9187E4041AF0B0550063B4CC /* DelayEffect.cpp in Sources */,
 				7D393646FB859A930EF58917 /* ofxUIButton.cpp in Sources */,
 				7BE46522B64E24FAEDE1A25D /* ofxUICanvas.cpp in Sources */,
 				DF0C851B244C4C867CEA8806 /* ofxUICircleSlider.cpp in Sources */,
@@ -845,6 +856,7 @@
 				BFEFCE32DAFE10A8EB519F6C /* ofxUISpacer.cpp in Sources */,
 				52AFF80A869790144ACCC9BA /* ofxUISpectrum.cpp in Sources */,
 				1DAAC3FB4B98B08AE63F4687 /* ofxUISuperCanvas.cpp in Sources */,
+				9187E4051AF0B0550063B4CC /* DelayLine.cpp in Sources */,
 				5AE95ADB5549701423B6DA48 /* ofxUITabBar.cpp in Sources */,
 				C961BE22AB9A8CCF037FC18F /* ofxUITextArea.cpp in Sources */,
 				F8D05F7C7F785CE323983B47 /* ofxUITextInput.cpp in Sources */,

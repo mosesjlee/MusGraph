@@ -30,7 +30,6 @@ public:
     void draw();
     void setOutputConnection(WaveTable * sptr);
     void controlOutObject();
-    int getMyID();
     
     void setAmIClicked(bool clicked);
     

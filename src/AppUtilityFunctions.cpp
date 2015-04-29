@@ -37,7 +37,7 @@ bool selectItemsHelper(int x, int y, ElementObject ** eObj, vector<ElementObject
     return itemSelected;
 }
 
-std::string Convert (float number){
+std::string Convert (int number){
     std::ostringstream buff;
     buff<<number;
     return buff.str();
@@ -64,10 +64,30 @@ void writeElementsToFile(vector<ElementObject *> * list, int size){
     ofBuffer bufToWrite;
     ofFile configFile;
     
-    for(int i = 0; i < list->size(); i++){
-        tempText = (list->at(i)->getType()) + ";" + Convert(list->at(i)->getXCoord()) +
+    
+    string type = list->at(0)->getType();
+    
+    if(type == "LineConnect"){
+        for(int i = 0; i < list->size(); i++){
+            tempText = (list->at(i)->getType()) + ";" +
+                        Convert(((LineConnect *) list->at(i))->getXStart()) + ";" +
+                        Convert(((LineConnect *) list->at(i))->getYStart()) + ";" +
+                        Convert(((LineConnect *) list->at(i))->getXEnd()) + ";" +
+                        Convert(((LineConnect *) list->at(i))->getYEnd()) + ";" +
+                        Convert(((LineConnect *) list->at(i))->getElemID_1()) + ";" +
+                        ((LineConnect *) list->at(i))->getType1() + ";" +
+                        Convert(((LineConnect *) list->at(i))->getElemID_2()) + ";" +
+                        ((LineConnect *) list->at(i))->getType2() + "\n";
+            
+            textToSave += tempText;
+        }
+    }
+    else {
+        for(int i = 0; i < list->size(); i++){
+            tempText = (list->at(i)->getType()) + ";" + Convert(list->at(i)->getXCoord()) +
                        ";" + Convert(list->at(i)->getYCoord()) + "\n";
-        textToSave += tempText;
+            textToSave += tempText;
+        }
     }
     
     char * s = new char[textToSave.length()];
@@ -104,4 +124,18 @@ vector<string> * loadElementsFromFileToBuffer(){
         }
     }
     return listOfObjects;
+}
+
+//-------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------
+int findPosition(string * s, int start, char delimiter){
+    int i = start;
+    
+    do{
+        i++;
+    }
+    while(s->substr()[i] != delimiter);
+    
+    return i;
 }

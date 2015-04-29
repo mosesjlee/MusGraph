@@ -52,6 +52,9 @@ public:
         }
     }
     
+    virtual void setMyID(int i) { myID = i; }
+    virtual int getMyID() { return myID; }
+    
     //These functions will remain virtual so that subclasses
     //can implement however way they choose
     virtual void draw() = 0;
@@ -59,6 +62,7 @@ public:
 protected:
     std::string type;
     int x, y;
+    int myID;
     int width, height;
     int x_bound, y_bound;
     int inputs;

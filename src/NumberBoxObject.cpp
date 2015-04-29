@@ -35,15 +35,11 @@ NumberBoxObject::NumberBoxObject(int x_coord, int y_coord, ofxUICanvas * parentC
     textBox->setID(id);
     textBox->setOnlyNumericInput(true);
     textBox->setVisible(false);
-    textBoxID = id;
+    myID = id;
 }
 
 NumberBoxObject::~NumberBoxObject(){
     delete numberBoxCanvas;
-}
-
-int NumberBoxObject::getMyID(){
-    return textBoxID;
 }
 
 void NumberBoxObject::setMyValue(float v){
@@ -86,6 +82,4 @@ void NumberBoxObject::draw(){
     
     ofSetLineWidth(2);
     ofRect(numberRect);
-    
-
 }

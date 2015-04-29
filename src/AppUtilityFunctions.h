@@ -12,6 +12,7 @@
 #include <stdio.h>
 #include <math.h>
 #include "ElementObject.h"
+#include "LineConnect.h"
 
 //Instance Variables I may need
 
@@ -25,4 +26,6 @@ void loadElementsFromFile(string fileName);
 void createFile();
 string Convert(float);
 void tickAllObjects();
+
+int findPosition(string *, int start, char delimiter);
 #endif /* defined(__MusGraph__AppUtilityFunctions__) */

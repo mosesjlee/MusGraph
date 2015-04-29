@@ -39,12 +39,29 @@ public:
     void setFirstElement(ElementObject * o);
     void setSecondElement(ElementObject * o);
     
-    void makeConnections();
+    bool makeConnections();
     void disconnect();
+    
+    int getXStart();
+    int getYStart();
+    int getXEnd();
+    int getYEnd();
+    
+    int getElemID_1();
+    int getElemID_2();
+    
+    string getType1();
+    string getType2();
     
 private:
     ElementObject * o1;
+    string type_1;
+    int id_1;
     ElementObject * o2;
+    string type_2;
+    int id_2;
+    
+    
     ofPolyline * line = NULL;
     float * buffer;
     int x_start, y_start;
