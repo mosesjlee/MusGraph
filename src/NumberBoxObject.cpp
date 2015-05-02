@@ -53,7 +53,7 @@ float NumberBoxObject::sendValue(){
     return myValue;
 }
 
-void NumberBoxObject::setOutputConnection(WaveTable * sptr){
+void NumberBoxObject::setOutputConnection(WaveTableObject * sptr){
     sinePtr = sptr;
 }
 

@@ -79,11 +79,11 @@ void OutputElement::setVolume(float newVolume){
     volume = newVolume;
 }
 
-void OutputElement::setLeftInput(WaveTable * wPtr){
+void OutputElement::setLeftInput(WaveTableObject * wPtr){
     lWavePtr = wPtr;
 }
 
-void OutputElement::setRightInput(WaveTable * wPtr){
+void OutputElement::setRightInput(WaveTableObject * wPtr){
     rWavePtr = wPtr;
 }
 

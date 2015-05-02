@@ -146,11 +146,11 @@ bool LineConnect::makeConnections(){
     }
 
     else if(o1_type == "NumberBox" && o2_type == "Sine"){
-        ((NumberBoxObject *) o1)->setOutputConnection((WaveTable *) o2);
+        ((NumberBoxObject *) o1)->setOutputConnection((WaveTableObject *) o2);
         return true;
     }
     else if(o2_type == "NumberBox" && o1_type == "Sine"){
-        ((NumberBoxObject *) o2)->setOutputConnection((WaveTable *) o1);
+        ((NumberBoxObject *) o2)->setOutputConnection((WaveTableObject *) o1);
         return true;
     }
     
@@ -184,7 +184,7 @@ bool LineConnect::makeConnections(){
 //----------------------------------------------------------
     //This is hard coded
     else if(o1_type == "Adder" && o2_type == "Sine"){
-        ((WaveTable *) o2)->setInput(o1);
+        ((WaveTableObject *) o2)->setInput(o1);
         return true;
     }
     //ABOVE IS HARD CODED
@@ -237,6 +237,12 @@ bool LineConnect::makeConnections(){
     }
     else if(o1_type == "Adder" && o2_type == "Multiplier"){
         ((AdderObject *) o1)->connectElement(o2);
+        return true;
+    }
+    
+    else if(o1_type == "HitBox" && o2_type == "Sine"){
+        ((HitObject *) o1)->setElementToHit((TickableElement *) o2);
+        ((TickableElement *) o2)->setHasHitControl(true);
         return true;
     }
     

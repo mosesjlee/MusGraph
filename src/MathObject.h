@@ -14,12 +14,14 @@
 
 #include "TickableElement.h"
 #include "NumberBoxObject.h"
-#include "WaveTable.h"
+#include "WaveTableObject.h"
+#include <stdio.h>
 
+class WaveTableObject;
 class MathObject : public TickableElement{
 public:
     virtual void connectElement(ElementObject * o);
-    virtual void connectOutElement(WaveTable * wPtr);
+    virtual void connectOutElement(WaveTableObject *);
     
     void draw();
     
@@ -28,7 +30,7 @@ protected:
     int numElementsConnected = 0;
     string o1_type;
     string o2_type;
-    WaveTable * sPtr = NULL;
+    WaveTableObject * sPtr = NULL;
     ElementObject * o1 = NULL;
     ElementObject * o2 = NULL;
     

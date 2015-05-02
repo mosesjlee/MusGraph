@@ -27,3 +27,15 @@ void TickableElement::draw(){
     ofSetColor(0, 0, 0);
     ofDrawBitmapString(text.str(), x+8, y+20);
 }
+
+void TickableElement::receivedHit(int hitLength){
+    cout << "Recieved Hit: " << hitLength << endl;
+    
+    hasHitControl = !hasHitControl;
+    
+}
+
+void TickableElement::setHasHitControl(bool t){
+    hasHitControl = t;
+}
+

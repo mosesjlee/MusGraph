@@ -7,6 +7,7 @@
 //
 
 #include "AdderObject.h"
+#include "MultiplierObject.h"
 
 AdderObject::AdderObject(){
     

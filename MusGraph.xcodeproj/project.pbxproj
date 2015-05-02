@@ -41,8 +41,11 @@
 		837220E80EB56CD44AD27F2A /* ofxSlider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 15F2C6477A769C03A56D1401 /* ofxSlider.cpp */; };
 		83D9F930112E0944444124EE /* ofxMidiOut.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04F77E5C73A62E2E77C78EC6 /* ofxMidiOut.cpp */; };
 		856AA354D08AB4B323081444 /* ofxBaseGui.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9604B925D32EE39065747725 /* ofxBaseGui.cpp */; };
+		913E3F361AF4550100C3CE5A /* WaveTableObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 913E3F341AF4550100C3CE5A /* WaveTableObject.cpp */; };
 		91461AD81AE77F6C001072B1 /* MathObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91461AD71AE77F6C001072B1 /* MathObject.cpp */; };
 		91461ADA1AE77FC3001072B1 /* TickableElement.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91461AD91AE77FC3001072B1 /* TickableElement.cpp */; };
+		915D408B1AF3FECE0064770C /* DelayLineObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 915D40891AF3FECE0064770C /* DelayLineObject.cpp */; };
+		915D408E1AF3FEE60064770C /* HitObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 915D408C1AF3FEE60064770C /* HitObject.cpp */; };
 		91733BE41ADDEB2D0024A56E /* AdderObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91733BE21ADDEB2D0024A56E /* AdderObject.cpp */; };
 		91733BE71ADDEB400024A56E /* MultiplierObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91733BE51ADDEB400024A56E /* MultiplierObject.cpp */; };
 		9187E4041AF0B0550063B4CC /* DelayEffect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9187E4011AF0B0550063B4CC /* DelayEffect.cpp */; };
@@ -64,7 +67,7 @@
 		AE281BEBF3A00F1FC37F3DA0 /* ofxUIWaveform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9345327AA463407B3DADBADE /* ofxUIWaveform.cpp */; };
 		B266578FC55D23BFEBC042E7 /* ofxGuiGroup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ECF8674C7975F1063C5E30CA /* ofxGuiGroup.cpp */; };
 		B56FE57CC35806596D38118C /* ofxSliderGroup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 802251BAF1B35B1D67B32FD0 /* ofxSliderGroup.cpp */; };
-		BBAB23CB13894F3D00AA2426 /* GLUT.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BBAB23BE13894E4700AA2426 /* GLUT.framework */; };
+		BBAB23CB13894F3D00AA2426 /* GLUT.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BBAB23BE13894E4700AA2426 /* GLUT.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		BCC8D420CBA9217E437D2D76 /* ofxRtMidiIn.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F634AA6CA2E3C60F3B87B59A /* ofxRtMidiIn.cpp */; };
 		BFEFCE32DAFE10A8EB519F6C /* ofxUISpacer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30CBAAEC78A0E9EBBB10A05A /* ofxUISpacer.cpp */; };
 		C30B3A2A37F8F32EE7318718 /* ofxUILabelToggle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 76AF3B44E0E2FA8BFBD5F592 /* ofxUILabelToggle.cpp */; };
@@ -217,9 +220,15 @@
 		8B5F60B902BFFD95E99AAB34 /* ofxUIImageSampler.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = ofxUIImageSampler.cpp; path = ../../../addons/ofxUI/src/ofxUIImageSampler.cpp; sourceTree = SOURCE_ROOT; };
 		8F8238006E98A8E39851968C /* ofxUIButton.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = ofxUIButton.cpp; path = ../../../addons/ofxUI/src/ofxUIButton.cpp; sourceTree = SOURCE_ROOT; };
 		907C5B5E104864A2D3A25745 /* ofxToggle.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = ofxToggle.cpp; path = ../../../addons/ofxGui/src/ofxToggle.cpp; sourceTree = SOURCE_ROOT; };
+		913E3F341AF4550100C3CE5A /* WaveTableObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = WaveTableObject.cpp; sourceTree = "<group>"; };
+		913E3F351AF4550100C3CE5A /* WaveTableObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaveTableObject.h; sourceTree = "<group>"; };
 		91461AD61AE7749F001072B1 /* MathObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MathObject.h; sourceTree = "<group>"; };
 		91461AD71AE77F6C001072B1 /* MathObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MathObject.cpp; sourceTree = "<group>"; };
 		91461AD91AE77FC3001072B1 /* TickableElement.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TickableElement.cpp; sourceTree = "<group>"; };
+		915D40891AF3FECE0064770C /* DelayLineObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DelayLineObject.cpp; sourceTree = "<group>"; };
+		915D408A1AF3FECE0064770C /* DelayLineObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DelayLineObject.h; sourceTree = "<group>"; };
+		915D408C1AF3FEE60064770C /* HitObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HitObject.cpp; sourceTree = "<group>"; };
+		915D408D1AF3FEE60064770C /* HitObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HitObject.h; sourceTree = "<group>"; };
 		91733BE21ADDEB2D0024A56E /* AdderObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AdderObject.cpp; sourceTree = "<group>"; };
 		91733BE31ADDEB2D0024A56E /* AdderObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdderObject.h; sourceTree = "<group>"; };
 		91733BE51ADDEB400024A56E /* MultiplierObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MultiplierObject.cpp; sourceTree = "<group>"; };
@@ -671,14 +680,20 @@
 				91D54C521AD8E8700023E49A /* OutputElement.cpp */,
 				91E0C7741AE32118004041C6 /* NumberBoxObject.h */,
 				91E0C7731AE32118004041C6 /* NumberBoxObject.cpp */,
+				915D408D1AF3FEE60064770C /* HitObject.h */,
+				915D408C1AF3FEE60064770C /* HitObject.cpp */,
 				91E0C7761AE32326004041C6 /* TickableElement.h */,
 				91461AD91AE77FC3001072B1 /* TickableElement.cpp */,
 				9187E4001AF0B0550063B4CC /* delayef.h */,
 				9187E4011AF0B0550063B4CC /* DelayEffect.cpp */,
 				9187E4021AF0B0550063B4CC /* delayl.h */,
 				9187E4031AF0B0550063B4CC /* DelayLine.cpp */,
+				915D408A1AF3FECE0064770C /* DelayLineObject.h */,
+				915D40891AF3FECE0064770C /* DelayLineObject.cpp */,
 				91D54C4B1AD8E79D0023E49A /* Wavetable.h */,
 				91D54C4A1AD8E79D0023E49A /* Wavetable.cpp */,
+				913E3F351AF4550100C3CE5A /* WaveTableObject.h */,
+				913E3F341AF4550100C3CE5A /* WaveTableObject.cpp */,
 				91461AD61AE7749F001072B1 /* MathObject.h */,
 				91461AD71AE77F6C001072B1 /* MathObject.cpp */,
 				91733BE61ADDEB400024A56E /* MultiplierObject.h */,
@@ -728,7 +743,7 @@
 		E4B69B4C0A3A1720003C02F2 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0460;
+				LastUpgradeCheck = 0620;
 			};
 			buildConfigurationList = E4B69B4D0A3A1720003C02F2 /* Build configuration list for PBXProject "MusGraph" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -808,6 +823,8 @@
 				5A4349E9754D6FA14C0F2A3A /* tinyxmlparser.cpp in Sources */,
 				BCC8D420CBA9217E437D2D76 /* ofxRtMidiIn.cpp in Sources */,
 				3AEFE4FA8AD5C72671AD07F8 /* ofxRtMidiOut.cpp in Sources */,
+				913E3F361AF4550100C3CE5A /* WaveTableObject.cpp in Sources */,
+				915D408B1AF3FECE0064770C /* DelayLineObject.cpp in Sources */,
 				91461ADA1AE77FC3001072B1 /* TickableElement.cpp in Sources */,
 				1A86B7721CAEBC6F1C572C45 /* ofxBaseMidi.cpp in Sources */,
 				63F9FE1D90234FA6DE6F509E /* ofxMidi.cpp in Sources */,
@@ -852,6 +869,7 @@
 				FE0F1DB69ACCD163E9DA2A15 /* ofxUIRotarySlider.cpp in Sources */,
 				43BADBB2FE0F17D34B57A705 /* ofxUIScrollableCanvas.cpp in Sources */,
 				740A58CBFDFE578C83A349AF /* ofxUISlider.cpp in Sources */,
+				915D408E1AF3FEE60064770C /* HitObject.cpp in Sources */,
 				ADE7C2AFC51E3F7E5E389026 /* ofxUISortableList.cpp in Sources */,
 				BFEFCE32DAFE10A8EB519F6C /* ofxUISpacer.cpp in Sources */,
 				52AFF80A869790144ACCC9BA /* ofxUISpectrum.cpp in Sources */,
@@ -885,7 +903,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E4EB6923138AFD0F00A09F29 /* Project.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(NATIVE_ARCH)";
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
 				CONFIGURATION_BUILD_DIR = "$(SRCROOT)/bin/";
 				COPY_PHASE_STRIP = NO;
@@ -918,6 +936,7 @@
 					../../../addons/ofxUI/src,
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CPLUSPLUSFLAGS = (
 					"-D__MACOSX_CORE__",
 					"-lpthread",
@@ -931,7 +950,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E4EB6923138AFD0F00A09F29 /* Project.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(NATIVE_ARCH)";
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
 				CONFIGURATION_BUILD_DIR = "$(SRCROOT)/bin/";
 				COPY_PHASE_STRIP = YES;

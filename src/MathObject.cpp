@@ -6,7 +6,6 @@
 //
 //
 
-#include <stdio.h>
 #include "MathObject.h"
 
 void MathObject::draw(){
@@ -44,7 +43,7 @@ void MathObject::connectElement(ElementObject * o){
     }
     else {
         cout << "S Pointer Connected: " << endl;
-        sPtr = (WaveTable *) o;
+        sPtr = (WaveTableObject *) o;
         numElementsConnected = 3;
     }
 }
@@ -53,6 +52,6 @@ void MathObject::connectElement(ElementObject * o){
 //------------------------------------------------------------------------
 //------------------------------------------------------------------------
 
-void MathObject::connectOutElement(WaveTable * wPtr){
+void MathObject::connectOutElement(WaveTableObject * wPtr){
     sPtr = wPtr;
 }

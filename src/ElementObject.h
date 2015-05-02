@@ -9,6 +9,7 @@
 #ifndef mySketch_ElementObject_h
 #define mySketch_ElementObject_h
 #define BUF_SIZ 1024
+#define SR 44100
 
 #include <stdio.h>
 #include <string>
@@ -60,7 +61,7 @@ public:
     virtual void draw() = 0;
     
 protected:
-    std::string type;
+    std::string type = "";
     int x, y;
     int myID;
     int width, height;

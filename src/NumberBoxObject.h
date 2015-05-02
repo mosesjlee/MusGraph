@@ -15,10 +15,10 @@
 #include <stdio.h>
 #include <string>
 #include "ElementObject.h"
-#include "WaveTable.h"
-#include "ofxGui.h"
 #include "SliderObject.h"
+#include "WaveTableObject.h"
 
+class WaveTableObject;
 class NumberBoxObject : public ElementObject{
 public:
     NumberBoxObject();
@@ -28,7 +28,7 @@ public:
     void setMyValue(float v);
     float sendValue();
     void draw();
-    void setOutputConnection(WaveTable * sptr);
+    void setOutputConnection(WaveTableObject * sptr);
     void controlOutObject();
     
     void setAmIClicked(bool clicked);
@@ -37,7 +37,7 @@ private:
     ofxUITextInput * textBox;
     ofxUICanvas * numberBoxCanvas;
     ofRectangle numberRect;
-    WaveTable * sinePtr = NULL;
+    WaveTableObject * sinePtr = NULL;
     int textBoxID;
     float myValue = 100.0f;
 };

@@ -4,7 +4,7 @@
 
 #include "ofMain.h"
 #include "MenuView.h"
-#include "Wavetable.h"
+#include "WavetableObject.h"
 #include "ofxUI.h"
 #include "SliderObject.h"
 #include "OutputElement.h"
@@ -13,6 +13,7 @@
 #include "MultiplierObject.h"
 #include "DividerObject.h"
 #include "NumberBoxObject.h"
+#include "HitObject.h"
 #include "AppUtilityFunctions.h"
 
 //Pred
@@ -52,7 +53,7 @@ public:
 private:
     //To create the visual elements
     MenuView selectMenu;
-    WaveTable * waveTablePtr;
+    WaveTableObject * waveTablePtr;
     SliderObject * sliderPtr;
     OutputElement * outputPtr;
     LineConnect * lineConnectPtr;
@@ -60,8 +61,9 @@ private:
     MultiplierObject * multiplierPtr;
     DividerObject * dividerPtr;
     NumberBoxObject * nbPtr;
+    HitObject * hitPtr;
     
-    vector<WaveTable *> listOfWaveTables;
+    vector<WaveTableObject *> listOfWaveTables;
     vector<SliderObject *> listOfSliderObjects;
     vector<OutputElement *> listOfOutputs;
     vector<LineConnect *> listOfLineConnects;
@@ -69,6 +71,7 @@ private:
     vector<MultiplierObject *> listOfMultipliers;
     vector<DividerObject *> listOfDividers;
     vector<NumberBoxObject *> listOfNumBox;
+    vector<HitObject *> listOfHitObjects;
     
     //For casting purposes
     typedef vector<ElementObject *> * ELEMVECT;
@@ -83,6 +86,7 @@ private:
     int numMultiplierObjects = 0;
     int numNumBoxObjects = 0;
     int numDividerObjects = 0;
+    int numHitObjects = 0;
     
     //For the output
     int onOff = 0;
@@ -119,6 +123,7 @@ private:
     void addMultiplierObject(int x, int y);
     void addDividerObject(int x, int y);
     void addNumberBoxObject(int x, int y);
+    void addHitObject(int x, int y);
     bool selectItems(int x, int y, ElementObject ** obj);
     void createObjects(vector<string> * listOfObjects);
     

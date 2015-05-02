@@ -14,10 +14,11 @@
 #include "AdderObject.h"
 #include "MultiplierObject.h"
 #include "OutputElement.h"
-#include "WaveTable.h"
+#include "WaveTableObject.h"
 #include "SliderObject.h"
 #include "DividerObject.h"
 #include "TickableElement.h"
+#include "HitObject.h"
 
 class LineConnect : public ElementObject{
     

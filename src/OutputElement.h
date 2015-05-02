@@ -13,7 +13,7 @@
 #include "ElementObject.h"
 #include "ofSoundStream.h"
 #include "LineConnect.h"
-#include "WaveTable.h"
+#include "WaveTableObject.h"
 
 
 #define MONO 0
@@ -42,8 +42,8 @@ public:
     void fillOutBuffer(float * output, int bufferSize, int nChannels);
     void setVolume(float newVolume);
     
-    void setLeftInput(WaveTable * wPtr);
-    void setRightInput(WaveTable * wPtr);
+    void setLeftInput(WaveTableObject * wPtr);
+    void setRightInput(WaveTableObject * wPtr);
     void setInput(ElementObject * o);
     void draw();
     
@@ -51,8 +51,8 @@ private:
     ofRectangle outputTab;
     ofSoundStream stream;
     ElementObject * elmtPtr;
-    WaveTable * lWavePtr = NULL;
-    WaveTable * rWavePtr = NULL;
+    WaveTableObject * lWavePtr = NULL;
+    WaveTableObject * rWavePtr = NULL;
     AdderObject * adderPtr = NULL;
     MultiplierObject * multPtr = NULL;
     TickableElement * tickElmPtr = NULL;

@@ -14,8 +14,7 @@
 
 #include <stdio.h>
 #include "ofxUI.h"
-#include "ofxGui.h"
-#include "Wavetable.h"
+#include "WaveTableObject.h"
 #include "ElementObject.h"
 #include "NumberBoxObject.h"
 

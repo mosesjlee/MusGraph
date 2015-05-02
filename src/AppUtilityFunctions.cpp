@@ -25,8 +25,9 @@ float euclideanDistance(float x_1, float y_1, float x_2, float y_2){
 //------------------------------------------------------------------------------------
 bool selectItemsHelper(int x, int y, ElementObject ** eObj, vector<ElementObject *> * listOfObj, int numElem){
     bool itemSelected = false;
+    if (numElem <= 0) return false;
     
-    //cout<< "Checking to see if wavetable object is clicked" << endl;
+    
     for(int i = 0; i < numElem; i++){
         if(listOfObj->at(i)->inBound(x, y)){
             *eObj = listOfObj->at(i);

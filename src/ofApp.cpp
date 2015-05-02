@@ -26,6 +26,7 @@ void ofApp::update(){
     numAdderObjects = listOfAdders.size();
     numDividerObjects = listOfDividers.size();
     numNumBoxObjects = listOfNumBox.size();
+    numHitObjects = listOfHitObjects.size();
 }
 
 //--------------------------------------------------------------
@@ -175,9 +176,16 @@ void ofApp::mousePressed(int x, int y, int button){
                         cout << "Divider " << endl;
                         addDividerObject(x_loc, y_loc);
                     }
-                    else if(y > y_coord + 170 && y < y_coord + 220){
+                    else if(y > y_coord + 170 && y < y_coord + 200){
                         cout << "Number Box " << endl;
                         addNumberBoxObject(x_loc, y_loc);
+                    }
+                    else if(y > y_coord + 200 && y < y_coord + 225){
+                        cout << "Delay Line " << endl;
+                    }
+                    else if(y > y_coord + 225 && y < y_coord + 250){
+                        cout << "Hit Box " << endl;
+                        addHitObject(x_loc, y_loc);
                     }
                 }
                 selectMenu.setShowMenu(false);
@@ -281,40 +289,7 @@ void ofApp::audioOut(float *output, int bufferSize, int nChannels){
 void ofApp::guiEvent(ofxUIEventArgs & e){
     string name = e.getName();
     
-    //For the getting of the value
-    if(name == "On/Off") {
-        onOff = e.getToggle()->getValue();
-        cout << "Toggle value: " << onOff << endl;
-    }
-    
-    else if (name == "Save Configuration"){
-        cout << "Saving Configuration: " << endl;
-        int value = e.getButton()->getValue();
-        cout << "Value: " << value <<endl;
-        
-        if(value == 1){
-            createFile();
-            writeElementsToFile((ELEMVECT) &listOfWaveTables, numWaveTables);
-            writeElementsToFile((ELEMVECT) &listOfSliderObjects, numSliderObjects);
-            writeElementsToFile((ELEMVECT) &listOfNumBox, numNumBoxObjects);
-            writeElementsToFile((ELEMVECT) &listOfOutputs, numOutput);
-            writeElementsToFile((ELEMVECT) &listOfAdders, numAdderObjects);
-            writeElementsToFile((ELEMVECT) &listOfMultipliers, numMultiplierObjects);
-            writeElementsToFile((ELEMVECT) &listOfDividers, numDividerObjects);
-            writeElementsToFile((ELEMVECT) &listOfLineConnects, numLineConnect);
-        }
-    }
-    
-    else if(name == "Load Configuration"){
-        cout << "Load Configs: " << endl;
-        int value = e.getButton()->getValue();
-        
-        if(value == 1){
-            createObjects(loadElementsFromFileToBuffer());
-        }
-    }
-    
-    else if(name == "Slider") {
+    if(name == "Slider") {
         int currSliderID = e.getSlider()->getID();
         double val = e.getSlider()->getValue();
         string type = "";
@@ -348,6 +323,17 @@ void ofApp::guiEvent(ofxUIEventArgs & e){
         }
     }
     
+    else if(name == "HitBox"){
+        int hitID = e.getButton()->getID();
+        string type = "";
+        int value = e.getButton()->getValue();
+        if(value == 1){
+            if(listOfHitObjects.at(hitID)->getMyID() == hitID){
+                listOfHitObjects.at(hitID)->receivedHit();
+            }
+        }
+    }
+    
     else if(name == "NumberBox"){
         cout << "in number box" << endl;
         ofxUITextInput * ti = (ofxUITextInput *) e.widget;
@@ -360,6 +346,39 @@ void ofApp::guiEvent(ofxUIEventArgs & e){
             if(ti->getInputTriggerType() == OFX_UI_TEXTINPUT_ON_ENTER){
                 listOfNumBox.at(numberBoxID)->setMyValue(atof(newValue.data()));
             }
+        }
+    }
+    
+    //For the MENU GUI
+    else if(name == "On/Off") {
+        onOff = e.getToggle()->getValue();
+        cout << "Toggle value: " << onOff << endl;
+    }
+    
+    else if (name == "Save Configuration"){
+        cout << "Saving Configuration: " << endl;
+        int value = e.getButton()->getValue();
+        cout << "Value: " << value <<endl;
+        
+        if(value == 1){
+            createFile();
+            writeElementsToFile((ELEMVECT) &listOfWaveTables, numWaveTables);
+            writeElementsToFile((ELEMVECT) &listOfSliderObjects, numSliderObjects);
+            writeElementsToFile((ELEMVECT) &listOfNumBox, numNumBoxObjects);
+            writeElementsToFile((ELEMVECT) &listOfOutputs, numOutput);
+            writeElementsToFile((ELEMVECT) &listOfAdders, numAdderObjects);
+            writeElementsToFile((ELEMVECT) &listOfMultipliers, numMultiplierObjects);
+            writeElementsToFile((ELEMVECT) &listOfDividers, numDividerObjects);
+            writeElementsToFile((ELEMVECT) &listOfLineConnects, numLineConnect);
+        }
+    }
+    
+    else if(name == "Load Configuration"){
+        cout << "Load Configs: " << endl;
+        int value = e.getButton()->getValue();
+        
+        if(value == 1){
+            createObjects(loadElementsFromFileToBuffer());
         }
     }
 }
@@ -418,6 +437,12 @@ void ofApp::exit(){
         }
     }
     
+    if(numHitObjects > 0){
+        for(int i = 0; i < numHitObjects; i++){
+            delete listOfHitObjects.at(i);
+        }
+    }
+    
     cout << "Deleted all objects sucessfully" << endl;
 }
 
@@ -449,7 +474,7 @@ void ofApp::setUpGUIElements(){
 }
 
 void ofApp::addWaveTableObject(int x, int y){
-    waveTablePtr = new WaveTable(x, y);
+    waveTablePtr = new WaveTableObject(x, y);
     waveTablePtr->setFreq(440);
     waveTablePtr->setMyID(listOfWaveTables.size());
     listOfWaveTables.push_back(waveTablePtr);
@@ -498,6 +523,15 @@ void ofApp::addNumberBoxObject(int x, int y){
     listOfNumBox.push_back(nbPtr);
 }
 
+void ofApp::addHitObject(int x, int y){
+    elementsGUI = new ofxUICanvas();
+    ofAddListener(elementsGUI->newGUIEvent, this, &ofApp::guiEvent);
+    
+    hitPtr = new HitObject(elementsGUI, x, y, listOfHitObjects.size());
+    listOfHitObjects.push_back(hitPtr);
+}
+
+
 //-------------------------------------------------------------------------------
 //Select Items based on locations
 //-------------------------------------------------------------------------------
@@ -524,6 +558,9 @@ bool ofApp::selectItems(int x, int y, ElementObject ** eObj){
     if(!itemSelected)
         itemSelected = selectItemsHelper(x, y, eObj, (ELEMVECT) &listOfNumBox, numNumBoxObjects);
     
+    if(!itemSelected)
+        itemSelected = selectItemsHelper(x, y, eObj, (ELEMVECT) &listOfHitObjects, numHitObjects);
+    
     return itemSelected;
 }
 
@@ -531,27 +568,15 @@ bool ofApp::selectItems(int x, int y, ElementObject ** eObj){
 void ofApp::createObjects(vector<string> * listOfObjects){
     cout << "in creating objects: " << endl;
     
-    string temp = "";
-    string x_pos = "";
-    string y_pos = "";
-    string x_end_pos = "";
-    string y_end_pos = "";
-    string id_1 = "";
-    string id_2 = "";
+    string temp = "", x_pos = "", y_pos = "", x_end_pos = "", y_end_pos = "", id_1 = "", id_2 = "";
     string type_1 = "";
     string type_2 = "";
     
     const string delimiter = ";";
     string holder = "";
     
-    int first_pos = 0;
-    int second_pos = 0;
-    int third_pos = 0;
-    int fourth_pos = 0;
-    int fifth_pos = 0;
-    int sixth_pos = 0;
-    int seventh_pos = 0;
-    int eighth_pos = 0;
+    int first_pos = 0, second_pos = 0, third_pos = 0, fourth_pos = 0;
+    int fifth_pos = 0, sixth_pos = 0, seventh_pos = 0, eighth_pos = 0;
     
     for(int i = 0; i < listOfObjects->size(); i++){
         holder = "";
