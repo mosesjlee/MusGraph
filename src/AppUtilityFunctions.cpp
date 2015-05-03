@@ -27,7 +27,6 @@ bool selectItemsHelper(int x, int y, ElementObject ** eObj, vector<ElementObject
     bool itemSelected = false;
     if (numElem <= 0) return false;
     
-    
     for(int i = 0; i < numElem; i++){
         if(listOfObj->at(i)->inBound(x, y)){
             *eObj = listOfObj->at(i);

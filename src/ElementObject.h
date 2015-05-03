@@ -9,7 +9,6 @@
 #ifndef mySketch_ElementObject_h
 #define mySketch_ElementObject_h
 #define BUF_SIZ 1024
-#define SR 44100
 
 #include <stdio.h>
 #include <string>
@@ -55,6 +54,9 @@ public:
     
     virtual void setMyID(int i) { myID = i; }
     virtual int getMyID() { return myID; }
+    
+    virtual int getXBound(){return x_bound;}
+    virtual int getYBound(){return y_bound;}
     
     //These functions will remain virtual so that subclasses
     //can implement however way they choose

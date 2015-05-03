@@ -229,6 +229,7 @@ void ofApp::mouseReleased(int x, int y, int button){
             y_2 = currObject_2->getYCoord();
             
             lineConnectPtr = new LineConnect(currLine, x_1, y_1, x_2, y_2);
+            //lineConnectPtr = new LineConnect(currLine);
             
             lineConnectPtr->setFirstElement(currObject_1);
             lineConnectPtr->setSecondElement(currObject_2);
@@ -380,63 +381,53 @@ void ofApp::exit(){
     delete saveMenuGUI;
     
     if(numWaveTables > 0){
-        for(int i = 0; i < numWaveTables; i++){
+        for(int i = 0; i < numWaveTables; i++)
             delete listOfWaveTables.at(i);
-        }
     }
     
     if(numSliderObjects > 0){
-        for(int i = 0; i < numSliderObjects; i++){
+        for(int i = 0; i < numSliderObjects; i++)
             delete listOfSliderObjects.at(i);
-        }
     }
 
     if(numOutput > 0) {
-        for(int i = 0; i < numOutput; i++){
+        for(int i = 0; i < numOutput; i++)
             delete listOfOutputs.at(i);
-        }
     }
     
     if(numLineConnect > 0){
-        for(int i = 0; i < numLineConnect; i++){
+        for(int i = 0; i < numLineConnect; i++)
             delete listOfLineConnects.at(i);
-        }
     }
     
     if(numMultiplierObjects > 0){
-        for(int i = 0; i < numMultiplierObjects; i++){
+        for(int i = 0; i < numMultiplierObjects; i++)
             delete listOfMultipliers.at(i);
-        }
     }
     
     if(numAdderObjects > 0){
-        for(int i = 0; i < numAdderObjects; i++){
+        for(int i = 0; i < numAdderObjects; i++)
             delete listOfAdders.at(i);
-        }
     }
     
     if(numDividerObjects > 0){
-        for(int i = 0; i < numDividerObjects; i++){
+        for(int i = 0; i < numDividerObjects; i++)
             delete listOfDividers.at(i);
-        }
     }
     
     if(numNumBoxObjects > 0){
-        for(int i = 0; i < numNumBoxObjects; i++){
+        for(int i = 0; i < numNumBoxObjects; i++)
             delete listOfNumBox.at(i);
-        }
     }
     
     if(numDelayLine > 0){
-        for(int i = 0; i < numDelayLine; i++){
+        for(int i = 0; i < numDelayLine; i++)
             delete listOfDelayLines.at(i);
-        }
     }
     
     if(numHitObjects > 0){
-        for(int i = 0; i < numHitObjects; i++){
+        for(int i = 0; i < numHitObjects; i++)
             delete listOfHitObjects.at(i);
-        }
     }
     
     cout << "Deleted all objects sucessfully" << endl;
@@ -514,7 +505,6 @@ void ofApp::addDividerObject(int x, int y){
 void ofApp::addNumberBoxObject(int x, int y){
     elementsGUI = new ofxUICanvas();
     ofAddListener(elementsGUI->newGUIEvent, this, &ofApp::guiEvent);
-    
     nbPtr = new NumberBoxObject(x, y, elementsGUI, listOfNumBox.size());
     listOfNumBox.push_back(nbPtr);
 }

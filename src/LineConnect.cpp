@@ -12,6 +12,11 @@ LineConnect::LineConnect(){
     
 }
 
+LineConnect::LineConnect(ofPolyline * linePtr){
+    line = linePtr;
+    line->clear();
+}
+
 LineConnect::LineConnect(ofPolyline * linePtr, int x_start, int y_start, int x_end, int y_end){
     line = linePtr;
     line->clear();
@@ -25,14 +30,15 @@ LineConnect::LineConnect(ofPolyline * linePtr, int x_start, int y_start, int x_e
 }
 
 LineConnect::LineConnect(int x_start, int y_start, int x_end, int y_end){
-    line = new ofPolyline();
-    line->addVertex(x_start, y_start);
-    line->addVertex(x_end, y_end);
     
     this->x_start = x_start;
     this->y_start = y_start;
     this->x_end = x_end;
     this->y_end = y_end;
+    
+    line = new ofPolyline();
+    line->addVertex(x_start, y_start);
+    line->addVertex(x_end, y_end);
 }
 
 LineConnect::~LineConnect(){
@@ -120,10 +126,22 @@ bool LineConnect::makeConnections(){
     //Connections below this line order does not matter
     if(o1_type == "Sine" && o2_type == "Output"){
         ((OutputElement *) o2)->setInput(o1);
+//        x_start = o1->getXCoord();
+//        y_start = o1->getYBound();
+//        x_end = o2->getXCoord();
+//        y_end = o2->getYCoord();
+//        line->addVertex(x_start, y_start);
+//        line->addVertex(x_end, y_end);
         return true;
     }
     else if(o2_type == "Sine" && o1_type == "Output"){
         ((OutputElement *) o1)->setInput(o2);
+//        x_start = o1->getXCoord();
+//        y_start = o1->getYBound();
+//        x_end = o2->getXCoord();
+//        y_end = o2->getYCoord();
+//        line->addVertex(x_start, y_start);
+//        line->addVertex(x_end, y_end);
         return true;
     }
     
@@ -176,6 +194,7 @@ bool LineConnect::makeConnections(){
         ((DividerObject *) o2)->connectElement(o1);
         return true;
     }
+    
     else if(o2_type == "NumberBox" && o1_type == "Divider"){
         ((DividerObject *) o1)->connectElement(o2);
         return true;
@@ -243,6 +262,17 @@ bool LineConnect::makeConnections(){
     else if(o1_type == "HitBox" && o2_type == "Sine"){
         ((HitObject *) o1)->setElementToHit((TickableElement *) o2);
         ((TickableElement *) o2)->setHasHitControl(true);
+        return true;
+    }
+    
+    else if(o1_type == "Sine" && o2_type == "Delay Line"){
+        ((DelayLineObject *) o2)->setInput(o1);
+        return true;
+    }
+    
+    
+    else if(o1_type == "Delay Line" && o2_type == "Adder"){
+        ((AdderObject *) o2)->connectElement(o1);
         return true;
     }
     

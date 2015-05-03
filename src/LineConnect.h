@@ -18,6 +18,7 @@
 #include "SliderObject.h"
 #include "DividerObject.h"
 #include "TickableElement.h"
+#include "DelayLineObject.h"
 #include "HitObject.h"
 
 class LineConnect : public ElementObject{
@@ -26,6 +27,7 @@ public:
     LineConnect();
     LineConnect(ofPolyline * linePtr, int x_start, int y_start, int x_end, int y_end);
     LineConnect(int x_start, int y_start, int x_end, int y_end);
+    LineConnect(ofPolyline * linePtr);
     ~LineConnect();
     void draw();
     void setInitialCoord(int x, int y);

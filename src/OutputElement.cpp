@@ -104,5 +104,4 @@ void OutputElement::draw(){
     text << "Output" << endl;
     ofSetColor(0, 0, 0);
     ofDrawBitmapString(text.str(), x+10, y+20);
-    
 }

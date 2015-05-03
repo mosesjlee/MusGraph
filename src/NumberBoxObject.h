@@ -38,6 +38,7 @@ private:
     ofxUICanvas * numberBoxCanvas;
     ofRectangle numberRect;
     WaveTableObject * sinePtr = NULL;
+    ElementObject * eObj = NULL;
     int textBoxID;
     float myValue = 100.0f;
 };
