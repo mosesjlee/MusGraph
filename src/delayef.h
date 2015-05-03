@@ -18,11 +18,11 @@ class DelayEffect {
   double tick(double);
 	double echo(double);
 
- private:
-  DelayLine *delayBuf;
-  double wetGain;
-  double dryGain;
-	double feedbackGain;
+private:
+    DelayLine *delayBuf;
+    double wetGain;
+    double dryGain;
+    double feedbackGain;
 };
 
 #endif

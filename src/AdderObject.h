@@ -10,6 +10,7 @@
 #define __MusGraph__AdderObject__
 
 #include "MathObject.h"
+#include "MultiplierObject.h"
 
 class AdderObject : public MathObject{
 public:

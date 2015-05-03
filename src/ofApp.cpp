@@ -26,6 +26,7 @@ void ofApp::update(){
     numAdderObjects = listOfAdders.size();
     numDividerObjects = listOfDividers.size();
     numNumBoxObjects = listOfNumBox.size();
+    numDelayLine = listOfDelayLines.size();
     numHitObjects = listOfHitObjects.size();
 }
 
@@ -38,47 +39,45 @@ void ofApp::draw(){
     
     //Draw the list of wave tables
     if(numWaveTables > 0){
-        for(int i = 0; i < numWaveTables; i++){
+        for(int i = 0; i < numWaveTables; i++)
             listOfWaveTables.at(i)->draw();
-        }
     }
     
     //Draw the list of output items
     if(numOutput > 0){
-        for(int i = 0; i < numOutput; i++){
+        for(int i = 0; i < numOutput; i++)
             listOfOutputs.at(i)->draw();
-        }
     }
     
     //Draw the list of line connect items
     if (numLineConnect > 0) {
-        for(int i = 0; i < numLineConnect;i++){
+        for(int i = 0; i < numLineConnect;i++)
             listOfLineConnects.at(i)->draw();
-        }
     }
     
     if(numAdderObjects > 0){
-        for(int i = 0; i < numAdderObjects;i++){
+        for(int i = 0; i < numAdderObjects;i++)
             listOfAdders.at(i)->draw();
-        }
     }
     
     if(numMultiplierObjects > 0){
-        for(int i = 0; i < numMultiplierObjects;i++){
+        for(int i = 0; i < numMultiplierObjects;i++)
             listOfMultipliers.at(i)->draw();
-        }
     }
     
     if(numDividerObjects > 0){
-        for(int i = 0; i < numDividerObjects;i++){
+        for(int i = 0; i < numDividerObjects;i++)
             listOfDividers.at(i)->draw();
-        }
     }
     
     if(numNumBoxObjects > 0){
-        for(int i = 0; i < numNumBoxObjects;i++){
+        for(int i = 0; i < numNumBoxObjects;i++)
             listOfNumBox.at(i)->draw();
-        }
+    }
+    
+    if(numDelayLine > 0){
+        for(int i = 0; i < numDelayLine ;i++)
+            listOfDelayLines.at(i)->draw();
     }
     
     //Draw line connects
@@ -119,13 +118,10 @@ void ofApp::keyPressed(int key){
 }
 
 //--------------------------------------------------------------
-void ofApp::keyReleased(int key){
-}
+void ofApp::keyReleased(int key){}
 
 //--------------------------------------------------------------
-void ofApp::mouseMoved(int x, int y ){
-    //cout << "mouse is at x: " << x << " y: " << y << endl;
-}
+void ofApp::mouseMoved(int x, int y ){}
 
 //--------------------------------------------------------------
 void ofApp::mouseDragged(int x, int y, int button){
@@ -182,6 +178,7 @@ void ofApp::mousePressed(int x, int y, int button){
                     }
                     else if(y > y_coord + 200 && y < y_coord + 225){
                         cout << "Delay Line " << endl;
+                        addDelayLine(x_loc, y_loc);
                     }
                     else if(y > y_coord + 225 && y < y_coord + 250){
                         cout << "Hit Box " << endl;
@@ -206,7 +203,6 @@ void ofApp::mousePressed(int x, int y, int button){
                 }
             }
 
-            
             break;
         case RIGHT_CLICK:
             selectMenu.setCoordinates(x, y);
@@ -261,19 +257,13 @@ void ofApp::mouseReleased(int x, int y, int button){
 }
 
 //--------------------------------------------------------------
-void ofApp::windowResized(int w, int h){
-    
-}
+void ofApp::windowResized(int w, int h){}
 
 //--------------------------------------------------------------
-void ofApp::gotMessage(ofMessage msg){
-    
-}
+void ofApp::gotMessage(ofMessage msg){}
 
 //--------------------------------------------------------------
-void ofApp::dragEvent(ofDragInfo dragInfo){
-    
-}
+void ofApp::dragEvent(ofDragInfo dragInfo){}
 
 //--------------------------------------------------------------
 void ofApp::audioOut(float *output, int bufferSize, int nChannels){
@@ -437,6 +427,12 @@ void ofApp::exit(){
         }
     }
     
+    if(numDelayLine > 0){
+        for(int i = 0; i < numDelayLine; i++){
+            delete listOfDelayLines.at(i);
+        }
+    }
+    
     if(numHitObjects > 0){
         for(int i = 0; i < numHitObjects; i++){
             delete listOfHitObjects.at(i);
@@ -523,6 +519,11 @@ void ofApp::addNumberBoxObject(int x, int y){
     listOfNumBox.push_back(nbPtr);
 }
 
+void ofApp::addDelayLine(int x, int y){
+    delayPtr = new DelayLineObject(x, y, listOfDelayLines.size());
+    listOfDelayLines.push_back(delayPtr);
+}
+
 void ofApp::addHitObject(int x, int y){
     elementsGUI = new ofxUICanvas();
     ofAddListener(elementsGUI->newGUIEvent, this, &ofApp::guiEvent);
@@ -557,6 +558,9 @@ bool ofApp::selectItems(int x, int y, ElementObject ** eObj){
     
     if(!itemSelected)
         itemSelected = selectItemsHelper(x, y, eObj, (ELEMVECT) &listOfNumBox, numNumBoxObjects);
+    
+    if(!itemSelected)
+        itemSelected = selectItemsHelper(x, y, eObj, (ELEMVECT) &listOfDelayLines, numDelayLine);
     
     if(!itemSelected)
         itemSelected = selectItemsHelper(x, y, eObj, (ELEMVECT) &listOfHitObjects, numHitObjects);
@@ -639,28 +643,24 @@ void ofApp::createObjects(vector<string> * listOfObjects){
             seventh_pos = findPosition(&holder, sixth_pos+1, delimiter.substr()[0]);
             eighth_pos = findPosition(&holder, seventh_pos+1, delimiter.substr()[0]);
             
-            for ( int j = third_pos + 1; j < fourth_pos; j++){
+            for ( int j = third_pos + 1; j < fourth_pos; j++)
                 x_end_pos += holder.substr()[j];
-            }
             
-            for ( int j = fourth_pos + 1; j < fifth_pos; j++){
+            for ( int j = fourth_pos + 1; j < fifth_pos; j++)
                 y_end_pos += holder.substr()[j];
-            }
 
-            for ( int j = fifth_pos + 1; j < sixth_pos; j++){
+            for ( int j = fifth_pos + 1; j < sixth_pos; j++)
                 id_1 += holder.substr()[j];
-            }
             
-            
-            for ( int j = sixth_pos + 1; j < seventh_pos; j++){
+            for ( int j = sixth_pos + 1; j < seventh_pos; j++)
                 type_1 += holder.substr()[j];
-            }
-            for ( int j = seventh_pos + 1; j < eighth_pos; j++){
+
+            for ( int j = seventh_pos + 1; j < eighth_pos; j++)
                 id_2 += holder.substr()[j];
-            }
-            for ( int j = eighth_pos + 1; j < holder.size(); j++){
+            
+            for ( int j = eighth_pos + 1; j < holder.size(); j++)
                 type_2 += holder.substr()[j];
-            }
+            
             
             cout << "Creating: " << temp << " from: " << x_pos << ", " << y_pos << " to: " <<
             x_end_pos << ", " << y_end_pos << " connects: " << type_1 << " to: " << type_2 << endl;

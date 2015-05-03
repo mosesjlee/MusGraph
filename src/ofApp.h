@@ -6,6 +6,7 @@
 #include "MenuView.h"
 #include "WavetableObject.h"
 #include "ofxUI.h"
+#include "DelayLineObject.h"
 #include "SliderObject.h"
 #include "OutputElement.h"
 #include "LineConnect.h"
@@ -61,6 +62,7 @@ private:
     MultiplierObject * multiplierPtr;
     DividerObject * dividerPtr;
     NumberBoxObject * nbPtr;
+    DelayLineObject * delayPtr;
     HitObject * hitPtr;
     
     vector<WaveTableObject *> listOfWaveTables;
@@ -71,6 +73,7 @@ private:
     vector<MultiplierObject *> listOfMultipliers;
     vector<DividerObject *> listOfDividers;
     vector<NumberBoxObject *> listOfNumBox;
+    vector<DelayLineObject *> listOfDelayLines;
     vector<HitObject *> listOfHitObjects;
     
     //For casting purposes
@@ -86,6 +89,7 @@ private:
     int numMultiplierObjects = 0;
     int numNumBoxObjects = 0;
     int numDividerObjects = 0;
+    int numDelayLine = 0;
     int numHitObjects = 0;
     
     //For the output
@@ -123,6 +127,7 @@ private:
     void addMultiplierObject(int x, int y);
     void addDividerObject(int x, int y);
     void addNumberBoxObject(int x, int y);
+    void addDelayLine(int x, int y);
     void addHitObject(int x, int y);
     bool selectItems(int x, int y, ElementObject ** obj);
     void createObjects(vector<string> * listOfObjects);

@@ -1,21 +1,22 @@
 #ifndef DELAYL_H
 #define DELAYL_H
+#define SR 44100
 
 class DelayLine {
- public:
-  DelayLine();
-  DelayLine(int);
-  ~DelayLine();
-  void setDelayLineDelay(double);
-  double getDelayLineDelay();
-  double getCurrentOut();
-  double tick(double);
+public:
+    DelayLine();
+    DelayLine(int);
+    ~DelayLine();
+    void setDelayLineDelay(float);
+    float getDelayLineDelay();
+    float getCurrentOut();
+    float tick(float);
 
- private:
-  double *buffer;
-  int maxDelay;
-  double currDelay;
-  int currIndex;
+private:
+    float *buffer;
+    int maxDelay;
+    float currDelay;
+    int currIndex;
 };
 
 #endif

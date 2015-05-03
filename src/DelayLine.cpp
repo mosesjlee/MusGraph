@@ -7,7 +7,7 @@ using std::endl;
 DelayLine::DelayLine()
 {
   maxDelay = 4096;
-  buffer = new double [maxDelay+1];
+  buffer = new float [maxDelay+1];
   for (int i=0; i<maxDelay+1; i++) buffer[i] = 0.0;
   currDelay = maxDelay;
   currIndex = 0;
@@ -16,7 +16,7 @@ DelayLine::DelayLine()
 DelayLine::DelayLine(int size)
 {
   maxDelay = size;
-  buffer = new double [maxDelay+1];
+  buffer = new float [maxDelay+1];
   for (int i=0; i<maxDelay+1; i++) buffer[i] = 0.0;
   currDelay = maxDelay;
   currIndex = 0;
@@ -27,9 +27,9 @@ DelayLine::~DelayLine()
   delete [] buffer;
 }
 
-void DelayLine::setDelayLineDelay(double newDelay)
+void DelayLine::setDelayLineDelay(float newDelay)
 {
-  if (newDelay > (double) maxDelay) {
+  if (newDelay > (float) maxDelay) {
     cout << "Error: setting delay greater than max delay...\n";
     return;
   }
@@ -38,28 +38,28 @@ void DelayLine::setDelayLineDelay(double newDelay)
   }
 }
 
-double DelayLine::getDelayLineDelay()
+float DelayLine::getDelayLineDelay()
 {
   return currDelay;
 }
 
-double DelayLine::getCurrentOut()
+float DelayLine::getCurrentOut()
 {
-  double delayIndex;
-  double output;
+  float delayIndex;
+  float output;
 
   delayIndex = currIndex - currDelay;
   if (delayIndex < 0.0)
-    delayIndex = delayIndex + ((double) maxDelay + 1.0);
+    delayIndex = delayIndex + ((float) maxDelay + 1.0);
     
-  if (delayIndex > (double) maxDelay) {
+  if (delayIndex > (float) maxDelay) {
     output = buffer[(int) delayIndex] + (buffer[0] - 
 							buffer[(int) delayIndex]) * (delayIndex -
-							(double) ((int) delayIndex));
+							(float) ((int) delayIndex));
   }
   else {
     output = buffer[(int) delayIndex] + (buffer[(int) delayIndex + 1] - 
-							buffer[(int) delayIndex]) * (delayIndex - (double) ((int) delayIndex));
+							buffer[(int) delayIndex]) * (delayIndex - (float) ((int) delayIndex));
   }
 
   if (output > 1.0)
@@ -71,9 +71,9 @@ double DelayLine::getCurrentOut()
 }
 
 
-double DelayLine::tick(double input)
+float DelayLine::tick(float input)
 {
-  double output;
+  float output;
  
   buffer[currIndex] = input;
   output = getCurrentOut();

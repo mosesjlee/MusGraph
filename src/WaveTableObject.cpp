@@ -7,7 +7,6 @@
 //
 
 #include "WaveTableObject.h"
-#include "AdderObject.h"
 
 WaveTableObject::WaveTableObject(int x_coord, int y_coord){
     //Set the coordinates and the visual representation
@@ -28,7 +27,7 @@ WaveTableObject::~WaveTableObject(){
 }
 
 float WaveTableObject::tick(){
-    if(input != NULL) setFreq(((AdderObject *) input)->tick());
+    if(input != NULL) setFreq(((TickableElement *) input)->tick());
     
     return mySine->tick();
 }
