@@ -15,6 +15,7 @@
 #include <stdio.h>
 #include "Wavetable.h"
 #include "TickableElement.h"
+#include "DelayLineObject.h"
 
 
 class WaveTableObject : public TickableElement{
@@ -24,9 +25,11 @@ public:
     float tick();
     void setInput(ElementObject *);
     void setFreq(float);
+    void setDelayLine(DelayLineObject * dl);
 protected:
     WaveTable * mySine;
     ElementObject * input = NULL;
+    DelayLineObject * delayLine = NULL;
 };
 
 #endif /* defined(__MusGraph__WaveTableObject__) */

@@ -35,7 +35,13 @@ float WaveTableObject::tick(){
     else
         val = 0.0f;
     
+    if(delayLine != NULL) delayLine->tick(val);
+    
     return val;
+}
+
+void WaveTableObject::setDelayLine(DelayLineObject *dl){
+    delayLine = dl;
 }
 
 void WaveTableObject::setFreq(float freq){

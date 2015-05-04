@@ -44,9 +44,13 @@ float DelayLineObject::tick(float t){
     return delay->tick(t);
 }
 
+//float DelayLineObject::tick(){
+//    if(input != NULL) xN = input->tick();
+//    return delay->tick(xN);
+//}
+
 float DelayLineObject::tick(){
-    if(input != NULL) xN = input->tick();
-    return delay->tick(xN);
+    return delay->getCurrentOut();
 }
 
 float DelayLineObject::getCurrentOut(){

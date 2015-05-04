@@ -266,7 +266,7 @@ bool LineConnect::makeConnections(){
     }
     
     else if(o1_type == "Sine" && o2_type == "Delay Line"){
-        ((DelayLineObject *) o2)->setInput((TickableElement *) o1);
+        ((WaveTableObject *) o1)->setDelayLine((DelayLineObject *) o2);
         return true;
     }
     
