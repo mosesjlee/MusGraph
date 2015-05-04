@@ -266,13 +266,17 @@ bool LineConnect::makeConnections(){
     }
     
     else if(o1_type == "Sine" && o2_type == "Delay Line"){
-        ((DelayLineObject *) o2)->setInput(o1);
+        ((DelayLineObject *) o2)->setInput((TickableElement *) o1);
         return true;
     }
     
-    
     else if(o1_type == "Delay Line" && o2_type == "Adder"){
         ((AdderObject *) o2)->connectElement(o1);
+        return true;
+    }
+    
+    else if(o1_type == "NumberBox" && o2_type == "Delay Line"){
+        ((NumberBoxObject *) o1)->setControlElementConnection(o2);
         return true;
     }
     

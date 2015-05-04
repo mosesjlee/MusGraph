@@ -15,7 +15,6 @@ std::string ConvertMyValue (float number){
 }
 
 NumberBoxObject::NumberBoxObject(){
-    
 }
 
 NumberBoxObject::NumberBoxObject(int x_coord, int y_coord, ofxUICanvas * parentCanvas, int id){
@@ -59,6 +58,13 @@ void NumberBoxObject::setOutputConnection(WaveTableObject * sptr){
 
 void NumberBoxObject::controlOutObject(){
     if(sinePtr != NULL) sinePtr->setFreq(myValue);
+    if(typeElemControl == "Delay Line") ((DelayLineObject *) eObj)->setDelayTime(myValue);
+    
+}
+
+void NumberBoxObject::setControlElementConnection(ElementObject * o){
+    eObj = o;
+    typeElemControl = o->getType();
 }
 
 void NumberBoxObject::setAmIClicked(bool clicked){

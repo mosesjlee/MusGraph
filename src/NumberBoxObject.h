@@ -17,6 +17,7 @@
 #include "ElementObject.h"
 #include "SliderObject.h"
 #include "WaveTableObject.h"
+#include "DelayLineObject.h"
 
 class WaveTableObject;
 class NumberBoxObject : public ElementObject{
@@ -30,7 +31,7 @@ public:
     void draw();
     void setOutputConnection(WaveTableObject * sptr);
     void controlOutObject();
-    
+    void setControlElementConnection(ElementObject * o);
     void setAmIClicked(bool clicked);
     
 private:
@@ -41,6 +42,7 @@ private:
     ElementObject * eObj = NULL;
     int textBoxID;
     float myValue = 100.0f;
+    string typeElemControl = "";
 };
 
 #endif /* defined(__MusGraph__NumberBoxObject__) */

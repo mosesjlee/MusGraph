@@ -21,7 +21,7 @@ public:
     DelayLineObject(int x_coord, int y_coord, int id);
     DelayLineObject(int size, int id);
     ~DelayLineObject();
-    void setInput(ElementObject *);
+    void setInput(TickableElement *);
     void setDelayTime(float time);
     float tick(float);
     float tick();
@@ -29,8 +29,8 @@ public:
     
 private:
     DelayLine * delay;
-    ElementObject * input;
-    
+    TickableElement * input;
+    float xN = 0.0f;
     
     
 };

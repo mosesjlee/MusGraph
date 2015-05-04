@@ -31,7 +31,7 @@ DelayLineObject::~DelayLineObject(){
     delete delay;
 }
 
-void DelayLineObject::setInput(ElementObject * o){
+void DelayLineObject::setInput(TickableElement * o){
     input = o;
 }
 
@@ -45,9 +45,11 @@ float DelayLineObject::tick(float t){
 }
 
 float DelayLineObject::tick(){
+    if(input != NULL) xN = input->tick();
+    return delay->tick(xN);
 }
 
 float DelayLineObject::getCurrentOut(){
-    delay->getCurrentOut();
+    return delay->getCurrentOut();
 }
 

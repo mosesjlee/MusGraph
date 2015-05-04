@@ -28,8 +28,14 @@ WaveTableObject::~WaveTableObject(){
 
 float WaveTableObject::tick(){
     if(input != NULL) setFreq(((TickableElement *) input)->tick());
+    float val;
     
-    return mySine->tick();
+    if(!hasHitControl)
+        val = mySine->tick();
+    else
+        val = 0.0f;
+    
+    return val;
 }
 
 void WaveTableObject::setFreq(float freq){

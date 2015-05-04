@@ -67,9 +67,7 @@ double DelayEffect::echo(double input)
 {
 	double x_n_G = input * dryGain;
 
-	double currOut = delayBuf->getCurrentOut();
-
-	double xN = input + feedbackGain * currOut;	
+	double xN = input + feedbackGain * delayBuf->getCurrentOut();
 
 	//Limiter
 	if(xN < -1.0) xN = -1.0;
