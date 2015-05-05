@@ -205,6 +205,10 @@ bool LineConnect::makeConnections(){
         ((AdderObject *) o2)->setReadBuffers(((MathObject *) o1)->getOutBuffer());
         return true;
     }
+//------------------------------------------------------------------
+//-                    DelayLine connections                       -
+//------------------------------------------------------------------
+    
     
 //----------------------------------------------------------
     

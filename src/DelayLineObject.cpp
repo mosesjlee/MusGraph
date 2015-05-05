@@ -48,6 +48,20 @@ void DelayLineObject::setDelayTime(float t){
     delay->setDelayLineDelay(time);
 }
 
+float * DelayLineObject::getBuffer(){
+    cout << "currOutConnected: " << currOutBufferConnected <<
+    "tickedBuffer: " << tickedBufferConnected << endl;
+    
+    if(!currOutBufferConnected){
+        currOutBufferConnected = true;
+        cout << "currOutConnected: " << currOutBufferConnected << endl;
+        return currOutBuffer;
+    } else {
+        tickedBufferConnected = true;
+        cout << "tickedBuffer: " << tickedBufferConnected << endl;
+        return tickedBuffer;
+    }
+}
 
 float DelayLineObject::tick(){
     currOutBuffer[readIndex] = delay->getCurrentOut();
