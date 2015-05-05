@@ -19,7 +19,7 @@ AdderObject::AdderObject(int x_coord, int y_coord){
     y_bound = y + MATH_HEIGHT;
     type = "Adder";
     mySymbol = "+";
-    outBuf = (float *) calloc(sizeof(float) * MAX_SAMPLES, sizeof(float));
+    outBuf = (float *) calloc(MAX_SAMPLES, sizeof(float));
 }
 
 AdderObject::~AdderObject(){
@@ -31,7 +31,7 @@ float AdderObject::tick(){
     if (!leftConnected) {
        // cout << "pointer one in adder is NULL: " << endl;
         left_sample = val;
-    }
+    }our
     else {
         left_sample = readBuf_1[readIndex];
     }

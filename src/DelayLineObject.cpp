@@ -27,8 +27,8 @@ DelayLineObject::DelayLineObject(int x_coord, int y_coord, int id){
     currOutRegion.setWidth(10);
     currOutRegion.setPosition(x_bound - 10, y);
     type = "Delay Line";
-    currOutBuffer = (float *) calloc(sizeof(float) * MAX_SAMPLES, sizeof(float));
-    tickedBuffer = (float *) calloc(sizeof(float) * MAX_SAMPLES, sizeof(float));
+    currOutBuffer = (float *) calloc(MAX_SAMPLES, sizeof(float));
+    tickedBuffer = (float *) calloc(MAX_SAMPLES, sizeof(float));
 }
 
 DelayLineObject::DelayLineObject(int size, int id){

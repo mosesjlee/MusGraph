@@ -18,7 +18,7 @@ WaveTableObject::WaveTableObject(int x_coord, int y_coord){
     x_bound = x + WT_WIDTH;
     y_bound = y + WT_HEIGHT;
     type = "Sine";
-    outBuffer = (float *) calloc(sizeof(float) * MAX_SAMPLES, sizeof(float));
+    outBuffer = (float *) calloc(MAX_SAMPLES, sizeof(float));
     
     mySine = new WaveTable();
 }

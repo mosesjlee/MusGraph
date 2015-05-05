@@ -22,7 +22,7 @@ MultiplierObject::MultiplierObject(int x_coord, int y_coord){
     y_bound = y + MATH_HEIGHT;
     type = "Multiplier";
     mySymbol = "*";
-    outBuf = (float *) calloc(sizeof(float) * MAX_SAMPLES, sizeof(float));
+    outBuf = (float *) calloc(MAX_SAMPLES, sizeof(float));
 }
 
 
