@@ -29,14 +29,12 @@ AdderObject::~AdderObject(){
 float AdderObject::tick(){
     float left_sample, right_sample;
     if (!leftConnected) {
-       // cout << "pointer one in adder is NULL: " << endl;
         left_sample = val;
-    }our
+    }
     else {
         left_sample = readBuf_1[readIndex];
     }
     if (!rightConnected) {
-        //cout << "pointer two in adder is NULL: " << endl;
         right_sample = val;
     }
     else {
@@ -52,7 +50,7 @@ float AdderObject::tick(){
     
     outBuf[outIndex] = val;
     outIndex = (outIndex + 1) % MAX_SAMPLES;
-    //cout << "Adder val: " << val << endl;
+
     return val;
 }
 

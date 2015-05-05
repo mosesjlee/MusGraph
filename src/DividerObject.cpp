@@ -30,20 +30,31 @@ DividerObject::~DividerObject(){
 }
 
 float DividerObject::tick(){
-    if (readBuf_1 == NULL || readBuf_2 == NULL) {
-        cout << "one pointer in adder is NULL: " << endl;
-        return 0.00;
+    float left_sample, right_sample;
+    if (!leftConnected) {
+        left_sample = val;
+    }
+    else {
+        left_sample = readBuf_1[readIndex];
+    }
+    if (!rightConnected) {
+        right_sample = val;
+    }
+    else {
+        right_sample = readBuf_2[readIndex];
     }
     
-    readIndex_buf1 = (readIndex_buf1 + 1) % MAX_SAMPLES;
+    readIndex = (readIndex + 1) % MAX_SAMPLES;
     
-    float val = readBuf_1[readIndex_buf1] + readBuf_2[readIndex_buf1];;
+    float val = left_sample/right_sample;
+    if(right_sample <= 0) val = 0.0f;
     
-    if(val > 1.0f) val = 1.0f;
-    if(val < -1.0f) val = -1.0f;
+    //    if(val > 1.0f) val = 1.0f;
+    //    if(val < -1.0f) val = -1.0f;
     
     outBuf[outIndex] = val;
     outIndex = (outIndex + 1) % MAX_SAMPLES;
+    
     return val;
 }
 

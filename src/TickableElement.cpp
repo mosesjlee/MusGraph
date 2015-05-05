@@ -29,7 +29,6 @@ void TickableElement::draw(){
 }
 
 void TickableElement::receivedHit(int hitLength){
-    cout << "Recieved Hit: " << hitLength << endl;
     
     hasHitControl = !hasHitControl;
     

@@ -1,0 +1,15 @@
+Sine;338;103
+Sine;398;420
+NumberBox;614;133
+NumberBox;597;290
+NumberBox;202;206
+Output;478;511
+Adder;463;256
+Multiplier;478;117
+LineConnect;614;133;478;117;0;NumberBox;0;Multiplier
+LineConnect;338;103;478;117;0;Sine;0;Multiplier
+LineConnect;478;117;463;256;0;Multiplier;0;Adder
+LineConnect;597;290;463;256;1;NumberBox;0;Adder
+LineConnect;463;256;398;420;0;Adder;1;Sine
+LineConnect;398;420;478;511;1;Sine;0;Output
+LineConnect;202;206;338;103;2;NumberBox;0;Sine
