@@ -18,8 +18,17 @@ DelayLineObject::DelayLineObject(int x_coord, int y_coord, int id){
     y = y_coord;
     x_bound = x + DELAY_WIDTH;
     y_bound = y + DELAY_HEIGHT;
+    
+    tickRegion.setHeight(5);
+    tickRegion.setWidth(10);
+    tickRegion.setPosition(x_bound - 10, y_bound - 5);
+    
+    currOutRegion.setHeight(5);
+    currOutRegion.setWidth(10);
+    currOutRegion.setPosition(x_bound - 10, y);
     type = "Delay Line";
-    outBuffer = (float *) calloc(sizeof(float) * MAX_SAMPLES, sizeof(float));
+    currOutBuffer = (float *) calloc(sizeof(float) * MAX_SAMPLES, sizeof(float));
+    tickedBuffer = (float *) calloc(sizeof(float) * MAX_SAMPLES, sizeof(float));
 }
 
 DelayLineObject::DelayLineObject(int size, int id){
@@ -30,15 +39,8 @@ DelayLineObject::DelayLineObject(int size, int id){
 
 DelayLineObject::~DelayLineObject(){
     delete delay;
-    free(outBuffer);
-}
-
-void DelayLineObject::setInput(TickableElement * o){
-    input = o;
-}
-
-void DelayLineObject::setOutput(TickableElement * o){
-    output = o;
+    free(currOutBuffer);
+    free(tickedBuffer);
 }
 
 void DelayLineObject::setDelayTime(float t){
@@ -46,22 +48,49 @@ void DelayLineObject::setDelayTime(float t){
     delay->setDelayLineDelay(time);
 }
 
-float DelayLineObject::tick(float t){
-    
-    if(input != NULL) xN = input->tick();
-    
-    float val = xN + t;
-    
-    return delay->tick(val);
-}
 
 float DelayLineObject::tick(){
-    if(input == NULL) return 0.0f;
+    currOutBuffer[readIndex] = delay->getCurrentOut();
+    tickedBuffer[readIndex] = delay->tick(readBuf[readIndex]);
     
-    return delay->tick(input->tick());
+    readIndex = (readIndex + 1) % MAX_SAMPLES;
+    
+    return currOutBuffer[readIndex];
 }
 
-float DelayLineObject::getCurrentOut(){
-    return delay->getCurrentOut();
+void DelayLineObject::draw(){
+    
+    if(!amIClicked){
+        ofSetColor(0, 0, 0);
+        ofNoFill();
+    }
+    else {
+        ofSetColor(125, 100, 100);
+        ofFill();
+    }
+    
+    ofSetLineWidth(2);
+    ofRect(displayRect);
+    ofRect(tickRegion);
+    ofRect(currOutRegion);
+    
+    stringstream text;
+    text << type << endl;
+    ofSetColor(0, 0, 0);
+    ofDrawBitmapString(text.str(), x+8, y+20);
+}
+
+bool DelayLineObject::isTickRegion(int x, int y){
+    if((x >= x_bound - 10 && x <= x_bound) && (y >= y_bound - 5 && y <= y_bound))
+        return true;
+    else
+        return false;
+}
+
+bool DelayLineObject::isGetCurrOutRegion(int x, int y){
+    if((x >= x_bound - 10 && x <= x_bound) && (y >= y_bound && y <= y_bound-5))
+        return true;
+    else
+        return false;
 }
 
