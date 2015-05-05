@@ -18,8 +18,8 @@
 #include "SliderObject.h"
 #include "WaveTableObject.h"
 #include "DelayLineObject.h"
+#include "MathObject.h"
 
-class WaveTableObject;
 class NumberBoxObject : public ElementObject{
 public:
     NumberBoxObject();

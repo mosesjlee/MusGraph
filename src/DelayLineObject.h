@@ -22,15 +22,19 @@ public:
     DelayLineObject(int size, int id);
     ~DelayLineObject();
     void setInput(TickableElement *);
+    void setOutput(TickableElement *);
     void setDelayTime(float time);
     float tick(float);
     float tick();
     float getCurrentOut();
     
 private:
-    DelayLine * delay;
-    TickableElement * input;
+    DelayLine * delay = NULL;
+    TickableElement * input = NULL;
+    TickableElement * output = NULL;
     float xN = 0.0f;
+    float * outBuffer;
+    int outIndex = 0;
     
     
 };

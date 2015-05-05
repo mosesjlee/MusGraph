@@ -75,6 +75,7 @@ private:
     vector<NumberBoxObject *> listOfNumBox;
     vector<DelayLineObject *> listOfDelayLines;
     vector<HitObject *> listOfHitObjects;
+    vector<TickableElement *> listOfTickableElements;
     
     //For casting purposes
     typedef vector<ElementObject *> * ELEMVECT;
@@ -109,6 +110,9 @@ private:
     ofxUICanvas * saveMenuGUI;
     ofxUIButton * saveButton;
     
+    ofxUICanvas * saveFileNameUI;
+    ofxUITextInput * saveNameField;
+    
     ofxUICanvas * loadConfigMenu;
     ofxUIButton * loadButton;
     
@@ -131,6 +135,7 @@ private:
     void addHitObject(int x, int y);
     bool selectItems(int x, int y, ElementObject ** obj);
     void createObjects(vector<string> * listOfObjects);
+    void tickElements();
     
 };
 

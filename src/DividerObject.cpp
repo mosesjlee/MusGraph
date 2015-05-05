@@ -22,28 +22,28 @@ DividerObject::DividerObject(int x_coord, int y_coord){
     y_bound = y + MATH_HEIGHT;
     type = "Divider";
     mySymbol = "/";
+    outBuf = (float *) calloc(sizeof(float) * MAX_SAMPLES, sizeof(float));
 }
 
 DividerObject::~DividerObject(){
-    
+    free(outBuf);
 }
 
 float DividerObject::tick(){
-    if (o1 == NULL || o2 == NULL) {
+    if (readBuf_1 == NULL || readBuf_2 == NULL) {
         cout << "one pointer in adder is NULL: " << endl;
         return 0.00;
     }
     
-    float o1_sample;
-    float o2_sample;
+    readIndex_buf1 = (readIndex_buf1 + 1) % MAX_SAMPLES;
     
-    if(o1_type == "NumberBox") o1_sample = ((NumberBoxObject *) o1)->sendValue();
-    else o1_sample = ((TickableElement *) o1)->tick();
+    float val = readBuf_1[readIndex_buf1] + readBuf_2[readIndex_buf1];;
     
+    if(val > 1.0f) val = 1.0f;
+    if(val < -1.0f) val = -1.0f;
     
-    if(o2_type == "NumberBox") o2_sample = ((NumberBoxObject *) o2)->sendValue();
-    else o2_sample = ((TickableElement *) o2)->tick();
-    
-    if(o2_sample < 0.0000) return 0;
-    else return o1_sample/o2_sample;
+    outBuf[outIndex] = val;
+    outIndex = (outIndex + 1) % MAX_SAMPLES;
+    return val;
 }
+

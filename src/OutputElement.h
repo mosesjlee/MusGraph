@@ -46,21 +46,21 @@ public:
     void setRightInput(WaveTableObject * wPtr);
     void setInput(ElementObject * o);
     void draw();
+    void setReadBuffer(float * r);
     
 private:
     ofRectangle outputTab;
     ofSoundStream stream;
     ElementObject * elmtPtr;
+    float * readBuffer;
+    int readIndex = 0;
     WaveTableObject * lWavePtr = NULL;
     WaveTableObject * rWavePtr = NULL;
-    AdderObject * adderPtr = NULL;
-    MultiplierObject * multPtr = NULL;
     TickableElement * tickElmPtr = NULL;
     string inputType = "";
     int soundMode = MONO;
     float sampleRate = DEFAULT_SAMPLE_RATE;
     int bufsiz = DEFAULT_BUF_SIZE;
-
     vector<float> audio;
     
     float volume = 0.4;

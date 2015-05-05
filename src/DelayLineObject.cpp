@@ -9,7 +9,7 @@
 #include "DelayLineObject.h"
 
 DelayLineObject::DelayLineObject(int x_coord, int y_coord, int id){
-    delay = new DelayLine();
+    delay = new DelayLine(8192);
     myID = id;
     displayRect.setPosition(x_coord, y_coord);
     displayRect.setHeight(DELAY_HEIGHT);
@@ -19,6 +19,7 @@ DelayLineObject::DelayLineObject(int x_coord, int y_coord, int id){
     x_bound = x + DELAY_WIDTH;
     y_bound = y + DELAY_HEIGHT;
     type = "Delay Line";
+    outBuffer = (float *) calloc(sizeof(float) * MAX_SAMPLES, sizeof(float));
 }
 
 DelayLineObject::DelayLineObject(int size, int id){
@@ -29,10 +30,15 @@ DelayLineObject::DelayLineObject(int size, int id){
 
 DelayLineObject::~DelayLineObject(){
     delete delay;
+    free(outBuffer);
 }
 
 void DelayLineObject::setInput(TickableElement * o){
     input = o;
+}
+
+void DelayLineObject::setOutput(TickableElement * o){
+    output = o;
 }
 
 void DelayLineObject::setDelayTime(float t){
@@ -41,16 +47,18 @@ void DelayLineObject::setDelayTime(float t){
 }
 
 float DelayLineObject::tick(float t){
-    return delay->tick(t);
+    
+    if(input != NULL) xN = input->tick();
+    
+    float val = xN + t;
+    
+    return delay->tick(val);
 }
 
-//float DelayLineObject::tick(){
-//    if(input != NULL) xN = input->tick();
-//    return delay->tick(xN);
-//}
-
 float DelayLineObject::tick(){
-    return delay->getCurrentOut();
+    if(input == NULL) return 0.0f;
+    
+    return delay->tick(input->tick());
 }
 
 float DelayLineObject::getCurrentOut(){

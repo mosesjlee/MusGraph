@@ -16,14 +16,13 @@ class AdderObject : public MathObject{
 public:
     AdderObject();
     AdderObject(int x_coord, int y_coord);
-    AdderObject(ElementObject * o1, ElementObject * o2);
     ~AdderObject();
     float tick();
     void fillBuf();
     void sendOut(float);
     
 private:
-    float * buf;
+    int outIndex = 0;
 };
 
 #endif /* defined(__MusGraph__AdderObject__) */

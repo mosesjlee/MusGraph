@@ -19,7 +19,7 @@ public:
     ~DividerObject();
     float tick();
 private:
-    float * buf;
+    int outIndex = 0;
 };
 
 #endif /* defined(__MusGraph__DividerObject__) */

@@ -22,8 +22,7 @@ public:
     MultiplierObject(ElementObject * o1, ElementObject * o2, int x_coord, int y_coord);
     ~MultiplierObject();
     float tick();
-    
 private:
-    float * buf;
+    int outIndex = 0;
 };
 #endif /* defined(__MusGraph__MultiplierObject__) */

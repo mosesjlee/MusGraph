@@ -9,10 +9,6 @@
 #include "AdderObject.h"
 #include "MultiplierObject.h"
 
-AdderObject::AdderObject(){
-    
-}
-
 AdderObject::AdderObject(int x_coord, int y_coord){
     displayRect.setPosition(x_coord, y_coord);
     displayRect.setHeight(MATH_HEIGHT);
@@ -23,35 +19,44 @@ AdderObject::AdderObject(int x_coord, int y_coord){
     y_bound = y + MATH_HEIGHT;
     type = "Adder";
     mySymbol = "+";
+    outBuf = (float *) calloc(sizeof(float) * MAX_SAMPLES, sizeof(float));
 }
 
 AdderObject::~AdderObject(){
+    free(outBuf);
 }
 
 float AdderObject::tick(){
-    if (o1 == NULL || o2 == NULL) {
-        cout << "one pointer in adder is NULL: " << endl;
-        return 0.00;
+    float left_sample, right_sample;
+    if (!leftConnected) {
+       // cout << "pointer one in adder is NULL: " << endl;
+        left_sample = val;
+    }
+    else {
+        left_sample = readBuf_1[readIndex];
+    }
+    if (!rightConnected) {
+        //cout << "pointer two in adder is NULL: " << endl;
+        right_sample = val;
+    }
+    else {
+        right_sample = readBuf_2[readIndex];
     }
     
+    readIndex = (readIndex + 1) % MAX_SAMPLES;
     
-    float o1_sample;
-    float o2_sample;
-    
-    if(o1_type == "NumberBox") o1_sample = ((NumberBoxObject *) o1)->sendValue();
-    else o1_sample = ((TickableElement *) o1)->tick();
-    
-    
-    if(o2_type == "NumberBox") o2_sample = ((NumberBoxObject *) o2)->sendValue();
-    else o2_sample = ((TickableElement *) o2)->tick();
-    
-    float val = o1_sample + o2_sample;
+    float val = left_sample + right_sample;
     
 //    if(val > 1.0f) val = 1.0f;
 //    if(val < -1.0f) val = -1.0f;
+    
+    outBuf[outIndex] = val;
+    outIndex = (outIndex + 1) % MAX_SAMPLES;
+    //cout << "Adder val: " << val << endl;
     return val;
 }
 
 void AdderObject::sendOut(float v){
     sPtr->setFreq(v);
 }
+

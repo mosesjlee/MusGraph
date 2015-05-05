@@ -32,6 +32,10 @@ void OutputElement::stop(){
     stream.stop();
 }
 
+void OutputElement::setReadBuffer(float * r){
+    readBuffer = r;
+}
+
 void OutputElement::setUpAudio(ofBaseApp * parent){
     
     stream.setup(parent, DEFAULT_OUTPUT_NUM, DEFAULT_INPUT_NUM, sampleRate, bufsiz, DEFAULT_BUF_NUM);
@@ -43,12 +47,14 @@ void OutputElement::fillOutBuffer(float * output, int bufferSize, int nChannels)
     
     //cout << "Filling out" << endl;
     
-    if(tickElmPtr == NULL) return;
+    //if(tickElmPtr == NULL) return;
     
     //cout << "In fill out buffer... type: " << inputType << endl;
     if(soundMode == MONO || soundMode == LEFT_AUDIO){
         for(int i = 0; i < bufferSize; i++){
-            rSample = lSample = tickElmPtr->tick();
+            lSample = rSample = readBuffer[readIndex];
+            readIndex = (readIndex + 1) % MAX_SAMPLES;
+            //cout << "lSample: " << lSample << endl;
             output[i*nChannels    ] = lSample * volume;
             output[i*nChannels + 1] = rSample * volume;
         }

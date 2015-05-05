@@ -13,7 +13,7 @@ void ofApp::setup(){
     selectMenu.setSize(250, 100);
     selectMenu.setMenuColor(101, 123, 140);
     
-    ofSetFrameRate(60);
+    //ofSetFrameRate(60);
 }
 
 //--------------------------------------------------------------
@@ -268,10 +268,11 @@ void ofApp::dragEvent(ofDragInfo dragInfo){}
 
 //--------------------------------------------------------------
 void ofApp::audioOut(float *output, int bufferSize, int nChannels){
-    
+//    tickElements();
     //Noise
     //This is hard coded
     if(onOff == 1 && numOutput > 0) {
+        tickElements();
         listOfOutputs.at(0)->fillOutBuffer(output, bufferSize, nChannels);
     }
 }
@@ -296,7 +297,7 @@ void ofApp::guiEvent(ofxUIEventArgs & e){
             type = listOfSliderObjects.at(currSliderID)->getObjectToControl()->getType();
                 
             if(type == "Sine"){
-                ((WaveTable *) listOfSliderObjects.at(currSliderID)->getObjectToControl())->setFreq(val);
+                ((WaveTableObject *) listOfSliderObjects.at(currSliderID)->getObjectToControl())->setFreq(val);
             }
             else if(type == "Output"){
                     
@@ -381,6 +382,7 @@ void ofApp::guiEvent(ofxUIEventArgs & e){
 void ofApp::exit(){
     delete menuGUI;
     delete saveMenuGUI;
+    delete saveFileNameUI;
     
     if(numWaveTables > 0){
         for(int i = 0; i < numWaveTables; i++)
@@ -450,14 +452,20 @@ void ofApp::setUpGUIElements(){
     ofAddListener(menuGUI->newGUIEvent,this,&ofApp::guiEvent);
     
     saveMenuGUI = new ofxUICanvas();
-    saveMenuGUI->setDimensions(160, 32);
+    saveMenuGUI->setDimensions(150, 32);
     saveMenuGUI->setPosition(100, 0);
     saveButton = saveMenuGUI->addButton("Save Configuration", false);
     ofAddListener(saveMenuGUI->newGUIEvent,this,&ofApp::guiEvent);
     
+    saveFileNameUI = new ofxUICanvas();
+    saveFileNameUI->setDimensions(150, 32);
+    saveFileNameUI->setPosition(250, 0);
+    saveNameField = saveFileNameUI->addTextInput("", "Save File Name");
+    ofAddListener(saveFileNameUI->newGUIEvent,this,&ofApp::guiEvent);
+    
     loadConfigMenu = new ofxUICanvas();
     loadConfigMenu->setDimensions(160, 32);
-    loadConfigMenu->setPosition(260, 0);
+    loadConfigMenu->setPosition(400, 0);
     loadButton = loadConfigMenu->addButton("Load Configuration", false);
     ofAddListener(loadConfigMenu->newGUIEvent,this,&ofApp::guiEvent);
 }
@@ -467,6 +475,9 @@ void ofApp::addWaveTableObject(int x, int y){
     waveTablePtr->setFreq(440);
     waveTablePtr->setMyID(listOfWaveTables.size());
     listOfWaveTables.push_back(waveTablePtr);
+    
+    listOfTickableElements.push_back(waveTablePtr);
+    tickElements();
 }
 
 void ofApp::addOutputObject(int x, int y){
@@ -489,18 +500,21 @@ void ofApp::addAdderObject(int x, int y){
     adderPtr = new AdderObject(x, y);
     adderPtr->setMyID(listOfAdders.size());
     listOfAdders.push_back(adderPtr);
+    listOfTickableElements.push_back(adderPtr);
 }
 
 void ofApp::addMultiplierObject(int x, int y){
     multiplierPtr = new MultiplierObject(x, y);
     multiplierPtr->setMyID(listOfMultipliers.size());
     listOfMultipliers.push_back(multiplierPtr);
+    listOfTickableElements.push_back(multiplierPtr);
 }
 
 void ofApp::addDividerObject(int x, int y){
     dividerPtr = new DividerObject(x, y);
     dividerPtr->setMyID(listOfDividers.size());
     listOfDividers.push_back(dividerPtr);
+    listOfTickableElements.push_back(dividerPtr);
 }
 
 
@@ -514,6 +528,7 @@ void ofApp::addNumberBoxObject(int x, int y){
 void ofApp::addDelayLine(int x, int y){
     delayPtr = new DelayLineObject(x, y, listOfDelayLines.size());
     listOfDelayLines.push_back(delayPtr);
+    listOfTickableElements.push_back(delayPtr);
 }
 
 void ofApp::addHitObject(int x, int y){
@@ -522,6 +537,15 @@ void ofApp::addHitObject(int x, int y){
     
     hitPtr = new HitObject(elementsGUI, x, y, listOfHitObjects.size());
     listOfHitObjects.push_back(hitPtr);
+}
+
+void ofApp::tickElements(){
+    //cout << "Ticking Elements" << endl;
+    for(int i = 0; i < listOfTickableElements.size(); i++){
+        for(int j = 0; j < 512; j++){
+            listOfTickableElements.at(i)->tick();
+        }
+    }
 }
 
 
@@ -605,7 +629,6 @@ void ofApp::createObjects(vector<string> * listOfObjects){
         }
         
         if(temp != "LineConnect"){
-        
             cout << "Creating: " << temp << " At: " << x_pos << ", " << y_pos << endl;
         
             if(temp == "Sine"){

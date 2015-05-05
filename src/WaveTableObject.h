@@ -26,10 +26,18 @@ public:
     void setInput(ElementObject *);
     void setFreq(float);
     void setDelayLine(DelayLineObject * dl);
+    float * getOutBuffer();
+    void setReadBuffer(float * r);
+    
 protected:
     WaveTable * mySine;
     ElementObject * input = NULL;
     DelayLineObject * delayLine = NULL;
+    float * outBuffer;
+    float * readBuffer = NULL;
+    int outIndex = 0;
+    int readIndex = 0;
+    bool readBufferConnected = false;
 };
 
 #endif /* defined(__MusGraph__WaveTableObject__) */

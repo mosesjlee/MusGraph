@@ -125,23 +125,11 @@ bool LineConnect::makeConnections(){
     
     //Connections below this line order does not matter
     if(o1_type == "Sine" && o2_type == "Output"){
-        ((OutputElement *) o2)->setInput(o1);
-//        x_start = o1->getXCoord();
-//        y_start = o1->getYBound();
-//        x_end = o2->getXCoord();
-//        y_end = o2->getYCoord();
-//        line->addVertex(x_start, y_start);
-//        line->addVertex(x_end, y_end);
+        ((OutputElement *) o2)->setReadBuffer(((WaveTableObject *) o1)->getOutBuffer());
         return true;
     }
     else if(o2_type == "Sine" && o1_type == "Output"){
-        ((OutputElement *) o1)->setInput(o2);
-//        x_start = o1->getXCoord();
-//        y_start = o1->getYBound();
-//        x_end = o2->getXCoord();
-//        y_end = o2->getYCoord();
-//        line->addVertex(x_start, y_start);
-//        line->addVertex(x_end, y_end);
+        ((OutputElement *) o1)->setReadBuffer(((WaveTableObject *) o2)->getOutBuffer());
         return true;
     }
     
@@ -163,63 +151,54 @@ bool LineConnect::makeConnections(){
         return true;
     }
 
+    //Order Matters from this point on---------------------------
     else if(o1_type == "NumberBox" && o2_type == "Sine"){
         ((NumberBoxObject *) o1)->setOutputConnection((WaveTableObject *) o2);
         return true;
     }
-    else if(o2_type == "NumberBox" && o1_type == "Sine"){
-        ((NumberBoxObject *) o2)->setOutputConnection((WaveTableObject *) o1);
-        return true;
-    }
     
     else if(o1_type == "NumberBox" && o2_type == "Adder"){
-        ((AdderObject *) o2)->connectElement(o1);
-        return true;
-    }
-    else if(o2_type == "NumberBox" && o1_type == "Adder"){
-        ((AdderObject *) o1)->connectElement(o2);
+        ((NumberBoxObject *) o1)->setControlElementConnection(o2);
         return true;
     }
 
     else if(o1_type == "NumberBox" && o2_type == "Multiplier"){
-        ((MultiplierObject *) o2)->connectElement(o1);
-        return true;
-    }
-    else if(o2_type == "NumberBox" && o1_type == "Multiplier"){
-        ((MultiplierObject *) o1)->connectElement(o2);
+        ((NumberBoxObject *) o1)->setControlElementConnection(o2);
         return true;
     }
     
     else if(o1_type == "NumberBox" && o2_type == "Divider"){
-        ((DividerObject *) o2)->connectElement(o1);
-        return true;
-    }
-    
-    else if(o2_type == "NumberBox" && o1_type == "Divider"){
-        ((DividerObject *) o1)->connectElement(o2);
+        ((NumberBoxObject *) o1)->setControlElementConnection(o2);
         return true;
     }
     
 //----------------------------------------------------------
     //This is hard coded
     else if(o1_type == "Adder" && o2_type == "Sine"){
-        ((WaveTableObject *) o2)->setInput(o1);
+        ((WaveTableObject *) o2)->setReadBuffer(((MathObject *) o1)->getOutBuffer());
         return true;
     }
     //ABOVE IS HARD CODED
     
-    else if(o2_type == "Adder" && o1_type == "Sine"){
-        ((AdderObject *) o2)->connectElement(o1);
+    else if(o1_type == "Sine" && o2_type == "Multiplier"){
+        ((MultiplierObject *) o2)->setReadBuffers(((WaveTableObject *) o1)->getOutBuffer());
         return true;
     }
+    
+    else if(o1_type == "Sine" && o2_type == "Adder" ){
+        ((AdderObject *) o2)->setReadBuffers(((WaveTableObject *) o1)->getOutBuffer());
+        return true;
+    }
+    
+    
 //----------------------------------------------------------
     
     else if(o1_type == "Adder" && o2_type == "Output"){
-        ((OutputElement *) o2)->setInput(o1);
+        ((OutputElement *) o2)->setReadBuffer(((MathObject *) o1)->getOutBuffer());
         return true;
     }
     else if(o2_type == "Adder" && o1_type == "Output"){
-        ((OutputElement *) o1)->setInput(o2);
+        ((OutputElement *) o1)->setReadBuffer(((MathObject *) o2)->getOutBuffer());
         return true;
     }
     
@@ -229,15 +208,6 @@ bool LineConnect::makeConnections(){
     }
     else if(o2_type == "Divider" && o1_type == "Output"){
         ((OutputElement *) o1)->setInput(o2);
-        return true;
-    }
-    
-    else if(o1_type == "Multiplier" && o2_type == "Sine"){
-        ((MultiplierObject *) o1)->connectElement(o2);
-        return true;
-    }
-    else if(o2_type == "Multiplier" && o1_type == "Sine"){
-        ((MultiplierObject *) o2)->connectElement(o1);
         return true;
     }
 
@@ -251,11 +221,7 @@ bool LineConnect::makeConnections(){
     }
     
     else if(o1_type == "Multiplier" && o2_type == "Adder"){
-        ((AdderObject *) o2)->connectElement(o1);
-        return true;
-    }
-    else if(o1_type == "Adder" && o2_type == "Multiplier"){
-        ((AdderObject *) o1)->connectElement(o2);
+        ((AdderObject *) o2)->setReadBuffers(((MathObject *) o1)->getOutBuffer());
         return true;
     }
     
@@ -272,6 +238,11 @@ bool LineConnect::makeConnections(){
     
     else if(o1_type == "Delay Line" && o2_type == "Adder"){
         ((AdderObject *) o2)->connectElement(o1);
+        return true;
+    }
+    
+    else if(o1_type == "Adder" && o2_type == "Delay Line"){
+        ((DelayLineObject *) o2)->setInput((TickableElement *) o1);
         return true;
     }
     

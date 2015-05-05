@@ -8,7 +8,7 @@
 
 #ifndef MusGraph_TickableElement_h
 #define MusGraph_TickableElement_h
-
+#define MAX_SAMPLES 4096
 #include "ElementObject.h"
 
 class TickableElement : public ElementObject{
@@ -22,6 +22,8 @@ protected:
     ofRectangle displayRect;
     bool hasHitControl = false;
     bool hit = true;
+    int readIndex_buf1 = 0;
+    int readIndex_buf2 = 0;
 };
 
 #endif

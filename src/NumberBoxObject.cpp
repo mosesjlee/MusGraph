@@ -45,7 +45,7 @@ void NumberBoxObject::setMyValue(float v){
     myValue = v;
     textBox->ofxUIWidget::setVisible(false);
     amIClicked = false;
-    if(sinePtr != NULL) controlOutObject();
+    controlOutObject();
 }
 
 float NumberBoxObject::sendValue(){
@@ -60,11 +60,16 @@ void NumberBoxObject::controlOutObject(){
     if(sinePtr != NULL) sinePtr->setFreq(myValue);
     if(typeElemControl == "Delay Line") ((DelayLineObject *) eObj)->setDelayTime(myValue);
     
+    if(typeElemControl == "Adder" || typeElemControl == "Multiplier" || typeElemControl == "Divider"){
+        ((MathObject *) eObj)->setOtherValue(myValue);
+    }
+    
 }
 
 void NumberBoxObject::setControlElementConnection(ElementObject * o){
     eObj = o;
     typeElemControl = o->getType();
+    controlOutObject();
 }
 
 void NumberBoxObject::setAmIClicked(bool clicked){

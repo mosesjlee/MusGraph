@@ -48,7 +48,6 @@
 		915D408E1AF3FEE60064770C /* HitObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 915D408C1AF3FEE60064770C /* HitObject.cpp */; };
 		91733BE41ADDEB2D0024A56E /* AdderObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91733BE21ADDEB2D0024A56E /* AdderObject.cpp */; };
 		91733BE71ADDEB400024A56E /* MultiplierObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91733BE51ADDEB400024A56E /* MultiplierObject.cpp */; };
-		917E4E8C1AF6AC8600D28C6C /* DelayBox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 917E4E8A1AF6AC8600D28C6C /* DelayBox.cpp */; };
 		9187E4041AF0B0550063B4CC /* DelayEffect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9187E4011AF0B0550063B4CC /* DelayEffect.cpp */; };
 		9187E4051AF0B0550063B4CC /* DelayLine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9187E4031AF0B0550063B4CC /* DelayLine.cpp */; };
 		91B1A7181AE80B960048C985 /* AppUtilityFunctions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91B1A7161AE80B960048C985 /* AppUtilityFunctions.cpp */; };
@@ -234,8 +233,6 @@
 		91733BE31ADDEB2D0024A56E /* AdderObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdderObject.h; sourceTree = "<group>"; };
 		91733BE51ADDEB400024A56E /* MultiplierObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MultiplierObject.cpp; sourceTree = "<group>"; };
 		91733BE61ADDEB400024A56E /* MultiplierObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MultiplierObject.h; sourceTree = "<group>"; wrapsLines = 0; };
-		917E4E8A1AF6AC8600D28C6C /* DelayBox.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DelayBox.cpp; sourceTree = "<group>"; };
-		917E4E8B1AF6AC8600D28C6C /* DelayBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DelayBox.h; sourceTree = "<group>"; };
 		9187E4001AF0B0550063B4CC /* delayef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = delayef.h; sourceTree = "<group>"; };
 		9187E4011AF0B0550063B4CC /* DelayEffect.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DelayEffect.cpp; sourceTree = "<group>"; };
 		9187E4021AF0B0550063B4CC /* delayl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = delayl.h; sourceTree = "<group>"; };
@@ -693,8 +690,6 @@
 				915D40891AF3FECE0064770C /* DelayLineObject.cpp */,
 				9187E4001AF0B0550063B4CC /* delayef.h */,
 				9187E4011AF0B0550063B4CC /* DelayEffect.cpp */,
-				917E4E8B1AF6AC8600D28C6C /* DelayBox.h */,
-				917E4E8A1AF6AC8600D28C6C /* DelayBox.cpp */,
 				91D54C4B1AD8E79D0023E49A /* Wavetable.h */,
 				91D54C4A1AD8E79D0023E49A /* Wavetable.cpp */,
 				913E3F351AF4550100C3CE5A /* WaveTableObject.h */,
@@ -832,7 +827,6 @@
 				915D408B1AF3FECE0064770C /* DelayLineObject.cpp in Sources */,
 				91461ADA1AE77FC3001072B1 /* TickableElement.cpp in Sources */,
 				1A86B7721CAEBC6F1C572C45 /* ofxBaseMidi.cpp in Sources */,
-				917E4E8C1AF6AC8600D28C6C /* DelayBox.cpp in Sources */,
 				63F9FE1D90234FA6DE6F509E /* ofxMidi.cpp in Sources */,
 				0BFC9C20FD7E3C8D5873AA97 /* ofxMidiIn.cpp in Sources */,
 				C6FE64F74F1EA1D98C8F9847 /* ofxMidiMessage.cpp in Sources */,
