@@ -181,11 +181,6 @@ bool LineConnect::makeConnections(){
         return true;
     }
     
-    else if(o1_type == "NumberBox" && o2_type == "Delay Line"){
-        ((NumberBoxObject *) o1)->setControlElementConnection(o2);
-        return true;
-    }
-    
     else if(o1_type == "Adder" && o2_type == "Sine"){
         ((WaveTableObject *) o2)->setReadBuffer(((MathObject *) o1)->getOutBuffer());
         return true;
@@ -205,10 +200,43 @@ bool LineConnect::makeConnections(){
         ((AdderObject *) o2)->setReadBuffers(((MathObject *) o1)->getOutBuffer());
         return true;
     }
+    
+//------------------------------------------------------------------
+//-                      HitBox connections                        -
+//------------------------------------------------------------------
+    else if(o1_type == "HitBox" && o2_type == "Sine"){
+        ((HitObject *) o1)->setElementToHit((TickableElement *) o2);
+        ((TickableElement *) o2)->setHasHitControl(true);
+        return true;
+    }
+    
 //------------------------------------------------------------------
 //-                    DelayLine connections                       -
 //------------------------------------------------------------------
     
+    else if(o1_type == "Delay Line" && o2_type == "Multiplier"){
+        ((MultiplierObject *) o2)->setReadBuffers(((DelayLineObject *) o1)->getBuffer());
+        return true;
+    }
+    else if(o1_type == "Delay Line" && o2_type == "Adder"){
+        ((AdderObject *) o2)->setReadBuffers(((DelayLineObject *) o1)->getBuffer());
+        return true;
+    }
+    
+    else if(o1_type == "NumberBox" && o2_type == "Delay Line"){
+        ((NumberBoxObject *) o1)->setControlElementConnection(o2);
+        return true;
+    }
+    
+    else if(o1_type == "Adder" && o2_type == "Delay Line"){
+        ((DelayLineObject *) o2)->setReadBuffer(((AdderObject *) o1)->getOutBuffer());
+        return true;
+    }
+    
+    else if(o1_type == "Multiplier" && o2_type == "Delay Line"){
+        ((DelayLineObject *) o2)->setReadBuffer(((MultiplierObject *) o1)->getOutBuffer());
+        return true;
+    }
     
 //----------------------------------------------------------
     

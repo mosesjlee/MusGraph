@@ -160,11 +160,11 @@ void ofApp::mousePressed(int x, int y, int button){
                         cout << "third menu" << endl;
                         addOutputObject(x_loc, y_loc);
                     }
-                    else if(y > y_coord + 90 && y < y_coord + 120){
+                    else if(y > y_coord + 90 && y < y_coord + 110){
                         cout << "Adder " << endl;
                         addAdderObject(x_loc, y_loc);
                     }
-                    else if(y > y_coord + 120 && y < y_coord + 140){
+                    else if(y > y_coord + 110 && y < y_coord + 140){
                         cout << "Multiplier " << endl;
                         addMultiplierObject(x_loc, y_loc);
                     }

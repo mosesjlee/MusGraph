@@ -72,6 +72,10 @@ float DelayLineObject::tick(){
     return currOutBuffer[readIndex];
 }
 
+void DelayLineObject::setReadBuffer(float * r){
+    readBuf = r;
+}
+
 void DelayLineObject::draw(){
     
     if(!amIClicked){

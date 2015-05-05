@@ -40,8 +40,12 @@ float WaveTableObject::tick(){
         readIndex = (readIndex + 1) % MAX_SAMPLES;
     }
     
+    float val;
+    if(hasHitControl) val = 0.0f;
+    else val = mySine->tick();
     
-    float val = outBuffer[outIndex] = mySine->tick();
+    outBuffer[outIndex] = val;
+    
     outIndex = (outIndex + 1) % MAX_SAMPLES;
     
     return val;
