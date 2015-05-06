@@ -20,6 +20,7 @@
 #include "TickableElement.h"
 #include "DelayLineObject.h"
 #include "HitObject.h"
+#include "BufferObject.h"
 
 class LineConnect : public ElementObject{
     

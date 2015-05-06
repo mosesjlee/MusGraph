@@ -14,16 +14,21 @@
 
 #include <stdio.h>
 #include "TickableElement.h"
+#include "NumberBoxObject.h"
 
 class BufferObject : public TickableElement{
 public:
     BufferObject(int x_coord, int y_coord, int myID);
     ~BufferObject();
     void setBuffer(float * r);
+    float * getBuffer();
+    void setDestinationObject(ElementObject * o);
     float tick();
 private:
     float * buffer;
+    bool bufferConnected = false;
     int readIndex;
+    NumberBoxObject * nBox;
 };
 
 #endif /* defined(__MusGraph__BufferObject__) */

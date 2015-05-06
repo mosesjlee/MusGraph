@@ -10,7 +10,7 @@ void ofApp::setup(){
     setUpGUIElements();
     
     //Create a menuView object
-    selectMenu.setSize(250, 100);
+    selectMenu.setSize(280, 100);
     selectMenu.setMenuColor(101, 123, 140);
     
     //ofSetFrameRate(60);
@@ -183,6 +183,10 @@ void ofApp::mousePressed(int x, int y, int button){
                     else if(y > y_coord + 225 && y < y_coord + 250){
                         cout << "Hit Box " << endl;
                         addHitObject(x_loc, y_loc);
+                    }
+                    else if(y > y_coord + 250 && y < y_coord + 280){
+                        cout << "Buffer " << endl;
+                        
                     }
                 }
                 selectMenu.setShowMenu(false);

@@ -17,10 +17,20 @@ BufferObject::~BufferObject(){
     
 }
 
-void BufferObject::setBuffer(float * r){
-    
-}
 
 float BufferObject::tick(){
     
 }
+
+void BufferObject::setBuffer(float * r){
+    
+}
+
+float * BufferObject::getBuffer(){
+    
+}
+
+void BufferObject::setDestinationObject(ElementObject * o){
+    
+}
+
