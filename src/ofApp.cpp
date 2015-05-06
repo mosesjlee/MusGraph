@@ -683,6 +683,9 @@ void ofApp::createObjects(vector<string> * listOfObjects){
             else if(temp == "HitBox"){
                 addHitObject(atoi(&x_pos.substr()[0]), atoi(&y_pos.substr()[0]));
             }
+            else if(temp == "Buffer"){
+                addBufferObject(atoi(&x_pos.substr()[0]), atoi(&y_pos.substr()[0]));
+            }
         }
         else {
             third_pos = findPosition(&holder, second_pos+1, delimiter.substr()[0]);
@@ -748,6 +751,9 @@ void ofApp::createObjects(vector<string> * listOfObjects){
             else if(type_1 == "HitBox"){
                 o1 = (ELEMVECT) listOfHitObjects.at(atoi(&id_1.substr()[0]));
             }
+            else if(type_1 == "Buffer"){
+                o1 = (ELEMVECT) listOfBuffers.at(atoi(&id_1.substr()[0]));
+            }
             
             if(type_2 == "Sine"){
                 o2 = (ELEMVECT) listOfWaveTables.at(atoi(&id_2.substr()[0]));
@@ -775,6 +781,9 @@ void ofApp::createObjects(vector<string> * listOfObjects){
             }
             else if(type_2 == "HitBox"){
                 o2 = (ELEMVECT) listOfHitObjects.at(atoi(&id_2.substr()[0]));
+            }
+            else if(type_2 == "Buffer"){
+                o2 = (ELEMVECT) listOfBuffers.at(atoi(&id_2.substr()[0]));
             }
             
             lineConnectPtr->setFirstElement((ElementObject *) o1);
