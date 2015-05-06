@@ -46,8 +46,10 @@ float DividerObject::tick(){
     
     readIndex = (readIndex + 1) % MAX_SAMPLES;
     
-    float val = left_sample/right_sample;
+    float val;
+    
     if(right_sample <= 0) val = 0.0f;
+    else val = left_sample/right_sample;
     
     //    if(val > 1.0f) val = 1.0f;
     //    if(val < -1.0f) val = -1.0f;

@@ -77,6 +77,11 @@ void NumberBoxObject::setAmIClicked(bool clicked){
     amIClicked = clicked;
 }
 
+void NumberBoxObject::setReadBuf(float * r){
+    readBufConnected = true;
+    readBuf = r;
+}
+
 void NumberBoxObject::draw(){
     if(!amIClicked){
         ofSetColor(0, 0, 0);

@@ -33,6 +33,7 @@ public:
     void controlOutObject();
     void setControlElementConnection(ElementObject * o);
     void setAmIClicked(bool clicked);
+    void setReadBuf(float * r);
     
 private:
     ofxUITextInput * textBox;
@@ -43,6 +44,10 @@ private:
     int textBoxID;
     float myValue = 100.0f;
     string typeElemControl = "";
+    
+    int readIndex = 0;
+    float * readBuf;
+    bool readBufConnected = false;
 };
 
 #endif /* defined(__MusGraph__NumberBoxObject__) */

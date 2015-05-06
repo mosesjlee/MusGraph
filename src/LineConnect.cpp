@@ -160,11 +160,16 @@ bool LineConnect::makeConnections(){
         return true;
     }
 
-    //Order Matters from this point on---------------------------
+    //---------------------Order Matters from this point on---------------------------
+
     else if(o1_type == "NumberBox" && o2_type == "Sine"){
         ((NumberBoxObject *) o1)->setOutputConnection((WaveTableObject *) o2);
         return true;
     }
+    
+    //------------------------------------------------------------------
+    //-                NumberBox to Math connections                   -
+    //------------------------------------------------------------------
     
     else if(o1_type == "NumberBox" && o2_type == "Adder"){
         ((NumberBoxObject *) o1)->setControlElementConnection(o2);
@@ -181,10 +186,27 @@ bool LineConnect::makeConnections(){
         return true;
     }
     
+    //------------------------------------------------------------------
+    //-                Math to Numberbox connections                   -
+    //------------------------------------------------------------------
+    
+    else if(o1_type == "Adder" && o2_type == "NumberBox"){
+        
+        return true;
+    }
+    
+    //------------------------------------------------------------------
+    //-                  Math to Sine connections                      -
+    //------------------------------------------------------------------
+    
     else if(o1_type == "Adder" && o2_type == "Sine"){
         ((WaveTableObject *) o2)->setReadBuffer(((MathObject *) o1)->getOutBuffer());
         return true;
     }
+    
+    //------------------------------------------------------------------
+    //-                  Sine to Math connections                      -
+    //------------------------------------------------------------------
     
     else if(o1_type == "Sine" && o2_type == "Multiplier"){
         ((MultiplierObject *) o2)->setReadBuffers(((WaveTableObject *) o1)->getOutBuffer());
@@ -196,8 +218,32 @@ bool LineConnect::makeConnections(){
         return true;
     }
     
+    else if(o1_type == "Sine" && o2_type == "Divider" ){
+        ((DividerObject *) o2)->setReadBuffers(((WaveTableObject *) o1)->getOutBuffer());
+        return true;
+    }
+    
+//------------------------------------------------------------------
+//-                  Math to Math connections                      -
+//------------------------------------------------------------------
+    
     else if(o1_type == "Multiplier" && o2_type == "Adder"){
         ((AdderObject *) o2)->setReadBuffers(((MathObject *) o1)->getOutBuffer());
+        return true;
+    }
+    
+    else if(o1_type == "Adder" && o2_type == "Adder"){
+        ((AdderObject *) o2)->setReadBuffers(((AdderObject *) o1)->getOutBuffer());
+        return true;
+    }
+    
+    else if(o1_type == "Divider" && o2_type == "Adder"){
+        ((AdderObject *) o2)->setReadBuffers(((DividerObject *) o1)->getOutBuffer());
+        return true;
+    }
+    
+    else if(o1_type == "Divider" && o2_type == "Multiplier"){
+        ((MultiplierObject *) o2)->setReadBuffers(((DividerObject *) o1)->getOutBuffer());
         return true;
     }
     
@@ -238,7 +284,7 @@ bool LineConnect::makeConnections(){
         return true;
     }
     
-//----------------------------------------------------------
+//------------------------------------------------------------------------------------------
     
     
     return false;
