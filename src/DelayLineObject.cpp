@@ -44,8 +44,8 @@ DelayLineObject::~DelayLineObject(){
 }
 
 void DelayLineObject::setDelayTime(float t){
-    float time = t * SR/1000.0;
-    delay->setDelayLineDelay(time);
+//    float time = t * SR/1000.0;
+    delay->setDelayLineDelay(t);
 }
 
 float * DelayLineObject::getBuffer(){

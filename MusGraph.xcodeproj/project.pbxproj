@@ -54,6 +54,7 @@
 		91D54C571AD8E88C0023E49A /* LineConnect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91D54C551AD8E88C0023E49A /* LineConnect.cpp */; };
 		91E0C7751AE32118004041C6 /* NumberBoxObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91E0C7731AE32118004041C6 /* NumberBoxObject.cpp */; };
 		91F59A4F1AFA981200B4BD8E /* BufferObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91F59A4D1AFA981200B4BD8E /* BufferObject.cpp */; };
+		91F59A521AFAB9F400B4BD8E /* SoundClipObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91F59A501AFAB9F400B4BD8E /* SoundClipObject.cpp */; };
 		933A2227713C720CEFF80FD9 /* tinyxml.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2B40EDA85BEB63E46785BC29 /* tinyxml.cpp */; };
 		9A83D1B3FB64456BC907667F /* ofxUIMinimalSlider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2BE7216430113F333B8351ED /* ofxUIMinimalSlider.cpp */; };
 		9BE4AE0AA2B8C436BDFE9D4D /* ofxUIDragableLabelButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FFD5D3C9D38E29DB72B32254 /* ofxUIDragableLabelButton.cpp */; };
@@ -239,6 +240,8 @@
 		91E0C7761AE32326004041C6 /* TickableElement.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TickableElement.h; sourceTree = "<group>"; };
 		91F59A4D1AFA981200B4BD8E /* BufferObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BufferObject.cpp; sourceTree = "<group>"; };
 		91F59A4E1AFA981200B4BD8E /* BufferObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BufferObject.h; sourceTree = "<group>"; };
+		91F59A501AFAB9F400B4BD8E /* SoundClipObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoundClipObject.cpp; sourceTree = "<group>"; };
+		91F59A511AFAB9F400B4BD8E /* SoundClipObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoundClipObject.h; sourceTree = "<group>"; };
 		9345327AA463407B3DADBADE /* ofxUIWaveform.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = ofxUIWaveform.cpp; path = ../../../addons/ofxUI/src/ofxUIWaveform.cpp; sourceTree = SOURCE_ROOT; };
 		938214A2795AA8FED29086DB /* ofxMidiConstants.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxMidiConstants.h; path = ../../../addons/ofxMidi/src/ofxMidiConstants.h; sourceTree = SOURCE_ROOT; };
 		938F5A098A216B403906129C /* ofxUIImage.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = ofxUIImage.cpp; path = ../../../addons/ofxUI/src/ofxUIImage.cpp; sourceTree = SOURCE_ROOT; };
@@ -639,6 +642,8 @@
 				91D54C4A1AD8E79D0023E49A /* Wavetable.cpp */,
 				913E3F351AF4550100C3CE5A /* WaveTableObject.h */,
 				913E3F341AF4550100C3CE5A /* WaveTableObject.cpp */,
+				91F59A511AFAB9F400B4BD8E /* SoundClipObject.h */,
+				91F59A501AFAB9F400B4BD8E /* SoundClipObject.cpp */,
 				91F59A4E1AFA981200B4BD8E /* BufferObject.h */,
 				91F59A4D1AFA981200B4BD8E /* BufferObject.cpp */,
 				91461AD61AE7749F001072B1 /* MathObject.h */,
@@ -804,6 +809,7 @@
 				E3D59A6B55F05669B3FBF8BD /* ofxUINumberDialer.cpp in Sources */,
 				D60E54E7FD6E19BC8636E0D2 /* ofxUIRadio.cpp in Sources */,
 				1587708E3CAC72997E43504E /* ofxUIRangeSlider.cpp in Sources */,
+				91F59A521AFAB9F400B4BD8E /* SoundClipObject.cpp in Sources */,
 				59C5F2F5D7254C33C00F97CB /* ofxUIRectangle.cpp in Sources */,
 				91733BE71ADDEB400024A56E /* MultiplierObject.cpp in Sources */,
 				FE0F1DB69ACCD163E9DA2A15 /* ofxUIRotarySlider.cpp in Sources */,

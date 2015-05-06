@@ -24,11 +24,13 @@ public:
     float * getBuffer();
     void setDestinationObject(ElementObject * o);
     float tick();
+    //void draw();
 private:
     float * buffer;
     bool bufferConnected = false;
     int readIndex;
     NumberBoxObject * nBox;
+    bool destinationConnected = false;
 };
 
 #endif /* defined(__MusGraph__BufferObject__) */

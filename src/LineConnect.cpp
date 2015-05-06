@@ -186,12 +186,21 @@ bool LineConnect::makeConnections(){
         return true;
     }
     
+    
     //------------------------------------------------------------------
-    //-                Math to Numberbox connections                   -
+    //-               Buffer to Numberbox connections                  -
     //------------------------------------------------------------------
     
-    else if(o1_type == "Adder" && o2_type == "NumberBox"){
-        
+    else if(o1_type == "Buffer" && o2_type == "NumberBox"){
+        ((BufferObject *) o1)->setDestinationObject(o2);
+        return true;
+    }
+    
+    //------------------------------------------------------------------
+    //-                  Math to Buffer connections                    -
+    //------------------------------------------------------------------
+    else if(o1_type == "Adder" && o2_type == "Buffer"){
+        ((BufferObject *) o2)->setBuffer(((MathObject *) o1)->getOutBuffer());
         return true;
     }
     

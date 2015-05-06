@@ -38,7 +38,8 @@ float DividerObject::tick(){
         left_sample = readBuf_1[readIndex];
     }
     if (!rightConnected) {
-        right_sample = val;
+        //Below is hard coded. Have to figure out a way to connect more than one number box
+        right_sample = 2.0;
     }
     else {
         right_sample = readBuf_2[readIndex];

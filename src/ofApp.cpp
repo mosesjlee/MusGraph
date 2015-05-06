@@ -28,6 +28,7 @@ void ofApp::update(){
     numNumBoxObjects = listOfNumBox.size();
     numDelayLine = listOfDelayLines.size();
     numHitObjects = listOfHitObjects.size();
+    numBufferObjects = listOfBuffers.size();
 }
 
 //--------------------------------------------------------------
@@ -78,6 +79,11 @@ void ofApp::draw(){
     if(numDelayLine > 0){
         for(int i = 0; i < numDelayLine ;i++)
             listOfDelayLines.at(i)->draw();
+    }
+    
+    if(numBufferObjects > 0){
+        for(int i = 0; i < numBufferObjects; i++)
+            listOfBuffers.at(i)->draw();
     }
     
     //Draw line connects
@@ -186,7 +192,7 @@ void ofApp::mousePressed(int x, int y, int button){
                     }
                     else if(y > y_coord + 250 && y < y_coord + 280){
                         cout << "Buffer " << endl;
-                        
+                        addBufferObject(x_loc, y_loc);
                     }
                 }
                 selectMenu.setShowMenu(false);
@@ -367,6 +373,7 @@ void ofApp::guiEvent(ofxUIEventArgs & e){
             writeElementsToFile((ELEMVECT) &listOfDividers, numDividerObjects);
             writeElementsToFile((ELEMVECT) &listOfDelayLines, numDelayLine);
             writeElementsToFile((ELEMVECT) &listOfHitObjects, numHitObjects);
+            writeElementsToFile((ELEMVECT) &listOfBuffers, numBufferObjects);
             writeElementsToFile((ELEMVECT) &listOfLineConnects, numLineConnect);
         }
     }
@@ -436,6 +443,11 @@ void ofApp::exit(){
     if(numHitObjects > 0){
         for(int i = 0; i < numHitObjects; i++)
             delete listOfHitObjects.at(i);
+    }
+    
+    if(numBufferObjects > 0){
+        for(int i = 0; i < numBufferObjects; i++)
+            delete listOfBuffers.at(i);
     }
     
     cout << "Deleted all objects sucessfully" << endl;
@@ -543,6 +555,12 @@ void ofApp::addHitObject(int x, int y){
     listOfHitObjects.push_back(hitPtr);
 }
 
+void ofApp::addBufferObject(int x, int y){
+    bufferPtr = new BufferObject(x, y, listOfBuffers.size());
+    listOfBuffers.push_back(bufferPtr);
+    listOfTickableElements.push_back(bufferPtr);
+}
+
 void ofApp::tickElements(){
     //cout << "Ticking Elements" << endl;
     for(int i = 0; i < listOfTickableElements.size(); i++){
@@ -581,6 +599,9 @@ bool ofApp::selectItems(int x, int y, ElementObject ** eObj){
     
     if(!itemSelected)
         itemSelected = selectItemsHelper(x, y, eObj, (ELEMVECT) &listOfDelayLines, numDelayLine);
+    
+    if(!itemSelected)
+        itemSelected = selectItemsHelper(x, y, eObj, (ELEMVECT) &listOfBuffers, numBufferObjects);
     
     if(!itemSelected)
         itemSelected = selectItemsHelper(x, y, eObj, (ELEMVECT) &listOfHitObjects, numHitObjects);

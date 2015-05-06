@@ -15,6 +15,7 @@
 #include "DividerObject.h"
 #include "NumberBoxObject.h"
 #include "HitObject.h"
+#include "BufferObject.h"
 #include "AppUtilityFunctions.h"
 
 //Pred
@@ -64,6 +65,7 @@ private:
     NumberBoxObject * nbPtr;
     DelayLineObject * delayPtr;
     HitObject * hitPtr;
+    BufferObject * bufferPtr;
     
     vector<WaveTableObject *> listOfWaveTables;
     vector<SliderObject *> listOfSliderObjects;
@@ -75,6 +77,7 @@ private:
     vector<NumberBoxObject *> listOfNumBox;
     vector<DelayLineObject *> listOfDelayLines;
     vector<HitObject *> listOfHitObjects;
+    vector<BufferObject *> listOfBuffers;
     vector<TickableElement *> listOfTickableElements;
     
     //For casting purposes
@@ -92,6 +95,7 @@ private:
     int numDividerObjects = 0;
     int numDelayLine = 0;
     int numHitObjects = 0;
+    int numBufferObjects = 0;
     
     //For the output
     int onOff = 0;
@@ -133,6 +137,7 @@ private:
     void addNumberBoxObject(int x, int y);
     void addDelayLine(int x, int y);
     void addHitObject(int x, int y);
+    void addBufferObject(int x, int y);
     bool selectItems(int x, int y, ElementObject ** obj);
     void createObjects(vector<string> * listOfObjects);
     void tickElements();
