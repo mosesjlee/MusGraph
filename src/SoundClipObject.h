@@ -10,9 +10,15 @@
 #define __MusGraph__SoundClipObject__
 
 #include <stdio.h>
+#include <sndfile.h>
 #include "TickableElement.h"
 
 class SoundClipObject : public TickableElement{
+public:
+    SoundClipObject();
+    
+private:
+    SNDFILE * myFile;
     
 };
 

@@ -86,10 +86,10 @@ void NumberBoxObject::draw(){
     if(!amIClicked){
         ofSetColor(0, 0, 0);
         ofNoFill();
-//        stringstream text;
-//        text << "" << myValue << endl;
-//        ofSetColor(0, 0, 0);
-//        ofDrawBitmapString(text.str(), x+5, y+20);
+        stringstream text;
+        text << "" << myValue << endl;
+        ofSetColor(0, 0, 0);
+        ofDrawBitmapString(text.str(), x+5, y+20);
     }
     else {
         ofSetColor(125, 100, 100);

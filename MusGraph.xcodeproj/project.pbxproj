@@ -36,6 +36,7 @@
 		7F2CD93F681F3C1547B3BF2C /* ofxUIImageButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E6280B5FA1CEA20450916E49 /* ofxUIImageButton.cpp */; };
 		82845E1F8C90E1F5A99D9868 /* ofxUIWidget.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 08A9C84B3CA68561BE01FF37 /* ofxUIWidget.cpp */; };
 		83D9F930112E0944444124EE /* ofxMidiOut.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04F77E5C73A62E2E77C78EC6 /* ofxMidiOut.cpp */; };
+		91309A2D1AFB494000F6E07D /* libsndfile.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 91309A2C1AFB494000F6E07D /* libsndfile.a */; };
 		913E3F361AF4550100C3CE5A /* WaveTableObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 913E3F341AF4550100C3CE5A /* WaveTableObject.cpp */; };
 		91461AD81AE77F6C001072B1 /* MathObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91461AD71AE77F6C001072B1 /* MathObject.cpp */; };
 		91461ADA1AE77FC3001072B1 /* TickableElement.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91461AD91AE77FC3001072B1 /* TickableElement.cpp */; };
@@ -203,6 +204,9 @@
 		885850B62FAD08EB1D2F0BF4 /* ofxUIRotarySlider.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxUIRotarySlider.h; path = ../../../addons/ofxUI/src/ofxUIRotarySlider.h; sourceTree = SOURCE_ROOT; };
 		8B5F60B902BFFD95E99AAB34 /* ofxUIImageSampler.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = ofxUIImageSampler.cpp; path = ../../../addons/ofxUI/src/ofxUIImageSampler.cpp; sourceTree = SOURCE_ROOT; };
 		8F8238006E98A8E39851968C /* ofxUIButton.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = ofxUIButton.cpp; path = ../../../addons/ofxUI/src/ofxUIButton.cpp; sourceTree = SOURCE_ROOT; };
+		91309A2A1AFB492A00F6E07D /* sndfile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = sndfile.h; path = ../../../../../../../opt/local/libsndfile/1.0.25/include/sndfile.h; sourceTree = "<group>"; };
+		91309A2B1AFB492A00F6E07D /* sndfile.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = sndfile.hh; path = ../../../../../../../opt/local/libsndfile/1.0.25/include/sndfile.hh; sourceTree = "<group>"; };
+		91309A2C1AFB494000F6E07D /* libsndfile.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libsndfile.a; path = ../../../../../../../opt/local/libsndfile/1.0.25/lib/libsndfile.a; sourceTree = "<group>"; };
 		913E3F341AF4550100C3CE5A /* WaveTableObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = WaveTableObject.cpp; sourceTree = "<group>"; };
 		913E3F351AF4550100C3CE5A /* WaveTableObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaveTableObject.h; sourceTree = "<group>"; };
 		91461AD61AE7749F001072B1 /* MathObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MathObject.h; sourceTree = "<group>"; };
@@ -337,6 +341,7 @@
 				E4C2424710CC5A17004149E2 /* AppKit.framework in Frameworks */,
 				E4C2424810CC5A17004149E2 /* Cocoa.framework in Frameworks */,
 				E4C2424910CC5A17004149E2 /* IOKit.framework in Frameworks */,
+				91309A2D1AFB494000F6E07D /* libsndfile.a in Frameworks */,
 				E7E077E515D3B63C0020DFD4 /* CoreVideo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -599,6 +604,9 @@
 		E4B69B4A0A3A1720003C02F2 = {
 			isa = PBXGroup;
 			children = (
+				91309A2C1AFB494000F6E07D /* libsndfile.a */,
+				91309A2A1AFB492A00F6E07D /* sndfile.h */,
+				91309A2B1AFB492A00F6E07D /* sndfile.hh */,
 				E4B6FCAD0C3E899E008CF71C /* openFrameworks-Info.plist */,
 				E4EB6923138AFD0F00A09F29 /* Project.xcconfig */,
 				E4B69E1C0A3A1BDC003C02F2 /* src */,
@@ -1019,6 +1027,8 @@
 					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_50)",
 					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_51)",
 					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_52)",
+					/Developer/usr/lib,
+					/opt/local/libsndfile/1.0.25/lib,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)Debug";
 				WRAPPER_EXTENSION = app;
@@ -1104,6 +1114,8 @@
 					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_49)",
 					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_50)",
 					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_51)",
+					/Developer/usr/lib,
+					/opt/local/libsndfile/1.0.25/lib,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
