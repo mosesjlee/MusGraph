@@ -17,6 +17,7 @@
 #include "HitObject.h"
 #include "BufferObject.h"
 #include "AppUtilityFunctions.h"
+#include "SoundClipObject.h"
 
 //Pred
 #define LEFT_CLICK 0
@@ -66,6 +67,7 @@ private:
     DelayLineObject * delayPtr;
     HitObject * hitPtr;
     BufferObject * bufferPtr;
+    SoundClipObject * soundClipPtr;
     
     vector<WaveTableObject *> listOfWaveTables;
     vector<SliderObject *> listOfSliderObjects;
@@ -78,6 +80,7 @@ private:
     vector<DelayLineObject *> listOfDelayLines;
     vector<HitObject *> listOfHitObjects;
     vector<BufferObject *> listOfBuffers;
+    vector<SoundClipObject *> listOfSoundClips;
     vector<TickableElement *> listOfTickableElements;
     
     //For casting purposes
@@ -96,6 +99,7 @@ private:
     int numDelayLine = 0;
     int numHitObjects = 0;
     int numBufferObjects = 0;
+    int numSoundClipObjects = 0;
     
     //For the output
     int onOff = 0;
@@ -138,6 +142,7 @@ private:
     void addDelayLine(int x, int y);
     void addHitObject(int x, int y);
     void addBufferObject(int x, int y);
+    void addSoundClipObject(int x, int y);
     bool selectItems(int x, int y, ElementObject ** obj);
     void createObjects(vector<string> * listOfObjects);
     void tickElements();

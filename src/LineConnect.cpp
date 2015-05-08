@@ -265,6 +265,12 @@ bool LineConnect::makeConnections(){
         return true;
     }
     
+    else if(o1_type == "HitBox" && o2_type == "SoundClip"){
+        ((HitObject *) o1)->setElementToHit((TickableElement *) o2);
+        ((TickableElement *) o2)->setHasHitControl(true);
+        return true;
+    }
+    
 //------------------------------------------------------------------
 //-                    DelayLine connections                       -
 //------------------------------------------------------------------
@@ -290,6 +296,19 @@ bool LineConnect::makeConnections(){
     
     else if(o1_type == "Multiplier" && o2_type == "Delay Line"){
         ((DelayLineObject *) o2)->setReadBuffer(((MultiplierObject *) o1)->getOutBuffer());
+        return true;
+    }
+    
+    //------------------------------------------------------------------
+    //-                  SoundClip to Math connections                 -
+    //------------------------------------------------------------------
+    
+    //------------------------------------------------------------------
+    //-                  SoundClip to Output connections               -
+    //------------------------------------------------------------------
+    
+    else if(o1_type == "SoundClip" && o2_type == "Output"){
+        ((OutputElement *) o2)->setReadBuffer(((SoundClipObject *) o1)->getOutBuffer());
         return true;
     }
     

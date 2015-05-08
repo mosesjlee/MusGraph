@@ -21,6 +21,8 @@
 #include "DelayLineObject.h"
 #include "HitObject.h"
 #include "BufferObject.h"
+#include "SoundClipObject.h"
+#include "EnvelopeObject.h"
 
 class LineConnect : public ElementObject{
     

@@ -1,0 +1,49 @@
+Sine;701;50
+Sine;60;409
+NumberBox;812;132
+NumberBox;109;237
+NumberBox;499;151
+NumberBox;501;344
+NumberBox;282;420
+NumberBox;421;431
+NumberBox;530;534
+NumberBox;47;498
+Output;813;321
+Adder;728;260
+Adder;376;92
+Adder;428;564
+Adder;253;581
+Multiplier;715;127
+Multiplier;431;166
+Multiplier;470;256
+Multiplier;258;505
+Divider;162;453
+Divider;421;498
+Delay Line;260;233
+HitBox;822;45
+Buffer;59;302
+LineConnect;701;50;715;127;0;Sine;0;Multiplier
+LineConnect;822;45;701;50;0;HitBox;0;Sine
+LineConnect;812;132;715;127;0;NumberBox;0;Multiplier
+LineConnect;715;127;728;260;0;Multiplier;0;Adder
+LineConnect;728;260;813;321;0;Adder;0;Output
+LineConnect;260;233;431;166;0;Delay Line;1;Multiplier
+LineConnect;499;151;431;166;2;NumberBox;1;Multiplier
+LineConnect;431;166;376;92;1;Multiplier;1;Adder
+LineConnect;501;344;470;256;3;NumberBox;2;Multiplier
+LineConnect;260;233;470;256;0;Delay Line;2;Multiplier
+LineConnect;470;256;728;260;2;Multiplier;0;Adder
+LineConnect;701;50;376;92;0;Sine;1;Adder
+LineConnect;376;92;260;233;1;Adder;0;Delay Line
+LineConnect;109;237;260;233;1;NumberBox;0;Delay Line
+LineConnect;60;409;162;453;1;Sine;0;Divider
+LineConnect;282;420;258;505;4;NumberBox;3;Multiplier
+LineConnect;162;453;258;505;0;Divider;3;Multiplier
+LineConnect;421;431;421;498;5;NumberBox;1;Divider
+LineConnect;530;534;428;564;6;NumberBox;2;Adder
+LineConnect;421;498;428;564;1;Divider;2;Adder
+LineConnect;258;505;253;581;3;Multiplier;3;Adder
+LineConnect;428;564;253;581;2;Adder;3;Adder
+LineConnect;253;581;59;302;3;Adder;0;Buffer
+LineConnect;59;302;109;237;0;Buffer;1;NumberBox
+LineConnect;47;498;60;409;7;NumberBox;1;Sine

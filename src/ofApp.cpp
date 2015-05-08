@@ -10,7 +10,7 @@ void ofApp::setup(){
     setUpGUIElements();
     
     //Create a menuView object
-    selectMenu.setSize(280, 100);
+    selectMenu.setSize(310, 100);
     selectMenu.setMenuColor(101, 123, 140);
     
     //ofSetFrameRate(60);
@@ -29,6 +29,7 @@ void ofApp::update(){
     numDelayLine = listOfDelayLines.size();
     numHitObjects = listOfHitObjects.size();
     numBufferObjects = listOfBuffers.size();
+    numSoundClipObjects = listOfSoundClips.size();
 }
 
 //--------------------------------------------------------------
@@ -84,6 +85,11 @@ void ofApp::draw(){
     if(numBufferObjects > 0){
         for(int i = 0; i < numBufferObjects; i++)
             listOfBuffers.at(i)->draw();
+    }
+    
+    if(numSoundClipObjects > 0){
+        for(int i = 0; i < numSoundClipObjects; i++)
+            listOfSoundClips.at(i)->draw();
     }
     
     //Draw line connects
@@ -193,6 +199,10 @@ void ofApp::mousePressed(int x, int y, int button){
                     else if(y > y_coord + 250 && y < y_coord + 280){
                         cout << "Buffer " << endl;
                         addBufferObject(x_loc, y_loc);
+                    }
+                    else if(y > y_coord + 280 && y < y_coord + 310){
+                        cout << "Sound Clip " << endl;
+                        addSoundClipObject(x_loc, y_loc);
                     }
                 }
                 selectMenu.setShowMenu(false);
@@ -450,6 +460,11 @@ void ofApp::exit(){
             delete listOfBuffers.at(i);
     }
     
+    if(numSoundClipObjects > 0){
+        for(int i = 0; i < numSoundClipObjects; i++)
+            delete listOfSoundClips.at(i);
+    }
+    
     cout << "Deleted all objects sucessfully" << endl;
 }
 
@@ -561,6 +576,12 @@ void ofApp::addBufferObject(int x, int y){
     listOfTickableElements.push_back(bufferPtr);
 }
 
+void ofApp::addSoundClipObject(int x, int y){
+    soundClipPtr = new SoundClipObject(x, y, listOfSoundClips.size());
+    listOfSoundClips.push_back(soundClipPtr);
+    listOfTickableElements.push_back(soundClipPtr);
+}
+
 void ofApp::tickElements(){
     //cout << "Ticking Elements" << endl;
     for(int i = 0; i < listOfTickableElements.size(); i++){
@@ -605,6 +626,9 @@ bool ofApp::selectItems(int x, int y, ElementObject ** eObj){
     
     if(!itemSelected)
         itemSelected = selectItemsHelper(x, y, eObj, (ELEMVECT) &listOfHitObjects, numHitObjects);
+    
+    if(!itemSelected)
+        itemSelected = selectItemsHelper(x, y, eObj, (ELEMVECT) &listOfSoundClips, numSoundClipObjects);
     
     return itemSelected;
 }

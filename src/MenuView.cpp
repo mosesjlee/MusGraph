@@ -23,6 +23,7 @@ MenuView::MenuView(int height, int width){
     menuListItems.push_back("Delay Line");
     menuListItems.push_back("Hit Box");
     menuListItems.push_back("Buffer");
+    menuListItems.push_back("Sound Clip");
     
 }
 
@@ -39,6 +40,7 @@ MenuView::MenuView()
     menuListItems.push_back("Delay Line");
     menuListItems.push_back("Hit Box");
     menuListItems.push_back("Buffer");
+    menuListItems.push_back("Sound Clip");
 }
 
 MenuView::~MenuView()
@@ -119,6 +121,8 @@ void MenuView::drawMenu()
     text << menuListItems.at(8) << endl;
     text << endl;
     text << menuListItems.at(9) << endl;
+    text << endl;
+    text << menuListItems.at(10) << endl;
     text << endl;
     
     ofDrawBitmapString(text.str(), x + 10, y + 20);
