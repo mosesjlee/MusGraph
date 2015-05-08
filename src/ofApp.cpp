@@ -782,6 +782,9 @@ void ofApp::createObjects(vector<string> * listOfObjects){
             else if(type_1 == "Buffer"){
                 o1 = (ELEMVECT) listOfBuffers.at(atoi(&id_1.substr()[0]));
             }
+            else if(type_1 == "SoundClip"){
+                o1 = (ELEMVECT) listOfSoundClips.at(atoi(&id_1.substr()[0]));
+            }
             
             if(type_2 == "Sine"){
                 o2 = (ELEMVECT) listOfWaveTables.at(atoi(&id_2.substr()[0]));
@@ -812,6 +815,9 @@ void ofApp::createObjects(vector<string> * listOfObjects){
             }
             else if(type_2 == "Buffer"){
                 o2 = (ELEMVECT) listOfBuffers.at(atoi(&id_2.substr()[0]));
+            }
+            else if(type_2 == "SoundClip"){
+                o2 = (ELEMVECT) listOfSoundClips.at(atoi(&id_2.substr()[0]));
             }
             
             lineConnectPtr->setFirstElement((ElementObject *) o1);

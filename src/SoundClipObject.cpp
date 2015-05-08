@@ -17,6 +17,7 @@ SoundClipObject::SoundClipObject(int x_coord, int y_coord, int myID){
     y_bound = y + SOUNDCLIP_HEIGHT;
     outBuffer = (float *) calloc(MAX_SAMPLES, sizeof(float));
     this->myID = myID;
+    
     //This should not be called here, but for the sake of demo purposes
     //I am calling this in the constructor
     openFile();
