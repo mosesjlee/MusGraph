@@ -384,6 +384,7 @@ void ofApp::guiEvent(ofxUIEventArgs & e){
             writeElementsToFile((ELEMVECT) &listOfDelayLines, numDelayLine);
             writeElementsToFile((ELEMVECT) &listOfHitObjects, numHitObjects);
             writeElementsToFile((ELEMVECT) &listOfBuffers, numBufferObjects);
+            writeElementsToFile((ELEMVECT) &listOfSoundClips, numSoundClipObjects);
             writeElementsToFile((ELEMVECT) &listOfLineConnects, numLineConnect);
         }
     }
@@ -709,6 +710,9 @@ void ofApp::createObjects(vector<string> * listOfObjects){
             }
             else if(temp == "Buffer"){
                 addBufferObject(atoi(&x_pos.substr()[0]), atoi(&y_pos.substr()[0]));
+            }
+            else if(temp == "SoundClip"){
+                addSoundClipObject(atoi(&x_pos.substr()[0]), atoi(&y_pos.substr()[0]));
             }
         }
         else {

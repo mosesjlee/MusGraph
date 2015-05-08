@@ -302,7 +302,15 @@ bool LineConnect::makeConnections(){
     //------------------------------------------------------------------
     //-                  SoundClip to Math connections                 -
     //------------------------------------------------------------------
+    else if(o1_type == "SoundClip" && o2_type == "Adder"){
+        ((AdderObject *) o2)->setReadBuffers(((SoundClipObject *) o1)->getOutBuffer());
+        return true;
+    }
     
+    else if(o1_type == "SoundClip" && o2_type == "Multiplier"){
+        ((MultiplierObject *) o2)->setReadBuffers(((SoundClipObject *) o1)->getOutBuffer());
+        return true;
+    }
     //------------------------------------------------------------------
     //-                  SoundClip to Output connections               -
     //------------------------------------------------------------------
