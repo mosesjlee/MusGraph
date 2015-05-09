@@ -26,6 +26,11 @@ AdderObject::~AdderObject(){
     free(outBuf);
 }
 
+void AdderObject::setNboxConnection(NumberBoxObject * n){
+    nBox = n;
+    nBoxConnected = true;
+}
+
 float AdderObject::tick(){
     float left_sample, right_sample;
     if (!leftConnected) {
@@ -45,8 +50,7 @@ float AdderObject::tick(){
     
     float val = left_sample + right_sample;
     
-//    if(val > 1.0f) val = 1.0f;
-//    if(val < -1.0f) val = -1.0f;
+    if(nBoxConnected) nBox->setMyValue(val);
     
     outBuf[outIndex] = val;
     outIndex = (outIndex + 1) % MAX_SAMPLES;

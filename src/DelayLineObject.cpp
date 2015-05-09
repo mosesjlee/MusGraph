@@ -9,7 +9,7 @@
 #include "DelayLineObject.h"
 
 DelayLineObject::DelayLineObject(int x_coord, int y_coord, int id){
-    delay = new DelayLine(8192);
+    delay = new DelayLine(8192 * SR/1000.00);
     myID = id;
     displayRect.setPosition(x_coord, y_coord);
     displayRect.setHeight(DELAY_HEIGHT);
@@ -44,8 +44,8 @@ DelayLineObject::~DelayLineObject(){
 }
 
 void DelayLineObject::setDelayTime(float t){
-//    float time = t * SR/1000.0;
-    delay->setDelayLineDelay(t);
+    float time = t * SR/1000.0;
+    delay->setDelayLineDelay(time);
 }
 
 float * DelayLineObject::getBuffer(){

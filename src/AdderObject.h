@@ -11,6 +11,7 @@
 
 #include "MathObject.h"
 #include "MultiplierObject.h"
+#include "NumberBoxObject.h"
 
 class AdderObject : public MathObject{
 public:
@@ -21,8 +22,12 @@ public:
     void fillBuf();
     void sendOut(float);
     
+    void setNboxConnection(NumberBoxObject * n);
+    
 private:
     int outIndex = 0;
+    NumberBoxObject * nBox;
+    bool nBoxConnected = false;
 };
 
 #endif /* defined(__MusGraph__AdderObject__) */

@@ -10,11 +10,14 @@
 
 LineConnect::LineConnect(){
     
+    type = "LineConnect";
 }
 
 LineConnect::LineConnect(ofPolyline * linePtr){
     line = linePtr;
     line->clear();
+    
+    type = "LineConnect";
 }
 
 LineConnect::LineConnect(ofPolyline * linePtr, int x_start, int y_start, int x_end, int y_end){
@@ -39,6 +42,8 @@ LineConnect::LineConnect(int x_start, int y_start, int x_end, int y_end){
     line = new ofPolyline();
     line->addVertex(x_start, y_start);
     line->addVertex(x_end, y_end);
+    
+    type = "LineConnect";
 }
 
 LineConnect::~LineConnect(){
@@ -201,6 +206,15 @@ bool LineConnect::makeConnections(){
     //------------------------------------------------------------------
     else if(o1_type == "Adder" && o2_type == "Buffer"){
         ((BufferObject *) o2)->setBuffer(((MathObject *) o1)->getOutBuffer());
+        return true;
+    }
+    
+    //------------------------------------------------------------------
+    //-                Math to NumberBox connections                   -
+    //------------------------------------------------------------------
+    
+    else if(o1_type == "Adder" && o2_type == "NumberBox"){
+        ((AdderObject *) o1)->setNboxConnection((NumberBoxObject *) o2);
         return true;
     }
     

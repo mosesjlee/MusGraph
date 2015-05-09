@@ -63,7 +63,7 @@ private:
     int bufsiz = DEFAULT_BUF_SIZE;
     vector<float> audio;
     
-    float volume = 0.4;
+    float volume = 1.0;
 };
 
 #endif /* defined(__MusGraph__OutputElement__) */

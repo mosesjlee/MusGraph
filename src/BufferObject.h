@@ -28,7 +28,7 @@ public:
 private:
     float * buffer;
     bool bufferConnected = false;
-    int readIndex;
+    int readIndex = 0;
     NumberBoxObject * nBox;
     bool destinationConnected = false;
 };

@@ -10,5 +10,16 @@
 #define __MusGraph__EnvelopeObject__
 
 #include <stdio.h>
+#include "TickableElement.h"
+class EnvelopeObject : public TickableElement{
+public:
+    EnvelopeObject();
+    ~EnvelopeObject();
+private:
+    float scaleUp;
+    float scaleDown;
+    float * readBuf;
+    float * outBuf;
+};
 
 #endif /* defined(__MusGraph__EnvelopeObject__) */

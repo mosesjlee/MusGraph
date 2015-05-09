@@ -59,7 +59,8 @@ float * SoundClipObject::getOutBuffer(){
   pick whichever audio file they want
  */
 void SoundClipObject::openFile(){
-    string file = "/Users/moseslee/Desktop/of_v0.8.3_osx_release/apps/myApps/MusGraph/bin/data/soundclips/guitar1.raw";
+//    string file = "/Users/moseslee/Desktop/of_v0.8.3_osx_release/apps/myApps/MusGraph/bin/data/soundclips/guitar1.raw";
+    string file = "/Users/moseslee/Desktop/of_v0.8.3_osx_release/apps/myApps/MusGraph/bin/data/soundclips/emma16.raw";
     
     rawFile = fopen(&file[0], "r");
     

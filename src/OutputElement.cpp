@@ -53,10 +53,12 @@ void OutputElement::fillOutBuffer(float * output, int bufferSize, int nChannels)
     if(soundMode == MONO || soundMode == LEFT_AUDIO){
         for(int i = 0; i < bufferSize; i++){
             lSample = rSample = readBuffer[readIndex];
+            if(lSample > 1.0) lSample = 1.0;
+            if(lSample < -1.0) lSample = -1.0;
             readIndex = (readIndex + 1) % MAX_SAMPLES;
             //cout << "lSample: " << lSample << endl;
             output[i*nChannels    ] = lSample * volume;
-            output[i*nChannels + 1] = rSample * volume;
+            //output[i*nChannels + 1] = rSample * volume;
         }
     }
     else if(soundMode == RIGHT_AUDIO){

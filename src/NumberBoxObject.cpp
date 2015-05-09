@@ -58,7 +58,10 @@ void NumberBoxObject::setOutputConnection(WaveTableObject * sptr){
 
 void NumberBoxObject::controlOutObject(){
     if(sinePtr != NULL) sinePtr->setFreq(myValue);
-    if(typeElemControl == "Delay Line") ((DelayLineObject *) eObj)->setDelayTime(myValue);
+    if(typeElemControl == "Delay Line") {
+//        cout << "setting delay: " << myValue << endl;
+        ((DelayLineObject *) eObj)->setDelayTime(myValue);
+    }
     
     if(typeElemControl == "Adder" || typeElemControl == "Multiplier" || typeElemControl == "Divider"){
         ((MathObject *) eObj)->setOtherValue(myValue);
@@ -69,6 +72,7 @@ void NumberBoxObject::controlOutObject(){
 void NumberBoxObject::setControlElementConnection(ElementObject * o){
     eObj = o;
     typeElemControl = o->getType();
+    cout << "Connected: " << typeElemControl << endl;
     controlOutObject();
 }
 

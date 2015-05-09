@@ -60,7 +60,7 @@ void writeElementsToFile(vector<ElementObject *> * list, int size){
     string fileName = "myconfig";
     string directoryText = "configs/" + fileName + ".txt";
     string textToSave;
-    string tempText;
+    string tempText = "";
     ofBuffer bufToWrite;
     ofFile configFile;
     
@@ -68,6 +68,7 @@ void writeElementsToFile(vector<ElementObject *> * list, int size){
     string type = list->at(0)->getType();
     
     if(type == "LineConnect"){
+        cout << "Saving line connect: " << endl;
         for(int i = 0; i < list->size(); i++){
             tempText = (list->at(i)->getType()) + ";" +
                         Convert(((LineConnect *) list->at(i))->getXStart()) + ";" +
@@ -83,10 +84,12 @@ void writeElementsToFile(vector<ElementObject *> * list, int size){
         }
     }
     else {
+        cout << "List size: " << list->size() << endl;
         for(int i = 0; i < list->size(); i++){
             tempText = (list->at(i)->getType()) + ";" + Convert(list->at(i)->getXCoord()) +
                        ";" + Convert(list->at(i)->getYCoord()) + "\n";
             textToSave += tempText;
+            cout << "Saving: " << tempText << endl;
         }
     }
     
