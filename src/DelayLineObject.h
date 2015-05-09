@@ -31,7 +31,6 @@ public:
     void setReadBuffer(float * r);
     float * getCurrOutBuffer();
     float * getTickedBuffer();
-    
     float * getBuffer();
     
     

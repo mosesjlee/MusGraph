@@ -12,8 +12,6 @@ void ofApp::setup(){
     //Create a menuView object
     selectMenu.setSize(310, 100);
     selectMenu.setMenuColor(101, 123, 140);
-    
-    //ofSetFrameRate(60);
 }
 
 //--------------------------------------------------------------
@@ -154,13 +152,13 @@ void ofApp::mousePressed(int x, int y, int button){
     switch(button){
         case LEFT_CLICK:
         
-            if(selectMenu.getShowMenu()){
+            if(selectMenu.getShowMenu() && onOff == 0){
                 if(x > x_coord && x < x_bound && y > y_coord && y < y_bound){
                     cout << "In menu: " << endl;
-                    int x_loc = selectMenu.getXCoord();
-                    int y_loc = selectMenu.getYCoord();
+                    int x_loc = selectMenu.getXItemLoc();
+                    int y_loc = selectMenu.getYItemLoc();
                     
-                    if(y > y_coord && y < y_coord + 25){
+                    if(y > y_coord && y < y_coord + 30){
                         addWaveTableObject(x_loc, y_loc);
                     }
                     else if(y > y_coord + 30 && y < y_coord + 60){
@@ -225,8 +223,9 @@ void ofApp::mousePressed(int x, int y, int button){
 
             break;
         case RIGHT_CLICK:
-            selectMenu.setCoordinates(x, y);
-            selectMenu.setShowMenu(true);
+            if(onOff == 0){
+                selectMenu.setShowSettings(x, y);
+            }
             break;
     }
 }
@@ -309,7 +308,7 @@ void ofApp::guiEvent(ofxUIEventArgs & e){
         //Look for the slider ID
             
         if(listOfSliderObjects.at(currSliderID)->getMyID() == currSliderID){
-                
+            
             if(listOfSliderObjects.at(currSliderID)->getObjectToControl() == NULL){
                 return;
             }
@@ -509,7 +508,6 @@ void ofApp::addWaveTableObject(int x, int y){
     listOfWaveTables.push_back(waveTablePtr);
     
     listOfTickableElements.push_back(waveTablePtr);
-    tickElements();
 }
 
 void ofApp::addOutputObject(int x, int y){
@@ -523,7 +521,7 @@ void ofApp::addSliderObject(int x, int y){
     elementsGUI = new ofxUICanvas();
     ofAddListener(elementsGUI->newGUIEvent, this, &ofApp::guiEvent);
     
-    sliderPtr = new SliderObject(elementsGUI, "Slider", 0, 1000, 440, listOfSliderObjects.size());
+    sliderPtr = new SliderObject(elementsGUI, "Slider", 40, 80, 440, listOfSliderObjects.size());
     sliderPtr->setCoord(x, y);
     listOfSliderObjects.push_back(sliderPtr);
 }

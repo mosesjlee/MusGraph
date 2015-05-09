@@ -94,6 +94,27 @@ int MenuView::getYCoord(){
     return y;
 }
 
+void MenuView::setItemLoc(int x, int y){
+    x_item_loc = x;
+    y_item_loc = y;
+}
+
+int MenuView::getXItemLoc(){
+    return x_item_loc;
+}
+int MenuView::getYItemLoc(){
+    return y_item_loc;
+}
+
+void MenuView::setShowSettings(int x, int y){
+    int x_c = x, y_c = y;
+    if(x + 100 > 1024) x_c = x - (x + 100 - 1024);
+    if(y + 310 > 768) y_c = y - (y + 310 - 768);
+    setCoordinates(x_c, y_c);
+    setItemLoc(x, y);
+    setShowMenu(true);
+}
+
 void MenuView::drawMenu()
 {
     ofSetColor(r, g, b);

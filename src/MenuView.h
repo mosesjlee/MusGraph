@@ -19,16 +19,20 @@ public:
     MenuView(int height, int width);
     void setCoordinates(int x, int y);
     void setSize(int x, int y);
+    void setItemLoc(int x, int y);
     void setShowMenu(bool show);
     bool getShowMenu();
     void setMenuColor(int r, int g, int b);
     void drawMenu();
     int getXCoord();
     int getYCoord();
+    int getXItemLoc();
+    int getYItemLoc();
     int getHeight() {return height;}
     int getWidth() {return width;}
     int getXBound() {return x_bound;}
     int getYBound() {return y_bound;}
+    void setShowSettings(int x, int y);
     void menuChoice(int x, int y);
     ofRectangle * getMenuBox();
     ~MenuView();
@@ -42,6 +46,7 @@ private:
     int height;
     int width;
     int r,g,b;
+    int x_item_loc, y_item_loc;
     vector <string> menuListItems;
     
 };
