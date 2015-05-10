@@ -37,7 +37,7 @@ void OutputElement::setReadBuffer(float * r){
 }
 
 void OutputElement::setUpAudio(ofBaseApp * parent){
-    
+    cout << "sample rate: " << sampleRate << endl;
     stream.setup(parent, DEFAULT_OUTPUT_NUM, DEFAULT_INPUT_NUM, sampleRate, bufsiz, DEFAULT_BUF_NUM);
 }
 

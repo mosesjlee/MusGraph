@@ -396,6 +396,13 @@ void ofApp::guiEvent(ofxUIEventArgs & e){
             createObjects(loadElementsFromFileToBuffer());
         }
     }
+    
+    else if(name == "Clear Elements"){
+        int value = e.getButton()->getValue();
+        if(value == 1 && onOff == 0){
+            clearElements();
+        }
+    }
 }
 //--------------------------------------------------------------
 //Deletes dynamically allocated objects
@@ -404,68 +411,7 @@ void ofApp::exit(){
     delete menuGUI;
     delete saveMenuGUI;
     delete saveFileNameUI;
-    
-    if(numWaveTables > 0){
-        for(int i = 0; i < numWaveTables; i++)
-            delete listOfWaveTables.at(i);
-    }
-    
-    if(numSliderObjects > 0){
-        for(int i = 0; i < numSliderObjects; i++)
-            delete listOfSliderObjects.at(i);
-    }
-
-    if(numOutput > 0) {
-        for(int i = 0; i < numOutput; i++)
-            delete listOfOutputs.at(i);
-    }
-    
-    if(numLineConnect > 0){
-        for(int i = 0; i < numLineConnect; i++)
-            delete listOfLineConnects.at(i);
-    }
-    
-    if(numMultiplierObjects > 0){
-        for(int i = 0; i < numMultiplierObjects; i++)
-            delete listOfMultipliers.at(i);
-    }
-    
-    if(numAdderObjects > 0){
-        for(int i = 0; i < numAdderObjects; i++)
-            delete listOfAdders.at(i);
-    }
-    
-    if(numDividerObjects > 0){
-        for(int i = 0; i < numDividerObjects; i++)
-            delete listOfDividers.at(i);
-    }
-    
-    if(numNumBoxObjects > 0){
-        for(int i = 0; i < numNumBoxObjects; i++)
-            delete listOfNumBox.at(i);
-    }
-    
-    if(numDelayLine > 0){
-        for(int i = 0; i < numDelayLine; i++)
-            delete listOfDelayLines.at(i);
-    }
-    
-    if(numHitObjects > 0){
-        for(int i = 0; i < numHitObjects; i++)
-            delete listOfHitObjects.at(i);
-    }
-    
-    if(numBufferObjects > 0){
-        for(int i = 0; i < numBufferObjects; i++)
-            delete listOfBuffers.at(i);
-    }
-    
-    if(numSoundClipObjects > 0){
-        for(int i = 0; i < numSoundClipObjects; i++)
-            delete listOfSoundClips.at(i);
-    }
-    
-    cout << "Deleted all objects sucessfully" << endl;
+    clearElements();
 }
 
 //--------------------------------------------------------------//
@@ -499,6 +445,12 @@ void ofApp::setUpGUIElements(){
     loadConfigMenu->setPosition(400, 0);
     loadButton = loadConfigMenu->addButton("Load Configuration", false);
     ofAddListener(loadConfigMenu->newGUIEvent,this,&ofApp::guiEvent);
+    
+    clearElementsMenu = new ofxUICanvas();
+    clearElementsMenu->setDimensions(160, 32);
+    clearElementsMenu->setPosition(560, 0);
+    clearElementsButton = clearElementsMenu->addButton("Clear Elements", false);
+    ofAddListener(clearElementsMenu->newGUIEvent,this,&ofApp::guiEvent);
 }
 
 void ofApp::addWaveTableObject(int x, int y){
@@ -590,6 +542,95 @@ void ofApp::tickElements(){
     }
 }
 
+void ofApp::clearElements(){
+    if(numWaveTables > 0){
+        for(int i = 0; i < numWaveTables; i++)
+            delete listOfWaveTables.at(i);
+        listOfWaveTables.clear();
+    }
+    
+    if(numSliderObjects > 0){
+        for(int i = 0; i < numSliderObjects; i++)
+            delete listOfSliderObjects.at(i);
+        listOfSliderObjects.clear();
+    }
+    
+    if(numOutput > 0) {
+        for(int i = 0; i < numOutput; i++)
+            delete listOfOutputs.at(i);
+        listOfOutputs.clear();
+    }
+    
+    if(numLineConnect > 0){
+        for(int i = 0; i < numLineConnect; i++)
+            delete listOfLineConnects.at(i);
+        listOfLineConnects.clear();
+    }
+    
+    if(numMultiplierObjects > 0){
+        for(int i = 0; i < numMultiplierObjects; i++)
+            delete listOfMultipliers.at(i);
+        listOfMultipliers.clear();
+    }
+    
+    if(numAdderObjects > 0){
+        for(int i = 0; i < numAdderObjects; i++)
+            delete listOfAdders.at(i);
+        listOfAdders.clear();
+    }
+    
+    if(numDividerObjects > 0){
+        for(int i = 0; i < numDividerObjects; i++)
+            delete listOfDividers.at(i);
+        listOfDividers.clear();
+    }
+    
+    if(numNumBoxObjects > 0){
+        for(int i = 0; i < numNumBoxObjects; i++)
+            delete listOfNumBox.at(i);
+        listOfNumBox.clear();
+    }
+    
+    if(numDelayLine > 0){
+        for(int i = 0; i < numDelayLine; i++)
+            delete listOfDelayLines.at(i);
+        listOfDelayLines.clear();
+    }
+    
+    if(numHitObjects > 0){
+        for(int i = 0; i < numHitObjects; i++)
+            delete listOfHitObjects.at(i);
+        listOfHitObjects.clear();
+    }
+    
+    if(numBufferObjects > 0){
+        for(int i = 0; i < numBufferObjects; i++)
+            delete listOfBuffers.at(i);
+        listOfBuffers.clear();
+    }
+    
+    if(numSoundClipObjects > 0){
+        for(int i = 0; i < numSoundClipObjects; i++)
+            delete listOfSoundClips.at(i);
+        listOfSoundClips.clear();
+    }
+    
+    listOfTickableElements.clear();
+    
+    cout << "Deleted all objects sucessfully" << endl;
+    numWaveTables = listOfWaveTables.size();
+    numOutput = listOfOutputs.size();
+    numSliderObjects = listOfSliderObjects.size();
+    numLineConnect = listOfLineConnects.size();
+    numMultiplierObjects = listOfMultipliers.size();
+    numAdderObjects = listOfAdders.size();
+    numDividerObjects = listOfDividers.size();
+    numNumBoxObjects = listOfNumBox.size();
+    numDelayLine = listOfDelayLines.size();
+    numHitObjects = listOfHitObjects.size();
+    numBufferObjects = listOfBuffers.size();
+    numSoundClipObjects = listOfSoundClips.size();
+}
 
 //-------------------------------------------------------------------------------
 //Select Items based on locations

@@ -31,12 +31,6 @@ DelayLineObject::DelayLineObject(int x_coord, int y_coord, int id){
     tickedBuffer = (float *) calloc(MAX_SAMPLES, sizeof(float));
 }
 
-DelayLineObject::DelayLineObject(int size, int id){
-    int newSize = 2 * size * SR/1000.0;
-    
-    delay = new DelayLine(newSize);
-}
-
 DelayLineObject::~DelayLineObject(){
     delete delay;
     free(currOutBuffer);
@@ -45,14 +39,14 @@ DelayLineObject::~DelayLineObject(){
 
 void DelayLineObject::setDelayTime(float t){
     int time = t * SR/1000.0;
-    //cout << "Delay time: " << time << endl;
+    cout << "Delay time: " << time << endl;
     delay->setDelayLineDelay(time);
 }
 
 float * DelayLineObject::getBuffer(){
-    cout << "currOutConnected: " << currOutBufferConnected <<
-    "tickedBuffer: " << tickedBufferConnected << endl;
-    
+    cout << "connecting delay out buffer:" << endl;
+    //return tickedBuffer;
+    //return currOutBuffer;
     if(!currOutBufferConnected){
         currOutBufferConnected = true;
         cout << "currOutConnected: " << currOutBufferConnected << endl;

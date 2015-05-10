@@ -124,6 +124,9 @@ private:
     ofxUICanvas * loadConfigMenu;
     ofxUIButton * loadButton;
     
+    ofxUICanvas * clearElementsMenu;
+    ofxUIButton * clearElementsButton;
+    
     ofxUICanvas * elementsGUI;
     ofPolyline * currLine;
 
@@ -143,6 +146,7 @@ private:
     void addHitObject(int x, int y);
     void addBufferObject(int x, int y);
     void addSoundClipObject(int x, int y);
+    void clearElements();
     bool selectItems(int x, int y, ElementObject ** obj);
     void createObjects(vector<string> * listOfObjects);
     void tickElements();
