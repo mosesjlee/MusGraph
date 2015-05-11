@@ -34,7 +34,7 @@ float * WaveTableObject::getOutBuffer(){
 
 
 
-float WaveTableObject::tick(){
+void WaveTableObject::tick(){
     if(readBufferConnected) {
         setFreq(readBuffer[readIndex]);
         readIndex = (readIndex + 1) % MAX_SAMPLES;
@@ -47,8 +47,6 @@ float WaveTableObject::tick(){
     outBuffer[outIndex] = val;
     
     outIndex = (outIndex + 1) % MAX_SAMPLES;
-    
-    return val;
 }
 
 void WaveTableObject::setReadBuffer(float * r){

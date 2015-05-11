@@ -23,7 +23,7 @@ public:
     void setBuffer(float * r);
     float * getBuffer();
     void setDestinationObject(ElementObject * o);
-    float tick();
+    void tick();
     //void draw();
 private:
     float * buffer;

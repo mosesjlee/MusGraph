@@ -17,7 +17,7 @@ public:
     DividerObject();
     DividerObject(int x, int y);
     ~DividerObject();
-    float tick();
+    void tick();
 private:
     int outIndex = 0;
 };

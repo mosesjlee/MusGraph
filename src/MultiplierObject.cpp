@@ -30,7 +30,7 @@ MultiplierObject::~MultiplierObject(){
     free(outBuf);
 }
 
-float MultiplierObject::tick(){
+void MultiplierObject::tick(){
     float left_sample, right_sample;
     if (!leftConnected) {
         left_sample = val;
@@ -51,8 +51,6 @@ float MultiplierObject::tick(){
     
     outBuf[outIndex] = val;
     outIndex = (outIndex + 1) % MAX_SAMPLES;
-    //cout << "Multiplier val: " << val << endl;
-    return val;
 }
 
 

@@ -13,7 +13,7 @@
 
 class TickableElement : public ElementObject{
 public:
-    virtual float tick() = 0;
+    virtual void tick() = 0;
     virtual void draw();
     virtual void receivedHit(int hitLength);
     virtual void setHasHitControl(bool t);

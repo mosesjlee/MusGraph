@@ -29,7 +29,7 @@ DividerObject::~DividerObject(){
     free(outBuf);
 }
 
-float DividerObject::tick(){
+void DividerObject::tick(){
     float left_sample, right_sample;
     if (!leftConnected) {
         left_sample = val;
@@ -57,7 +57,5 @@ float DividerObject::tick(){
     
     outBuf[outIndex] = val;
     outIndex = (outIndex + 1) % MAX_SAMPLES;
-    
-    return val;
 }
 

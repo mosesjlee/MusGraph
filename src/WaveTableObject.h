@@ -22,7 +22,7 @@ class WaveTableObject : public TickableElement{
 public:
     WaveTableObject(int x, int y);
     ~WaveTableObject();
-    float tick();
+    void tick();
     void setInput(ElementObject *);
     void setFreq(float);
     void setDelayLine(DelayLineObject * dl);

@@ -25,7 +25,7 @@ BufferObject::~BufferObject(){
 }
 
 
-float BufferObject::tick(){
+void BufferObject::tick(){
     float val = 0.0;
     if(bufferConnected){
         val = buffer[readIndex];
@@ -36,7 +36,6 @@ float BufferObject::tick(){
     }
     
     readIndex = (readIndex + 1) % MAX_SAMPLES;
-    return val;
 }
 
 void BufferObject::setBuffer(float * r){

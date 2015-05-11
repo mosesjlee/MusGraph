@@ -270,6 +270,11 @@ bool LineConnect::makeConnections(){
         return true;
     }
     
+    else if(o1_type == "Multiplier" && o2_type == "Multiplier"){
+        ((MultiplierObject *) o2)->setReadBuffers(((MultiplierObject *) o1)->getOutBuffer());
+        return true;
+    }
+    
 //------------------------------------------------------------------
 //-                      HitBox connections                        -
 //------------------------------------------------------------------
@@ -313,6 +318,11 @@ bool LineConnect::makeConnections(){
         return true;
     }
     
+    else if(o1_type == "SoundClip" && o2_type == "Delay Line"){
+        ((DelayLineObject *) o2)->setReadBuffer(((SoundClipObject *) o1)->getOutBuffer());
+        return true;
+    }
+    
     //------------------------------------------------------------------
     //-                  SoundClip to Math connections                 -
     //------------------------------------------------------------------
@@ -325,12 +335,18 @@ bool LineConnect::makeConnections(){
         ((MultiplierObject *) o2)->setReadBuffers(((SoundClipObject *) o1)->getOutBuffer());
         return true;
     }
+    
     //------------------------------------------------------------------
     //-                  SoundClip to Output connections               -
     //------------------------------------------------------------------
     
     else if(o1_type == "SoundClip" && o2_type == "Output"){
         ((OutputElement *) o2)->setReadBuffer(((SoundClipObject *) o1)->getOutBuffer());
+        return true;
+    }
+    
+    else if(o1_type == "SoundClip" && o2_type == "Delay Line"){
+        ((DelayLineObject *) o2)->setReadBuffer(((SoundClipObject *) o1)->getOutBuffer());
         return true;
     }
     

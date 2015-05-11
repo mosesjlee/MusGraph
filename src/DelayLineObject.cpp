@@ -39,36 +39,68 @@ DelayLineObject::~DelayLineObject(){
 
 void DelayLineObject::setDelayTime(float t){
     int time = t * SR/1000.0;
-    cout << "Delay time: " << time << endl;
+    //cout << "Delay time: " << time << endl;
     delay->setDelayLineDelay(time);
 }
 
 float * DelayLineObject::getBuffer(){
     cout << "connecting delay out buffer:" << endl;
     //return tickedBuffer;
-    //return currOutBuffer;
-    if(!currOutBufferConnected){
-        currOutBufferConnected = true;
-        cout << "currOutConnected: " << currOutBufferConnected << endl;
-        return currOutBuffer;
-    } else {
-        tickedBufferConnected = true;
-        cout << "tickedBuffer: " << tickedBufferConnected << endl;
-        return tickedBuffer;
-    }
+    return currOutBuffer;
+    
+    
+//    if(!currOutBufferConnected){
+//        currOutBufferConnected = true;
+//        cout << "currOutConnected: " << currOutBufferConnected << endl;
+//        return currOutBuffer;
+//    } else {
+//        tickedBufferConnected = true;
+//        cout << "tickedBuffer: " << tickedBufferConnected << endl;
+//        return tickedBuffer;
+//    }
 }
 
-float DelayLineObject::tick(){
+void DelayLineObject::setFeedBackBuffer(float * r){
+    cout << "feedback buffer connected: " << endl;
+    feedbackBuffer = r;
+}
+
+void DelayLineObject::tick(){
+    //Original IMplementation
+//    currOutBuffer[readIndex] = delay->getCurrentOut();
+//    tickedBuffer[readIndex] = delay->tick(readBuf[readIndex]);
+//    
+//    readIndex = (readIndex + 1) % MAX_SAMPLES;
+//    
+//    return currOutBuffer[readIndex];
+//The below somewhat works
+//    float feedBackGain = 0.95;
+//    currOutBuffer[readIndex] = feedBackGain * delay->getCurrentOut();
+//    
+//    tickedBuffer[readIndex] = delay->tick(currOutBuffer[readIndex]+readBuf[readIndex]);
+//    
+//    readIndex = (readIndex + 1) % MAX_SAMPLES;
+//    
+//    return currOutBuffer[readIndex];
+    
+//Yet another attempt
     currOutBuffer[readIndex] = delay->getCurrentOut();
-    tickedBuffer[readIndex] = delay->tick(readBuf[readIndex]);
+    tickedBuffer[readIndex] = delay->tick(feedbackBuffer[readIndex] + readBuf[readIndex]);
     
     readIndex = (readIndex + 1) % MAX_SAMPLES;
-    
-    return currOutBuffer[readIndex];
 }
 
 void DelayLineObject::setReadBuffer(float * r){
-    readBuf = r;
+    if(!readBufConnected){
+        cout << "readbufconnected " << endl;
+        readBuf = r;
+        readBufConnected = true;
+    }
+    else{
+        cout << "feedbackbuffer connected: ";
+        feedbackBuffer = r;
+        feedbackBufConnected = true;
+    }
 }
 
 void DelayLineObject::draw(){

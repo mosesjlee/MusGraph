@@ -23,12 +23,13 @@ public:
     ~DelayLineObject();
     void setDelayTime(float time);
     float tick(float);
-    float tick();
+    void tick();
     float getCurrentOut();
     bool isTickRegion(int x, int y);
     bool isGetCurrOutRegion(int x, int y);
     void draw();
     void setReadBuffer(float * r);
+    void setFeedBackBuffer(float * r);
     float * getCurrOutBuffer();
     float * getTickedBuffer();
     float * getBuffer();
@@ -41,8 +42,11 @@ private:
     float xN = 0.0f;
     bool currOutBufferConnected = false;
     bool tickedBufferConnected = false;
+    bool readBufConnected = false;
+    bool feedbackBufConnected = false;
     float * currOutBuffer;
     float * tickedBuffer;
+    float * feedbackBuffer;
     float * readBuf;
     int currOutIndex = 0;
     int currTickedIndex = 0;

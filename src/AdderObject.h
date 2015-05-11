@@ -18,7 +18,7 @@ public:
     AdderObject();
     AdderObject(int x_coord, int y_coord);
     ~AdderObject();
-    float tick();
+    void tick();
     void fillBuf();
     void sendOut(float);
     

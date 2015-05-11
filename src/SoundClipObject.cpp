@@ -31,7 +31,7 @@ SoundClipObject::~SoundClipObject(){
     fclose(rawFile);
 }
 
-float SoundClipObject::tick(){
+void SoundClipObject::tick(){
     float val = 0.0;
     if(!hasHitControl){
         if(readCount >= sampleVector.size()){
@@ -47,7 +47,6 @@ float SoundClipObject::tick(){
     
     outBuffer[readIndex] = val;
     readIndex = (readIndex + 1) % MAX_SAMPLES;
-    return outBuffer[readIndex];
 }
 
 float * SoundClipObject::getOutBuffer(){

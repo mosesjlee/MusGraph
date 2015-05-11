@@ -19,7 +19,7 @@ class SoundClipObject : public TickableElement{
 public:
     SoundClipObject(int x_coord, int y_coord, int myID);
     ~SoundClipObject();
-    float tick();
+    void tick();
     float * getOutBuffer();
     void openFile();
     

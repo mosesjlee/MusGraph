@@ -21,7 +21,7 @@ public:
     MultiplierObject(ElementObject * o1, ElementObject * o2);
     MultiplierObject(ElementObject * o1, ElementObject * o2, int x_coord, int y_coord);
     ~MultiplierObject();
-    float tick();
+    void tick();
 private:
     int outIndex = 0;
 };
