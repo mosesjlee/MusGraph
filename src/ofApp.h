@@ -3,6 +3,7 @@
 //TODO Think of ways to connect objects with each other
 
 #include "ofMain.h"
+#include "GLFW/glfw3.h"
 #include "MenuView.h"
 #include "WavetableObject.h"
 #include "ofxUI.h"

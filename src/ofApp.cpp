@@ -95,6 +95,8 @@ void ofApp::draw(){
         ofSetLineWidth(4);
         currLine->draw();
     }
+    
+    glfwWaitEvents();
 }
 
 //--------------------------------------------------------------
@@ -537,9 +539,9 @@ void ofApp::tickElements(){
     //cout << "Ticking Elements" << endl;
     for(int i = 0; i < listOfTickableElements.size(); i++){
         //for(int j = 0; j < 512; j++){
-        for(int j = 0; j < 608; j++){
+        //for(int j = 0; j < 608; j++){
             listOfTickableElements.at(i)->tick();
-        }
+        //}
     }
 }
 

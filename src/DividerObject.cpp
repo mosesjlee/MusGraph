@@ -31,6 +31,7 @@ DividerObject::~DividerObject(){
 
 void DividerObject::tick(){
     float left_sample, right_sample;
+    for(int i = 0; i < MAX_BUF_SIZ; i++){
     if (!leftConnected) {
         left_sample = val;
     }
@@ -45,8 +46,6 @@ void DividerObject::tick(){
         right_sample = readBuf_2[readIndex];
     }
     
-    readIndex = (readIndex + 1) % MAX_SAMPLES;
-    
     float val;
     
     if(right_sample <= 0) val = 0.0f;
@@ -55,7 +54,8 @@ void DividerObject::tick(){
     //    if(val > 1.0f) val = 1.0f;
     //    if(val < -1.0f) val = -1.0f;
     
-    outBuf[outIndex] = val;
-    outIndex = (outIndex + 1) % MAX_SAMPLES;
+    outBuf[readIndex] = val;
+    readIndex = (readIndex + 1) % MAX_SAMPLES;
+    }
 }
 

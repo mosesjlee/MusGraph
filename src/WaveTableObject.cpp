@@ -35,18 +35,20 @@ float * WaveTableObject::getOutBuffer(){
 
 
 void WaveTableObject::tick(){
-    if(readBufferConnected) {
-        setFreq(readBuffer[readIndex]);
-        readIndex = (readIndex + 1) % MAX_SAMPLES;
+    for(int i = 0; i < MAX_BUF_SIZ; i++){
+        if(readBufferConnected) {
+            setFreq(readBuffer[readIndex]);
+            readIndex = (readIndex + 1) % MAX_SAMPLES;
+        }
+    
+        float val;
+        if(hasHitControl) val = 0.0f;
+        else val = mySine->tick();
+    
+        outBuffer[outIndex] = val;
+    
+        outIndex = (outIndex + 1) % MAX_SAMPLES;
     }
-    
-    float val;
-    if(hasHitControl) val = 0.0f;
-    else val = mySine->tick();
-    
-    outBuffer[outIndex] = val;
-    
-    outIndex = (outIndex + 1) % MAX_SAMPLES;
 }
 
 void WaveTableObject::setReadBuffer(float * r){

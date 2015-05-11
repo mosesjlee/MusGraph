@@ -66,6 +66,7 @@ void DelayLineObject::setFeedBackBuffer(float * r){
 }
 
 void DelayLineObject::tick(){
+    for(int i = 0; i < MAX_BUF_SIZ; i++){
     //Original IMplementation
 //    currOutBuffer[readIndex] = delay->getCurrentOut();
 //    tickedBuffer[readIndex] = delay->tick(readBuf[readIndex]);
@@ -88,6 +89,7 @@ void DelayLineObject::tick(){
     tickedBuffer[readIndex] = delay->tick(feedbackBuffer[readIndex] + readBuf[readIndex]);
     
     readIndex = (readIndex + 1) % MAX_SAMPLES;
+    }
 }
 
 void DelayLineObject::setReadBuffer(float * r){

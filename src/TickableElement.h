@@ -9,6 +9,7 @@
 #ifndef MusGraph_TickableElement_h
 #define MusGraph_TickableElement_h
 #define MAX_SAMPLES 4096
+#define MAX_BUF_SIZ 512
 #include "ElementObject.h"
 
 class TickableElement : public ElementObject{
