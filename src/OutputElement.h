@@ -21,14 +21,14 @@
 #define RIGHT_AUDIO 2
 #define STEREO 3
 #define DEFAULT_SAMPLE_RATE 44100
-#define DEFAULT_BUF_SIZE 512
+#define DEFAULT_BUF_SIZE 256
 #define DEFAULT_INPUT_NUM 1
 #define DEFAULT_OUTPUT_NUM 1
 #define DEFAULT_BUF_NUM 1
 
 #define OUT_HEIGHT 30
 #define OUT_WIDTH 70
-
+#define DEBUG 1
 
 class OutputElement : public ElementObject{
 public:
@@ -54,6 +54,7 @@ private:
     ElementObject * elmtPtr;
     float * readBuffer;
     int readIndex = 0;
+    FILE * outputFile;
     WaveTableObject * lWavePtr = NULL;
     WaveTableObject * rWavePtr = NULL;
     TickableElement * tickElmPtr = NULL;

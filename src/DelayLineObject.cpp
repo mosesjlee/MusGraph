@@ -28,18 +28,19 @@ DelayLineObject::DelayLineObject(int x_coord, int y_coord, int id){
     currOutRegion.setPosition(x_bound - 10, y);
     type = "Delay Line";
     currOutBuffer = (float *) calloc(MAX_SAMPLES, sizeof(float));
-    tickedBuffer = (float *) calloc(MAX_SAMPLES, sizeof(float));
+    currOutIndex = readIndex = 0;
+//    tickedBuffer = (float *) calloc(MAX_SAMPLES, sizeof(float));
 }
 
 DelayLineObject::~DelayLineObject(){
     delete delay;
     free(currOutBuffer);
-    free(tickedBuffer);
+  //  free(tickedBuffer);
 }
 
 void DelayLineObject::setDelayTime(float t){
     int time = t * SR/1000.0;
-    //cout << "Delay time: " << time << endl;
+    cout << "Delay time: " << time << endl;
     delay->setDelayLineDelay(time);
 }
 
@@ -58,37 +59,40 @@ float * DelayLineObject::getBuffer(){
 //        cout << "tickedBuffer: " << tickedBufferConnected << endl;
 //        return tickedBuffer;
 //    }
+    
 }
 
-void DelayLineObject::setFeedBackBuffer(float * r){
-    cout << "feedback buffer connected: " << endl;
-    feedbackBuffer = r;
+void DelayLineObject::fillCurrentOut(){
+    //cout << "=========================fillcurrentout============================" << endl;
+//    for(int i = 0; i < MAX_OUT_BUF_SIZ; i++){
+//        currOutBuffer[currOutIndex] = delay->tick(readBuf[readIndex]);
+//        //currOutBuffer[currOutIndex] = delay->getCurrentOut();
+//        //cout << "curroutbuffer index: " << currOutIndex << endl;
+//        currOutIndex = (currOutIndex + 1) % MAX_SAMPLES;
+//        readIndex = (readIndex + 1) % MAX_SAMPLES;
+//    }
+    //cout << "currOutIndex: " << currOutIndex << endl;
+    delay->getCurrentOut(currOutBuffer, MAX_OUT_BUF_SIZ, currOutIndex);
+    currOutIndex += MAX_OUT_BUF_SIZ;
+    if(currOutIndex >= MAX_SAMPLES) currOutIndex = 0;
 }
 
 void DelayLineObject::tick(){
-    for(int i = 0; i < MAX_BUF_SIZ; i++){
+    //cout << "===============================tick===============================" << endl;
+    for(int i = 0; i < MAX_OUT_BUF_SIZ; i++){
     //Original IMplementation
-//    currOutBuffer[readIndex] = delay->getCurrentOut();
-//    tickedBuffer[readIndex] = delay->tick(readBuf[readIndex]);
-//    
-//    readIndex = (readIndex + 1) % MAX_SAMPLES;
-//    
-//    return currOutBuffer[readIndex];
+    //cout << "readbuf index: " << readIndex << endl;
+    //currOutBuffer[currOutIndex] = delay->getCurrentOut();
+    delay->tick(readBuf[readIndex]);
+    //currOutIndex = (currOutIndex + 1) % MAX_SAMPLES;
+    readIndex = (readIndex + 1) % MAX_SAMPLES;
+
+        
 //The below somewhat works
 //    float feedBackGain = 0.95;
 //    currOutBuffer[readIndex] = feedBackGain * delay->getCurrentOut();
 //    
 //    tickedBuffer[readIndex] = delay->tick(currOutBuffer[readIndex]+readBuf[readIndex]);
-//    
-//    readIndex = (readIndex + 1) % MAX_SAMPLES;
-//    
-//    return currOutBuffer[readIndex];
-    
-//Yet another attempt
-    currOutBuffer[readIndex] = delay->getCurrentOut();
-    tickedBuffer[readIndex] = delay->tick(feedbackBuffer[readIndex] + readBuf[readIndex]);
-    
-    readIndex = (readIndex + 1) % MAX_SAMPLES;
     }
 }
 
@@ -98,11 +102,11 @@ void DelayLineObject::setReadBuffer(float * r){
         readBuf = r;
         readBufConnected = true;
     }
-    else{
-        cout << "feedbackbuffer connected: ";
-        feedbackBuffer = r;
-        feedbackBufConnected = true;
-    }
+//    else{
+//        cout << "feedbackbuffer connected: " << endl;
+//        feedbackBuffer = r;
+//        feedbackBufConnected = true;
+//    }
 }
 
 void DelayLineObject::draw(){

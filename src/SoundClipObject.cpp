@@ -34,21 +34,21 @@ SoundClipObject::~SoundClipObject(){
 void SoundClipObject::tick(){
     float val = 0.0;
     
-    for(int i = 0; i < MAX_BUF_SIZ; i++){
-    if(!hasHitControl){
-        if(readCount >= sampleVector.size()){
-            val = 0.0;
-            readCount = 0;
-            hasHitControl = true;
+    for(int i = 0; i < MAX_OUT_BUF_SIZ; i++){
+        if(!hasHitControl){
+            if(readCount >= sampleVector.size()){
+                val = 0.0;
+                readCount = 0;
+                hasHitControl = true;
+            }
+            else {
+                val = sampleVector.at(readCount);
+                readCount++;
+            }
         }
-        else {
-            val = sampleVector.at(readCount);
-            readCount++;
-        }
-    }
     
-    outBuffer[readIndex] = val;
-    readIndex = (readIndex + 1) % MAX_SAMPLES;
+        outBuffer[readIndex] = val;
+        readIndex = (readIndex + 1) % MAX_SAMPLES;
     }
 }
 
@@ -61,8 +61,9 @@ float * SoundClipObject::getOutBuffer(){
   pick whichever audio file they want
  */
 void SoundClipObject::openFile(){
-    string file = "/Users/moseslee/Desktop/of_v0.8.3_osx_release/apps/myApps/MusGraph/bin/data/soundclips/guitar1.raw";
+//    string file = "/Users/moseslee/Desktop/of_v0.8.3_osx_release/apps/myApps/MusGraph/bin/data/soundclips/guitar1.raw";
 //    string file = "/Users/moseslee/Desktop/of_v0.8.3_osx_release/apps/myApps/MusGraph/bin/data/soundclips/emma16.raw";
+    string file = "/Users/moseslee/Desktop/of_v0.8.3_osx_release/apps/myApps/MusGraph/bin/data/soundclips/sine.raw";
     
     rawFile = fopen(&file[0], "r");
     

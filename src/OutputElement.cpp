@@ -22,6 +22,7 @@ OutputElement::OutputElement(int _x, int _y){
 
 OutputElement::~OutputElement(){
     stream.close();
+    if(DEBUG) fclose(outputFile);
 }
 
 void OutputElement::start(){
@@ -39,6 +40,7 @@ void OutputElement::setReadBuffer(float * r){
 void OutputElement::setUpAudio(ofBaseApp * parent){
     cout << "sample rate: " << sampleRate << endl;
     stream.setup(parent, DEFAULT_OUTPUT_NUM, DEFAULT_INPUT_NUM, sampleRate, bufsiz, DEFAULT_BUF_NUM);
+    if(DEBUG) outputFile = fopen("/Users/moseslee/Desktop/of_v0.8.3_osx_release/apps/myApps/MusGraph/bin/data/output", "w");
 }
 
 void OutputElement::fillOutBuffer(float * output, int bufferSize, int nChannels){
@@ -72,6 +74,7 @@ void OutputElement::fillOutBuffer(float * output, int bufferSize, int nChannels)
             output[i*nChannels + 1] = rSample * volume;
         }
     }
+    if(DEBUG) fwrite(output, sizeof(float), bufferSize, outputFile);
 }
 
 void OutputElement::setInput(ElementObject * o){

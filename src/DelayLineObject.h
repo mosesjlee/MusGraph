@@ -30,6 +30,7 @@ public:
     void draw();
     void setReadBuffer(float * r);
     void setFeedBackBuffer(float * r);
+    void fillCurrentOut();
     float * getCurrOutBuffer();
     float * getTickedBuffer();
     float * getBuffer();
@@ -48,9 +49,9 @@ private:
     float * tickedBuffer;
     float * feedbackBuffer;
     float * readBuf;
-    int currOutIndex = 0;
     int currTickedIndex = 0;
     int readIndex = 0;
+    int currOutIndex = 0;
     
 };
 

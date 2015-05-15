@@ -323,6 +323,11 @@ bool LineConnect::makeConnections(){
         return true;
     }
     
+    else if(o1_type == "Delay Line" && o2_type == "Output"){
+        ((OutputElement *) o2)->setReadBuffer(((DelayLineObject *) o1)->getBuffer());
+        return true;
+    }
+    
     //------------------------------------------------------------------
     //-                  SoundClip to Math connections                 -
     //------------------------------------------------------------------

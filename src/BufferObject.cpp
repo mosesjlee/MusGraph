@@ -27,7 +27,7 @@ BufferObject::~BufferObject(){
 
 void BufferObject::tick(){
     float val = 0.0;
-    for(int i = 0; i < MAX_BUF_SIZ; i++){
+    for(int i = 0; i < MAX_OUT_BUF_SIZ; i++){
     if(bufferConnected){
         val = buffer[readIndex];
     }

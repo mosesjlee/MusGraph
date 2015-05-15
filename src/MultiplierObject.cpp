@@ -32,7 +32,7 @@ MultiplierObject::~MultiplierObject(){
 
 void MultiplierObject::tick(){
     float left_sample, right_sample;
-    for(int i = 0; i < MAX_BUF_SIZ; i++){
+    for(int i = 0; i < MAX_OUT_BUF_SIZ; i++){
     if (!leftConnected) {
         left_sample = val;
     }

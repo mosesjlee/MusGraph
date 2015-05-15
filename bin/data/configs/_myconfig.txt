@@ -1,0 +1,11 @@
+NumberBox;845;133
+Output;768;276
+Adder;763;210
+Multiplier;760;122
+HitBox;910;55
+SoundClip;749;65
+LineConnect;910;55;749;65;0;HitBox;0;SoundClip
+LineConnect;760;122;763;210;0;Multiplier;0;Adder
+LineConnect;845;133;760;122;0;NumberBox;0;Multiplier
+LineConnect;763;210;768;276;0;Adder;0;Output
+LineConnect;749;65;760;122;0;SoundClip;0;Multiplier

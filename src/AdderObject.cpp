@@ -33,24 +33,25 @@ void AdderObject::setNboxConnection(NumberBoxObject * n){
 
 void AdderObject::tick(){
     float left_sample, right_sample;
-    for(int i = 0; i < MAX_BUF_SIZ; i++){
-    if (!leftConnected) {
-        left_sample = val;
-    }
-    else {
-        left_sample = readBuf_1[readIndex];
-    }
-    if (!rightConnected) {
-        right_sample = val;
-    }
-    else {
-        right_sample = readBuf_2[readIndex];
-    }
+    for(int i = 0; i < MAX_OUT_BUF_SIZ; i++){
+        if (!leftConnected) {
+            left_sample = val;
+        }
+        else {
+            left_sample = readBuf_1[readIndex];
+        }
+        if (!rightConnected) {
+            right_sample = val;
+        }
+        else {
+            right_sample = readBuf_2[readIndex];
+        }
     
-    float val = left_sample + right_sample;
+        float val = left_sample + right_sample;
     
-    outBuf[readIndex] = val;
-    readIndex = (readIndex + 1) % MAX_SAMPLES;
+//        cout << "Left sample: " << left_sample << " Right sample: " << right_sample <<  " val:" << val<<endl;
+        outBuf[readIndex] = val;
+        readIndex = (readIndex + 1) % MAX_SAMPLES;
     }
 }
 

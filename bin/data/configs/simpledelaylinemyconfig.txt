@@ -1,0 +1,12 @@
+NumberBox;195;249
+Output;560;232
+Adder;478;142
+Delay Line;226;200
+HitBox;15;40
+SoundClip;79;96
+LineConnect;15;40;79;96;0;HitBox;0;SoundClip
+LineConnect;79;96;226;200;0;SoundClip;0;Delay Line
+LineConnect;79;96;478;142;0;SoundClip;0;Adder
+LineConnect;195;249;226;200;0;NumberBox;0;Delay Line
+LineConnect;226;200;478;142;0;Delay Line;0;Adder
+LineConnect;478;142;560;232;0;Adder;0;Output

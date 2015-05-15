@@ -148,6 +148,7 @@ private:
     void addBufferObject(int x, int y);
     void addSoundClipObject(int x, int y);
     void clearElements();
+    void fillDelayLineBuff();
     bool selectItems(int x, int y, ElementObject ** obj);
     void createObjects(vector<string> * listOfObjects);
     void tickElements();

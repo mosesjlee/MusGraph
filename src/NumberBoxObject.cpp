@@ -72,7 +72,7 @@ void NumberBoxObject::controlOutObject(){
 void NumberBoxObject::setControlElementConnection(ElementObject * o){
     eObj = o;
     typeElemControl = o->getType();
-    cout << "Connected: " << typeElemControl << endl;
+    //cout << "Connected: " << typeElemControl << endl;
     controlOutObject();
 }
 

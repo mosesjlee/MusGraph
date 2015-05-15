@@ -126,6 +126,9 @@ void ofApp::keyPressed(int key){
                 
             }
         }
+    } else if(key == SPACE_BAR) {
+        if(onOff == 0) onOff = 1;
+        if(onOff == 1) onOff = 0;
     }
 }
 
@@ -293,6 +296,7 @@ void ofApp::audioOut(float *output, int bufferSize, int nChannels){
     //Noise
     //This is hard coded
     if(onOff == 1 && numOutput > 0) {
+        fillDelayLineBuff();
         tickElements();
         listOfOutputs.at(0)->fillOutBuffer(output, bufferSize, nChannels);
     }
@@ -353,7 +357,7 @@ void ofApp::guiEvent(ofxUIEventArgs & e){
         
         int numberBoxID = ti->getID();
         string newValue = ti->getTextString();
-        cout << "New text value: " << newValue << endl;
+        //cout << "New text value: " << newValue << endl;
         
         if(listOfNumBox.at(numberBoxID)->getMyID() == numberBoxID){
             if(ti->getInputTriggerType() == OFX_UI_TEXTINPUT_ON_ENTER){
@@ -535,13 +539,16 @@ void ofApp::addSoundClipObject(int x, int y){
     listOfTickableElements.push_back(soundClipPtr);
 }
 
+void ofApp::fillDelayLineBuff(){
+    for (int i = 0; i < listOfDelayLines.size(); i++){
+        //cout << "Filling current out buffer: " << endl;
+        listOfDelayLines.at(i)->fillCurrentOut();
+    }
+}
+
 void ofApp::tickElements(){
-    //cout << "Ticking Elements" << endl;
     for(int i = 0; i < listOfTickableElements.size(); i++){
-        //for(int j = 0; j < 512; j++){
-        //for(int j = 0; j < 608; j++){
-            listOfTickableElements.at(i)->tick();
-        //}
+        listOfTickableElements.at(i)->tick();
     }
 }
 
@@ -784,8 +791,8 @@ void ofApp::createObjects(vector<string> * listOfObjects){
                 type_2 += holder.substr()[j];
             
             
-            cout << "Creating: " << temp << " from: " << x_pos << ", " << y_pos << " to: " <<
-            x_end_pos << ", " << y_end_pos << " connects: " << type_1 << " to: " << type_2 << endl;
+            //cout << "Creating: " << temp << " from: " << x_pos << ", " << y_pos << " to: " <<
+            //x_end_pos << ", " << y_end_pos << " connects: " << type_1 << " to: " << type_2 << endl;
             
             lineConnectPtr = new LineConnect(atoi(&x_pos.substr()[0]),
                                              atoi(&y_pos.substr()[0]),
