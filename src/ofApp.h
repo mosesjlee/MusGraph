@@ -53,7 +53,6 @@ public:
     void audioOut(float * output, int bufferSize, int nChannels);
     void exit();
     
-    
 private:
     //To create the visual elements
     MenuView selectMenu;
@@ -83,6 +82,8 @@ private:
     vector<BufferObject *> listOfBuffers;
     vector<SoundClipObject *> listOfSoundClips;
     vector<TickableElement *> listOfTickableElements;
+    vector<TickableElement *> elementsConnectedToDelayLine;
+    vector<MathObject *> listOfOperators;
     
     //For casting purposes
     typedef vector<ElementObject *> * ELEMVECT;
@@ -152,6 +153,8 @@ private:
     bool selectItems(int x, int y, ElementObject ** obj);
     void createObjects(vector<string> * listOfObjects);
     void tickElements();
+    void tickOperators();
+    void tickDelayLineElements();
     
 };
 

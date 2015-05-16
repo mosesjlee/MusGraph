@@ -40,6 +40,7 @@ private:
     DelayLine * delay = NULL;
     ofRectangle tickRegion;
     ofRectangle currOutRegion;
+    vector<float *> inBuffers;
     float xN = 0.0f;
     bool currOutBufferConnected = false;
     bool tickedBufferConnected = false;

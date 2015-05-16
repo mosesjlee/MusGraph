@@ -1,0 +1,25 @@
+NumberBox;424;192
+NumberBox;132;385
+NumberBox;413;395
+NumberBox;318;308
+Output;690;274
+Adder;672;168
+Multiplier;413;144
+Multiplier;314;269
+Multiplier;425;348
+Delay Line;104;337
+HitBox;47;59
+SoundClip;139;142
+LineConnect;47;59;139;142;0;HitBox;0;SoundClip
+LineConnect;139;142;413;144;0;SoundClip;0;Multiplier
+LineConnect;424;192;413;144;0;NumberBox;0;Multiplier
+LineConnect;413;144;672;168;0;Multiplier;0;Adder
+LineConnect;672;168;690;274;0;Adder;0;Output
+LineConnect;425;348;672;168;2;Multiplier;0;Adder
+LineConnect;413;395;425;348;2;NumberBox;2;Multiplier
+LineConnect;132;385;104;337;1;NumberBox;0;Delay Line
+LineConnect;139;142;104;337;0;SoundClip;0;Delay Line
+LineConnect;104;337;314;269;0;Delay Line;1;Multiplier
+LineConnect;318;308;314;269;3;NumberBox;1;Multiplier
+LineConnect;314;269;104;337;1;Multiplier;0;Delay Line
+LineConnect;104;337;425;348;0;Delay Line;2;Multiplier

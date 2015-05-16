@@ -28,7 +28,7 @@
 
 #define OUT_HEIGHT 30
 #define OUT_WIDTH 70
-#define DEBUG 1
+#define DEBUG 0
 
 class OutputElement : public ElementObject{
 public:

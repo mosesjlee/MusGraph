@@ -103,28 +103,6 @@ void ofApp::draw(){
 void ofApp::keyPressed(int key){
     if(key == DELETE_KEY){
         if(currObject_1 != NULL){
-            string type = currObject_1->getType();
-            if(type == "Sine"){
-                
-            }
-            else if(type == "Output"){
-                
-            }
-            else if(type == "Slider"){
-                
-            }
-            else if(type == "NumberBox"){
-                
-            }
-            else if(type == "Adder"){
-                
-            }
-            else if(type == "Multiplier"){
-                
-            }
-            else if(type == "Divider"){
-                
-            }
         }
     } else if(key == SPACE_BAR) {
         if(onOff == 0) onOff = 1;
@@ -169,7 +147,6 @@ void ofApp::mousePressed(int x, int y, int button){
                     else if(y > y_coord + 30 && y < y_coord + 60){
                         cout << "second menu" << endl;
                         addSliderObject(x_loc, y_loc);
-
                     }
                     else if(y > y_coord + 60 && y < y_coord + 90){
                         cout << "third menu" << endl;
@@ -262,6 +239,18 @@ void ofApp::mouseReleased(int x, int y, int button){
             
             if(validConnection){
                 listOfLineConnects.push_back(lineConnectPtr);
+                if(currObject_2->getType() == "Delay Line"){
+                    cout << "Adding another delay line element: \n";
+                    if(currObject_1->getType() != "NumberBox"){
+                        elementsConnectedToDelayLine.push_back((TickableElement *)currObject_1);
+                    }
+                }
+//                else if(currObject_1->getType() == "Delay Line"){
+//                    cout << "Adding another delay line element: \n";
+//                    if(currObject_2->getType() != "NumberBox"){
+//                        elementsConnectedToDelayLine.push_back((TickableElement *)currObject_2);
+//                    }
+//                }
             }
             else {
                 delete lineConnectPtr;
@@ -297,11 +286,37 @@ void ofApp::audioOut(float *output, int bufferSize, int nChannels){
     //This is hard coded
     if(onOff == 1 && numOutput > 0) {
         fillDelayLineBuff();
+        listOfSoundClips.at(0)->tick();
+        tickOperators();
         tickElements();
         listOfOutputs.at(0)->fillOutBuffer(output, bufferSize, nChannels);
     }
 }
 
+void ofApp::fillDelayLineBuff(){
+    for (int i = 0; i < listOfDelayLines.size(); i++){
+        //cout << "Filling current out buffer: " << endl;
+        listOfDelayLines.at(i)->fillCurrentOut();
+    }
+}
+
+void ofApp::tickElements(){
+    for(int i = 0; i < listOfTickableElements.size(); i++){
+        listOfTickableElements.at(i)->tick();
+    }
+}
+
+void ofApp::tickDelayLineElements(){
+    for(int i = 0; i < elementsConnectedToDelayLine.size(); i++){
+        elementsConnectedToDelayLine.at(i)->tick();
+    }
+}
+
+void ofApp::tickOperators(){
+    for(int i = 0; i < listOfOperators.size(); i++){
+        listOfOperators.at(i)->tick();
+    }
+}
 //--------------------------------------------------------------
 void ofApp::guiEvent(ofxUIEventArgs & e){
     string name = e.getName();
@@ -324,15 +339,6 @@ void ofApp::guiEvent(ofxUIEventArgs & e){
             if(type == "Sine"){
                 ((WaveTableObject *) listOfSliderObjects.at(currSliderID)->getObjectToControl())->setFreq(val);
             }
-            else if(type == "Output"){
-                    
-            }
-            else if(type == "Adder"){
-                    
-            }
-            else if(type == "Multiplier"){
-                    
-            }
             else if(type == "NumberBox"){
                 ((NumberBoxObject *) listOfSliderObjects.at(currSliderID)->
                  getObjectToControl())->setMyValue(val);
@@ -352,7 +358,7 @@ void ofApp::guiEvent(ofxUIEventArgs & e){
     }
     
     else if(name == "NumberBox"){
-        cout << "in number box" << endl;
+        //cout << "in number box" << endl;
         ofxUITextInput * ti = (ofxUITextInput *) e.widget;
         
         int numberBoxID = ti->getID();
@@ -488,21 +494,24 @@ void ofApp::addAdderObject(int x, int y){
     adderPtr = new AdderObject(x, y);
     adderPtr->setMyID(listOfAdders.size());
     listOfAdders.push_back(adderPtr);
-    listOfTickableElements.push_back(adderPtr);
+    //listOfTickableElements.push_back(adderPtr);
+    listOfOperators.push_back(adderPtr);
 }
 
 void ofApp::addMultiplierObject(int x, int y){
     multiplierPtr = new MultiplierObject(x, y);
     multiplierPtr->setMyID(listOfMultipliers.size());
     listOfMultipliers.push_back(multiplierPtr);
-    listOfTickableElements.push_back(multiplierPtr);
+    //listOfTickableElements.push_back(multiplierPtr);
+    listOfOperators.push_back(multiplierPtr);
 }
 
 void ofApp::addDividerObject(int x, int y){
     dividerPtr = new DividerObject(x, y);
     dividerPtr->setMyID(listOfDividers.size());
     listOfDividers.push_back(dividerPtr);
-    listOfTickableElements.push_back(dividerPtr);
+    //listOfTickableElements.push_back(dividerPtr);
+    listOfOperators.push_back(dividerPtr);
 }
 
 
@@ -536,20 +545,7 @@ void ofApp::addBufferObject(int x, int y){
 void ofApp::addSoundClipObject(int x, int y){
     soundClipPtr = new SoundClipObject(x, y, listOfSoundClips.size());
     listOfSoundClips.push_back(soundClipPtr);
-    listOfTickableElements.push_back(soundClipPtr);
-}
-
-void ofApp::fillDelayLineBuff(){
-    for (int i = 0; i < listOfDelayLines.size(); i++){
-        //cout << "Filling current out buffer: " << endl;
-        listOfDelayLines.at(i)->fillCurrentOut();
-    }
-}
-
-void ofApp::tickElements(){
-    for(int i = 0; i < listOfTickableElements.size(); i++){
-        listOfTickableElements.at(i)->tick();
-    }
+    //listOfTickableElements.push_back(soundClipPtr);
 }
 
 void ofApp::clearElements(){
@@ -626,6 +622,8 @@ void ofApp::clearElements(){
     }
     
     listOfTickableElements.clear();
+    elementsConnectedToDelayLine.clear();
+    listOfOperators.clear();
     
     cout << "Deleted all objects sucessfully" << endl;
     numWaveTables = listOfWaveTables.size();
@@ -874,7 +872,6 @@ void ofApp::createObjects(vector<string> * listOfObjects){
             lineConnectPtr->makeConnections();
             listOfLineConnects.push_back(lineConnectPtr);
         }
-        
     }
     delete listOfObjects;
 }

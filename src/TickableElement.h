@@ -18,9 +18,12 @@ public:
     virtual void draw();
     virtual void receivedHit(int hitLength);
     virtual void setHasHitControl(bool t);
+    virtual void setIsTicked(bool b);
+    virtual bool getIsTicked();
     
 protected:
     ofRectangle displayRect;
+    bool isTicked;
     bool hasHitControl = false;
     bool hit = true;
     int readIndex_buf1 = 0;

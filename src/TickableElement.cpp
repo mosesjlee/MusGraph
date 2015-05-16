@@ -38,3 +38,14 @@ void TickableElement::setHasHitControl(bool t){
     hasHitControl = t;
 }
 
+void TickableElement::setIsTicked(bool b){
+    isTicked = b;
+}
+
+bool TickableElement::getIsTicked(){
+    return isTicked;
+}
+
+
+
+
