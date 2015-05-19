@@ -47,31 +47,27 @@ void OutputElement::fillOutBuffer(float * output, int bufferSize, int nChannels)
     float lSample = 0.0f;
     float rSample = 0.0f;
     
-    //cout << "Filling out" << endl;
-    
-    //if(tickElmPtr == NULL) return;
-    
     //cout << "In fill out buffer... type: " << inputType << endl;
     if(soundMode == MONO || soundMode == LEFT_AUDIO){
         for(int i = 0; i < bufferSize; i++){
             lSample = rSample = readBuffer[readIndex];
-            if(lSample > 1.0) lSample = 1.0;
-            if(lSample < -1.0) lSample = -1.0;
+            if(lSample > 1.0) rSample = lSample = 1.0;
+            if(lSample < -1.0) rSample = lSample = -1.0;
             readIndex = (readIndex + 1) % MAX_SAMPLES;
             //cout << "lSample: " << lSample << endl;
-            output[i*nChannels    ] = lSample * volume;
-            //output[i*nChannels + 1] = rSample * volume;
+            output[i*nChannels    ] = lSample;
+            output[i*nChannels + 1] = rSample;
         }
     }
     else if(soundMode == RIGHT_AUDIO){
         for(int i = 0; i < bufferSize; i++){
-            output[i*nChannels + 1] = rSample * volume;
+            output[i*nChannels + 1] = rSample;
         }
     }
     else if(soundMode == STEREO){
         for(int i = 0; i < bufferSize; i++){
-            output[i*nChannels    ] = lSample * volume;
-            output[i*nChannels + 1] = rSample * volume;
+            output[i*nChannels    ] = lSample;
+            output[i*nChannels + 1] = rSample;
         }
     }
     if(DEBUG) fwrite(output, sizeof(float), bufferSize, outputFile);
@@ -81,13 +77,8 @@ void OutputElement::setInput(ElementObject * o){
     inputType = o->getType();
     
     cout << "Connecting: " << inputType << endl;
-
     
     tickElmPtr = (TickableElement *) o;
-}
-
-void OutputElement::setVolume(float newVolume){
-    volume = newVolume;
 }
 
 void OutputElement::setLeftInput(WaveTableObject * wPtr){

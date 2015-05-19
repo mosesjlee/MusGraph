@@ -38,7 +38,6 @@ void SliderObject::setMinAndMax(float min, float max){
 }
 
 void SliderObject::draw(){
-    
 }
 
 void SliderObject::setObjectToControl(ElementObject * objPtr){

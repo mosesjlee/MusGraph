@@ -49,34 +49,27 @@ void DelayLineObject::setDelayTime(float t){
 
 float * DelayLineObject::getBuffer(){
     cout << "connecting delay out buffer:" << endl;
-    //return tickedBuffer;
     return currOutBuffer;
-    
-    
-//    if(!currOutBufferConnected){
-//        currOutBufferConnected = true;
-//        cout << "currOutConnected: " << currOutBufferConnected << endl;
-//        return currOutBuffer;
-//    } else {
-//        tickedBufferConnected = true;
-//        cout << "tickedBuffer: " << tickedBufferConnected << endl;
-//        return tickedBuffer;
-//    }
-    
 }
 
 void DelayLineObject::fillCurrentOut(){
-    //cout << "=========================fillcurrentout============================" << endl;
-    //cout << "currOutIndex: " << currOutIndex << endl;
     delay->getCurrentOut(currOutBuffer, MAX_OUT_BUF_SIZ, currOutIndex);
     currOutIndex += MAX_OUT_BUF_SIZ;
     if(currOutIndex >= MAX_SAMPLES) currOutIndex = 0;
 }
 
+float DelayLineObject::readInputBuffers(){
+    float val = 0.0f;
+    for(int i = 0; i < inBuffers.size(); i++){
+        val += inBuffers.at(i)[readIndex];
+    }
+    return val;
+}
+
 void DelayLineObject::tick(){
-    //cout << "===============================tick===============================" << endl;
     for(int i = 0; i < MAX_OUT_BUF_SIZ; i++){
-        readBuf[readIndex] = inBuffers.at(0)[readIndex] + inBuffers.at(1)[readIndex];
+        //readBuf[readIndex] = inBuffers.at(0)[readIndex] + inBuffers.at(1)[readIndex];
+        readBuf[readIndex] = readInputBuffers();
         delay->tick(readBuf[readIndex]);
         readIndex = (readIndex + 1) % MAX_SAMPLES;
     }
@@ -84,16 +77,6 @@ void DelayLineObject::tick(){
 
 void DelayLineObject::setReadBuffer(float * r){
     inBuffers.push_back(r);
-//    if(!readBufConnected){
-//        cout << "readbufconnected " << endl;
-//        readBuf = r;
-//        readBufConnected = true;
-//    }
-//    else{
-//        cout << "feedbackbuffer connected: " << endl;
-//        feedbackBuffer = r;
-//        feedbackBufConnected = true;
-//    }
 }
 
 void DelayLineObject::draw(){

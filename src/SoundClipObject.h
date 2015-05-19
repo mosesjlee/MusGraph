@@ -12,7 +12,7 @@
 #define SOUNDCLIP_WIDTH 90
 #define BUFFER_LEN 1024
 #include <stdio.h>
-#include <sndfile.h>
+//#include <sndfile.h>
 #include "TickableElement.h"
 
 class SoundClipObject : public TickableElement{
@@ -24,9 +24,9 @@ public:
     void openFile();
     
 private:
-    SNDFILE * myFile;
+//    SNDFILE * myFile;
     FILE * rawFile;
-    SF_INFO fileInfo;
+//    SF_INFO fileInfo;
     float * outBuffer;
     int readIndex = 0;
     int readCount = 0;

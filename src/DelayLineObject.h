@@ -34,6 +34,7 @@ public:
     float * getCurrOutBuffer();
     float * getTickedBuffer();
     float * getBuffer();
+    float readInputBuffers();
     
     
 private:

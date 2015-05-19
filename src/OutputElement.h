@@ -21,7 +21,7 @@
 #define RIGHT_AUDIO 2
 #define STEREO 3
 #define DEFAULT_SAMPLE_RATE 44100
-#define DEFAULT_BUF_SIZE 256
+#define DEFAULT_BUF_SIZE 128
 #define DEFAULT_INPUT_NUM 1
 #define DEFAULT_OUTPUT_NUM 1
 #define DEFAULT_BUF_NUM 1
@@ -63,8 +63,6 @@ private:
     float sampleRate = DEFAULT_SAMPLE_RATE;
     int bufsiz = DEFAULT_BUF_SIZE;
     vector<float> audio;
-    
-    float volume = 1.0;
 };
 
 #endif /* defined(__MusGraph__OutputElement__) */

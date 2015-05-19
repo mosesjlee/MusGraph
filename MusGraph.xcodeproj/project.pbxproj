@@ -36,7 +36,6 @@
 		7F2CD93F681F3C1547B3BF2C /* ofxUIImageButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E6280B5FA1CEA20450916E49 /* ofxUIImageButton.cpp */; };
 		82845E1F8C90E1F5A99D9868 /* ofxUIWidget.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 08A9C84B3CA68561BE01FF37 /* ofxUIWidget.cpp */; };
 		83D9F930112E0944444124EE /* ofxMidiOut.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04F77E5C73A62E2E77C78EC6 /* ofxMidiOut.cpp */; };
-		910A4F0B1AFBF0E7008F15D2 /* libsndfile.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 910A4F0A1AFBF0E7008F15D2 /* libsndfile.a */; settings = {ATTRIBUTES = (Weak, ); }; };
 		913E3F361AF4550100C3CE5A /* WaveTableObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 913E3F341AF4550100C3CE5A /* WaveTableObject.cpp */; };
 		91461AD81AE77F6C001072B1 /* MathObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91461AD71AE77F6C001072B1 /* MathObject.cpp */; };
 		91461ADA1AE77FC3001072B1 /* TickableElement.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91461AD91AE77FC3001072B1 /* TickableElement.cpp */; };
@@ -204,9 +203,6 @@
 		885850B62FAD08EB1D2F0BF4 /* ofxUIRotarySlider.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxUIRotarySlider.h; path = ../../../addons/ofxUI/src/ofxUIRotarySlider.h; sourceTree = SOURCE_ROOT; };
 		8B5F60B902BFFD95E99AAB34 /* ofxUIImageSampler.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = ofxUIImageSampler.cpp; path = ../../../addons/ofxUI/src/ofxUIImageSampler.cpp; sourceTree = SOURCE_ROOT; };
 		8F8238006E98A8E39851968C /* ofxUIButton.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = ofxUIButton.cpp; path = ../../../addons/ofxUI/src/ofxUIButton.cpp; sourceTree = SOURCE_ROOT; };
-		910A4F081AFBEEFF008F15D2 /* sndfile.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = sndfile.h; path = src/sndfile.h; sourceTree = "<group>"; };
-		910A4F091AFBEEFF008F15D2 /* sndfile.hh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = sndfile.hh; path = src/sndfile.hh; sourceTree = "<group>"; };
-		910A4F0A1AFBF0E7008F15D2 /* libsndfile.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libsndfile.a; path = ../../../../../../../opt/local/libsndfile/1.0.25/lib/libsndfile.a; sourceTree = "<group>"; };
 		913E3F341AF4550100C3CE5A /* WaveTableObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = WaveTableObject.cpp; sourceTree = "<group>"; };
 		913E3F351AF4550100C3CE5A /* WaveTableObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaveTableObject.h; sourceTree = "<group>"; };
 		91461AD61AE7749F001072B1 /* MathObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MathObject.h; sourceTree = "<group>"; };
@@ -326,7 +322,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				910A4F0B1AFBF0E7008F15D2 /* libsndfile.a in Frameworks */,
 				E7F985F815E0DEA3003869B5 /* Accelerate.framework in Frameworks */,
 				E7E077E815D3B6510020DFD4 /* QTKit.framework in Frameworks */,
 				E4EB6799138ADC1D00A09F29 /* GLUT.framework in Frameworks */,
@@ -604,9 +599,6 @@
 		E4B69B4A0A3A1720003C02F2 = {
 			isa = PBXGroup;
 			children = (
-				910A4F0A1AFBF0E7008F15D2 /* libsndfile.a */,
-				910A4F081AFBEEFF008F15D2 /* sndfile.h */,
-				910A4F091AFBEEFF008F15D2 /* sndfile.hh */,
 				E4B6FCAD0C3E899E008CF71C /* openFrameworks-Info.plist */,
 				E4EB6923138AFD0F00A09F29 /* Project.xcconfig */,
 				E4B69E1C0A3A1BDC003C02F2 /* src */,
