@@ -55,7 +55,7 @@ void AdderObject::tick(){
     }
 }
 
-void AdderObject::sendOut(float v){
-    sPtr->setFreq(v);
-}
+//void AdderObject::sendOut(float v){
+//    sPtr->setFreq(v);
+//}
 

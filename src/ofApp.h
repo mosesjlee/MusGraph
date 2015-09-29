@@ -154,7 +154,7 @@ private:
     void createObjects(vector<string> * listOfObjects);
     void tickElements();
     void tickOperators();
-    void tickDelayLineElements();
+    void tickSoundClipObjects();
     
 };
 

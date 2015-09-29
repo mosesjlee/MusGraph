@@ -245,12 +245,6 @@ void ofApp::mouseReleased(int x, int y, int button){
                         elementsConnectedToDelayLine.push_back((TickableElement *)currObject_1);
                     }
                 }
-//                else if(currObject_1->getType() == "Delay Line"){
-//                    cout << "Adding another delay line element: \n";
-//                    if(currObject_2->getType() != "NumberBox"){
-//                        elementsConnectedToDelayLine.push_back((TickableElement *)currObject_2);
-//                    }
-//                }
             }
             else {
                 delete lineConnectPtr;
@@ -284,18 +278,20 @@ void ofApp::audioOut(float *output, int bufferSize, int nChannels){
 //    tickElements();
     //Noise
     //This is hard coded
+    //cout << "goes in audioOut: " << onOff << " numOutput: " << numOutput <<endl;
+    
     if(onOff == 1 && numOutput > 0) {
         fillDelayLineBuff();
-        listOfSoundClips.at(0)->tick();
+        tickSoundClipObjects();
         tickOperators();
         tickElements();
+        //cout << "goes in the if " << endl;
         listOfOutputs.at(0)->fillOutBuffer(output, bufferSize, nChannels);
     }
 }
 
 void ofApp::fillDelayLineBuff(){
     for (int i = 0; i < listOfDelayLines.size(); i++){
-        //cout << "Filling current out buffer: " << endl;
         listOfDelayLines.at(i)->fillCurrentOut();
     }
 }
@@ -306,9 +302,9 @@ void ofApp::tickElements(){
     }
 }
 
-void ofApp::tickDelayLineElements(){
-    for(int i = 0; i < elementsConnectedToDelayLine.size(); i++){
-        elementsConnectedToDelayLine.at(i)->tick();
+void ofApp::tickSoundClipObjects(){
+    for(int i = 0; i < listOfSoundClips.size(); i++){
+        listOfSoundClips.at(i)->tick();
     }
 }
 
@@ -348,7 +344,6 @@ void ofApp::guiEvent(ofxUIEventArgs & e){
     
     else if(name == "HitBox"){
         int hitID = e.getButton()->getID();
-        string type = "";
         int value = e.getButton()->getValue();
         if(value == 1){
             if(listOfHitObjects.at(hitID)->getMyID() == hitID){
@@ -479,13 +474,14 @@ void ofApp::addOutputObject(int x, int y){
     outputPtr->setUpAudio(this);
     outputPtr->setMyID(listOfOutputs.size());
     listOfOutputs.push_back(outputPtr);
+    numOutput = listOfOutputs.size();
 }
 
 void ofApp::addSliderObject(int x, int y){
     elementsGUI = new ofxUICanvas();
     ofAddListener(elementsGUI->newGUIEvent, this, &ofApp::guiEvent);
     
-    sliderPtr = new SliderObject(elementsGUI, "Slider", 40, 80, 440, listOfSliderObjects.size());
+    sliderPtr = new SliderObject(elementsGUI, 40, 80, 440, listOfSliderObjects.size());
     sliderPtr->setCoord(x, y);
     listOfSliderObjects.push_back(sliderPtr);
 }

@@ -32,7 +32,6 @@ public:
 protected:
     WaveTable * mySine;
     ElementObject * input = NULL;
-    DelayLineObject * delayLine = NULL;
     float * outBuffer;
     float * readBuffer = NULL;
     int outIndex = 0;

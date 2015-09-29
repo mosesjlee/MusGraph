@@ -7,13 +7,13 @@
 //
 
 #include "SliderObject.h"
-SliderObject::SliderObject(ofxUICanvas * parentCanvas, string name, float min, float max, float init, int id){
+SliderObject::SliderObject(ofxUICanvas * parentCanvas, float min, float max, float init, int id){
     sliderCanvas = parentCanvas;
     sliderCanvas->setDimensions(SLIDER_WIDTH, SLIDER_HEIGHT);
-    slider = sliderCanvas->addSlider(name, min, max, init);
+    slider = sliderCanvas->addSlider("Slider", min, max, init);
     maxVal = max;
     minVal = min;
-    sliderName = name;
+    sliderName = "Slider";
     slider->setID(id);
     myID = id;
     type = "Slider";
@@ -41,16 +41,13 @@ void SliderObject::draw(){
 }
 
 void SliderObject::setObjectToControl(ElementObject * objPtr){
-    
     elementPtr = objPtr;
-    
 }
 
 ElementObject * SliderObject::getObjectToControl(){
     return elementPtr;
 }
 
-ofxUISlider * SliderObject::getSliderRef()
-{
+ofxUISlider * SliderObject::getSliderRef(){
     return slider;
 }

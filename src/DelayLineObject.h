@@ -42,16 +42,10 @@ private:
     ofRectangle tickRegion;
     ofRectangle currOutRegion;
     vector<float *> inBuffers;
-    float xN = 0.0f;
     bool currOutBufferConnected = false;
-    bool tickedBufferConnected = false;
     bool readBufConnected = false;
-    bool feedbackBufConnected = false;
     float * currOutBuffer;
-    float * tickedBuffer;
-    float * feedbackBuffer;
     float * readBuf;
-    int currTickedIndex = 0;
     int readIndex = 0;
     int currOutIndex = 0;
     

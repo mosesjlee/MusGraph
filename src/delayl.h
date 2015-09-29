@@ -20,7 +20,6 @@ private:
     int maxDelay;
     int prevCurrIndex;
     float delayIndex = 0;
-    int offSet = 1024;
     float currDelay;
     int currIndex;
 };

@@ -57,9 +57,6 @@ void WaveTableObject::setReadBuffer(float * r){
     readBuffer = r;
 }
 
-void WaveTableObject::setDelayLine(DelayLineObject * dl){
-    delayLine = dl;
-}
 
 void WaveTableObject::setFreq(float freq){
     mySine->setFreq(freq);

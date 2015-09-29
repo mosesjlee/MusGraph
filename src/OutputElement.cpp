@@ -47,7 +47,6 @@ void OutputElement::fillOutBuffer(float * output, int bufferSize, int nChannels)
     float lSample = 0.0f;
     float rSample = 0.0f;
     
-    //cout << "In fill out buffer... type: " << inputType << endl;
     if(soundMode == MONO || soundMode == LEFT_AUDIO){
         for(int i = 0; i < bufferSize; i++){
             lSample = rSample = readBuffer[readIndex];
@@ -71,22 +70,6 @@ void OutputElement::fillOutBuffer(float * output, int bufferSize, int nChannels)
         }
     }
     if(DEBUG) fwrite(output, sizeof(float), bufferSize, outputFile);
-}
-
-void OutputElement::setInput(ElementObject * o){
-    inputType = o->getType();
-    
-    cout << "Connecting: " << inputType << endl;
-    
-    tickElmPtr = (TickableElement *) o;
-}
-
-void OutputElement::setLeftInput(WaveTableObject * wPtr){
-    lWavePtr = wPtr;
-}
-
-void OutputElement::setRightInput(WaveTableObject * wPtr){
-    rWavePtr = wPtr;
 }
 
 void OutputElement::draw(){

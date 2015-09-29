@@ -28,7 +28,7 @@
 
 #define OUT_HEIGHT 30
 #define OUT_WIDTH 70
-#define DEBUG 0
+#define DEBUG 1
 
 class OutputElement : public ElementObject{
 public:
@@ -51,14 +51,9 @@ public:
 private:
     ofRectangle outputTab;
     ofSoundStream stream;
-    ElementObject * elmtPtr;
     float * readBuffer;
     int readIndex = 0;
     FILE * outputFile;
-    WaveTableObject * lWavePtr = NULL;
-    WaveTableObject * rWavePtr = NULL;
-    TickableElement * tickElmPtr = NULL;
-    string inputType = "";
     int soundMode = MONO;
     float sampleRate = DEFAULT_SAMPLE_RATE;
     int bufsiz = DEFAULT_BUF_SIZE;

@@ -39,8 +39,6 @@ protected:
     bool leftConnected = false;
     bool rightConnected = false;
     WaveTableObject * sPtr = NULL;
-    ElementObject * o1 = NULL;
-    ElementObject * o2 = NULL;
 };
 
 #endif

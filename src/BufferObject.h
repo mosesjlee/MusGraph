@@ -9,8 +9,8 @@
 #ifndef __MusGraph__BufferObject__
 #define __MusGraph__BufferObject__
 
-#define BUFFER_BOX_HEIGHT 40
-#define BUFFER_BOX_WIDTH 20
+#define BUFFER_BOX_HEIGHT 30
+#define BUFFER_BOX_WIDTH 60
 
 #include <stdio.h>
 #include "TickableElement.h"
